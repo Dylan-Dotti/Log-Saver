@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogSaverClient", "LogSaverClient\LogSaverClient.csproj", "{0577A1AD-8575-4FA1-A316-F019EF751495}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4A338908-C433-4616-83C8-1986765C9593} = {4A338908-C433-4616-83C8-1986765C9593}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "..\Messages\Messages.csproj", "{4A338908-C433-4616-83C8-1986765C9593}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{0577A1AD-8575-4FA1-A316-F019EF751495}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0577A1AD-8575-4FA1-A316-F019EF751495}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0577A1AD-8575-4FA1-A316-F019EF751495}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A338908-C433-4616-83C8-1986765C9593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A338908-C433-4616-83C8-1986765C9593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A338908-C433-4616-83C8-1986765C9593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A338908-C433-4616-83C8-1986765C9593}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

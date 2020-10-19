@@ -27,7 +27,7 @@ namespace LogSaverClient
                     new LogSaverClient().Start(ip, 1337);
                     break;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine($"Connection to {ip} failed.");
                 }
