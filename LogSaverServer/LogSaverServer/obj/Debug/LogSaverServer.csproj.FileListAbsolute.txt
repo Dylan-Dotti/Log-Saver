@@ -17,3 +17,8 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\De
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\obj\Debug\LogSaverServer.csproj.CopyComplete
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\Newtonsoft.Json.dll
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\Newtonsoft.Json.xml
+D:\Github\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\Messages.dll
+D:\Github\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\Newtonsoft.Json.dll
+D:\Github\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\Messages.pdb
+D:\Github\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\Newtonsoft.Json.xml
+D:\Github\Log-Saver\LogSaverServer\LogSaverServer\obj\Debug\LogSaverServer.csproj.CopyComplete

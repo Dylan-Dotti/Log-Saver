@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Messages
 {
-    public class SaveRequestMessage : LogSaverMessage
+    public class ResponseMessage : LogSaverMessage
     {
-        public SaveRequestMessage() : base(MessageType.SaveRequest)
+        public ResponseMessage() : base(MessageType.Response)
         {
 
         }
 
         public override string ToJsonString()
         {
-            return "";
+            throw new NotImplementedException();
         }
     }
 }

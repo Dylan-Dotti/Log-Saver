@@ -1,18 +1,15 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Messages
 {
     public abstract class LogSaverMessage
     {
-        public MessageType MType { get; private set; }
+        public MessageType MsgType { get; private set; }
 
-        public LogSaverMessage(JObject jsonObject)
+        public LogSaverMessage(MessageType messageType)
         {
-            if (!jsonObject.ContainsKey("MessageType"))
-                throw new JsonException("Expected key named 'MessageType' but did not find it");
-            MType = jsonObject.Value<string>("MessageType").ToMessageType();
+            MsgType = messageType;
         }
 
         public abstract string ToJsonString();

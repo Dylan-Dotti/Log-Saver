@@ -5,15 +5,21 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LogSaverClient
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
-            while (true)
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
+            /*while (true)
             {
+
                 IPAddress ip;
                 while (true)
                 {
@@ -31,7 +37,7 @@ namespace LogSaverClient
                 {
                     Console.WriteLine($"Connection to {ip} failed.");
                 }
-            }
+            }*/
         }
     }
 }

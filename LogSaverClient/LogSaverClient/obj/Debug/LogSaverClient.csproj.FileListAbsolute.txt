@@ -15,7 +15,10 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\De
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\LogSaverClient.exe.config
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\LogSaverClient.exe
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\LogSaverClient.pdb
-D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.csprojAssemblyReference.cache
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.csproj.CoreCompileInputs.cache
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.exe
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.pdb
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.MainForm.resources
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.csproj.GenerateResource.cache
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.ConnectionMenu.resources
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.csprojAssemblyReference.cache
