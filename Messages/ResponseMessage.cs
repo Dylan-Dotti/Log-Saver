@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,16 @@ namespace Messages
 {
     public class ResponseMessage : LogSaverMessage
     {
-        public ResponseMessage() : base(MessageType.Response)
-        {
+        private readonly ReturnCode returnCode;
 
+        public ResponseMessage(ReturnCode returnCode) : base(MessageType.Response)
+        {
+            this.returnCode = returnCode;
         }
 
-        public override string ToJsonString()
+        public override JObject ToJObject()
         {
-            throw new NotImplementedException();
+            return base.ToJObject();
         }
     }
 }

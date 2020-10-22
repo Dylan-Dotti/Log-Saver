@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Messages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,20 @@ namespace LogSaverClient
 {
     public partial class ConnectedClientForm : Form
     {
-        public ConnectedClientForm()
+        private readonly LSClient client;
+
+        public ConnectedClientForm(LSClient client)
         {
             InitializeComponent();
+            this.client = client;
+        }
+
+        private async void sendRequestButton_Click(object sender, EventArgs e)
+        {
+            sendRequestButton.Enabled = false;
+            client.SendMessage(new SaveRequestMessage());
+            await client.AwaitMessageAsync();
+            sendRequestButton.Enabled = true;
         }
     }
 }

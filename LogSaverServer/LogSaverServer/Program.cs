@@ -12,7 +12,7 @@ namespace LogSaverServer
         {
             Console.WriteLine(GetLocalIPAddress());
             IPAddress ip = IPAddress.Parse(GetLocalIPAddress());
-            new LogSaverServer().StartServer(ip, 1337);
+            new LogSaverServer().StartServer(ip, 1337, "", "");
         }
 
         public static string GetLocalIPAddress()

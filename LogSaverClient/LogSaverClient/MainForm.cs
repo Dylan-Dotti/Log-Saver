@@ -30,7 +30,8 @@ namespace LogSaverClient
 
         private void OnConnectionMade(LSClient client)
         {
-            throw new NotImplementedException();
+            new ConnectedClientForm(client).ShowDialog(this);
+            client.Close();
         }
     }
 }

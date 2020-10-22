@@ -12,6 +12,16 @@ namespace Messages
             MsgType = messageType;
         }
 
-        public abstract string ToJsonString();
+        public override string ToString()
+        {
+            return ToJObject().ToString();
+        }
+
+        public virtual JObject ToJObject()
+        {
+            JObject jObj = new JObject();
+            jObj.Add("MessageType", MsgType.ToString());
+            return jObj;
+        }
     }
 }

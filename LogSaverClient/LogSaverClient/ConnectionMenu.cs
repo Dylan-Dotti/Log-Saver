@@ -20,7 +20,7 @@ namespace LogSaverClient
             InitializeComponent();
         }
 
-        private void connectButton_Click(object sender, EventArgs e)
+        private async void connectButton_Click(object sender, EventArgs e)
         {
             connectButton.Enabled = false;
             string input = ipInput.Text;
@@ -29,13 +29,17 @@ namespace LogSaverClient
                 try
                 {
                     LSClient client = new LSClient();
-                    client.Connect(ip, 1337);
+                    resultLabel.Text = "Connecting...";
+                    await client.ConnectAsync(ip, 1337);
+                    //resultLabel.Text = "Connection successful";
                     ConnectionMade?.Invoke(client);
 
                 }
-                catch (Exception)
+                catch (Exception exception)
                 {
-                    Console.WriteLine($"Connection to {ip} failed.");
+                    resultLabel.Text = "Connection failed";
+                    Console.WriteLine(exception.Message);
+                    Console.WriteLine(exception.StackTrace);
                 }
             }
             connectButton.Enabled = true;

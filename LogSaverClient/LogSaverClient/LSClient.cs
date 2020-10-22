@@ -11,53 +11,46 @@ using System.Threading.Tasks;
 
 namespace LogSaverClient
 {
-    public class LSClient : TcpClient
+    public class LSClient
     {
-        private readonly BinaryWriter writer;
-        private readonly BinaryReader reader;
+        private readonly TcpClient client;
+        private BinaryWriter writer;
+        private BinaryReader reader;
 
-        public LSClient() : base()
+        public LSClient()
         {
-            writer = new BinaryWriter(GetStream());
-            reader = new BinaryReader(GetStream());
+            client = new TcpClient();
         }
 
-        public async Task<string> SendMessage(LogSaverMessage message)
+        ~LSClient()
         {
-            writer.Write(message.ToJsonString());
-            return await Task.Run(() => 
+            client.Close();
+        }
+
+        public async Task ConnectAsync(IPAddress address, int port)
+        {
+            await client.ConnectAsync(address, port);
+            writer = new BinaryWriter(client.GetStream());
+            reader = new BinaryReader(client.GetStream());
+        }
+
+        public void Close()
+        {
+            client.Close();
+        }
+
+        public void SendMessage(LogSaverMessage message)
+        {
+            writer.Write(message.ToString());
+        }
+
+        public async Task<string> AwaitMessageAsync()
+        {
+            return await Task.Run(() =>
             {
                 string response = reader.ReadString();
                 return response;
             });
         }
-        /*public void Start(IPAddress ip, int port)
-        {
-            TcpClient client = new TcpClient();
-            Console.WriteLine("Connecting...");
-            client.Connect(ip, port);
-            Console.WriteLine($"Connected to {ip}:{port}");
-            /*BinaryWriter writer = new BinaryWriter(client.GetStream());
-            BinaryReader reader = new BinaryReader(client.GetStream());
-            try
-            {
-                while (true)
-                {
-                    string json = "{ 'MessageType' : 'SaveRequest' }";
-                    Console.WriteLine("Enter a message to send: " + json);
-                    string request = json; //Console.ReadLine();
-                    writer.Write(request);
-                    Thread.Sleep(2000);
-                    string response = reader.ReadString();
-                    Console.WriteLine("Response: " + response);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-            }
-            Console.WriteLine("Connection ended.");
-        }*/
     }
 }

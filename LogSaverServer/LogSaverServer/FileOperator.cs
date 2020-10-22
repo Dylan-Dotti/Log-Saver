@@ -27,7 +27,14 @@ namespace LogSaverServer
 
         public void ZipDirectory(string sourcePath, string zipPath)
         {
+            //foreach (var f in GetFilesInDirectory(sourcePath))
+              //  Console.WriteLine(f);
             ZipFile.CreateFromDirectory(sourcePath, zipPath);
+        }
+
+        public string[] GetFilesInDirectory(string path)
+        {
+            return Directory.GetFiles(path);
         }
     }
 }

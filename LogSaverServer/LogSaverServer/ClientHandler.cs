@@ -1,46 +1,27 @@
-﻿using Messages;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace LogSaverServer
 {
-    class LogSaverServer
+    class ClientHandler
     {
-        public string LogsSourcePath { get; set; }
-        public string LogsDestPath { get; set; }
+        private readonly TcpClient client;
+        private readonly string logsSourcePath;
+        private readonly string logsDestPath;
 
-        public void StartServer(IPAddress ip, int port,
-            string logSourcePath, string logDestPath)
+        public ClientHandler(TcpClient client, string logsSourcePath, string logsDestPath)
         {
-            TcpListener listener = new TcpListener(ip, port);
-            listener.Start();
-            Console.WriteLine($"The server is running at {ip}:{port}...");
-
-            while (true)
-            {
-                TcpClient client = listener.AcceptTcpClient();
-                // blocks here until a client connects
-                Console.WriteLine("Received connection.");
-                new Thread(HandleClient).Start(client);
-            }
-        }
-
-        private void HandleClient(object client)
-        {
-            string src = @"C:\Users\Dylan\Desktop\Logs";
+            string src = @"C:\Users\Dylan\Desktop\test_m_logs";
             string dst = @"C:\Users\Dylan\Desktop\59972.zip";
             FileOperator fileOperator = new FileOperator();
-            TcpClient clientLocal = (TcpClient)client;
-            BinaryReader reader = new BinaryReader(clientLocal.GetStream());
-            BinaryWriter writer = new BinaryWriter(clientLocal.GetStream());
+            BinaryReader reader = new BinaryReader(client.GetStream());
+            BinaryWriter writer = new BinaryWriter(client.GetStream());
             while (true)
             {
                 try
@@ -65,10 +46,20 @@ namespace LogSaverServer
                 catch (Exception)
                 {
                     Console.WriteLine("Connection with client lost.");
-                    clientLocal.Close();
+                    client.Close();
                     break;
                 }
             }
+        }
+
+        public void HandleClient()
+        {
+
+        }
+
+        private void HandleClientWork()
+        {
+
         }
     }
 }

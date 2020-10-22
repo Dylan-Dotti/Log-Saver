@@ -28,33 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.sendRequestButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // sendRequestButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(277, 109);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.sendRequestButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.sendRequestButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sendRequestButton.Location = new System.Drawing.Point(125, 88);
+            this.sendRequestButton.Name = "sendRequestButton";
+            this.sendRequestButton.Size = new System.Drawing.Size(200, 50);
+            this.sendRequestButton.TabIndex = 0;
+            this.sendRequestButton.Text = "Save Logs";
+            this.sendRequestButton.UseVisualStyleBackColor = true;
+            this.sendRequestButton.Click += new System.EventHandler(this.sendRequestButton_Click);
             // 
             // ConnectedClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(459, 229);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.sendRequestButton);
             this.Name = "ConnectedClientForm";
             this.Text = "ConnectedClientForm";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button sendRequestButton;
     }
 }

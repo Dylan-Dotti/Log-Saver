@@ -29,3 +29,9 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\De
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\Messages.dll
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\Messages.pdb
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.csproj.CopyComplete
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\Messages.dll
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\Newtonsoft.Json.dll
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\Messages.pdb
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\Newtonsoft.Json.xml
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.ConnectedClientForm.resources
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.csproj.CopyComplete

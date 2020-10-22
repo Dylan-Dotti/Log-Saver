@@ -13,10 +13,5 @@ namespace Messages
         {
 
         }
-
-        public override string ToJsonString()
-        {
-            return "";
-        }
     }
 }
