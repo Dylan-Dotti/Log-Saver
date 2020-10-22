@@ -28,32 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.connectionMenu = new LogSaverClient.ConnectionMenu();
             this.SuspendLayout();
-            // 
-            // connectionMenu
-            // 
-            this.connectionMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.connectionMenu.Location = new System.Drawing.Point(0, 0);
-            this.connectionMenu.Name = "connectionMenu";
-            this.connectionMenu.Size = new System.Drawing.Size(672, 354);
-            this.connectionMenu.TabIndex = 0;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(672, 354);
-            this.Controls.Add(this.connectionMenu);
+            this.ClientSize = new System.Drawing.Size(828, 372);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainForm";
             this.Text = "Swiss Log Saver";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private ConnectionMenu connectionMenu;
     }
 }

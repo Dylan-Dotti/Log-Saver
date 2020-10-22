@@ -2,7 +2,6 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\bin\Debug\Messages.dll
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\bin\Debug\Messages.pdb
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\bin\Debug\Newtonsoft.Json.dll
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\bin\Debug\Newtonsoft.Json.xml
-C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\obj\Debug\Messages.csprojAssemblyReference.cache
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\obj\Debug\Messages.csproj.CoreCompileInputs.cache
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\obj\Debug\Messages.csproj.CopyComplete
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\obj\Debug\Messages.dll

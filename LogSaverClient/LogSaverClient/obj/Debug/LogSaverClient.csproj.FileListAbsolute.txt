@@ -22,3 +22,10 @@ D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.MainF
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.csproj.GenerateResource.cache
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.ConnectionMenu.resources
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.csprojAssemblyReference.cache
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.ConnectedClientForm.resources
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.ConnectionMenu.resources
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.MainForm.resources
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.csproj.GenerateResource.cache
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\Messages.dll
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\Messages.pdb
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.csproj.CopyComplete

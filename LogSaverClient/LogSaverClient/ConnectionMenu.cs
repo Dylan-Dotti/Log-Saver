@@ -29,7 +29,7 @@ namespace LogSaverClient
                 try
                 {
                     LSClient client = new LSClient();
-                    client.Start(ip, 1337);
+                    client.Connect(ip, 1337);
                     ConnectionMade?.Invoke(client);
 
                 }
