@@ -10,9 +10,11 @@ namespace LogSaverServer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(GetLocalIPAddress());
             IPAddress ip = IPAddress.Parse(GetLocalIPAddress());
-            new LogSaverServer().StartServer(ip, 1337, "", "");
+            new LogSaverServer(ip, 1337,
+                @"C:\Users\Dylan\Desktop\test_m_logs\",
+                @"C:\Users\Dylan\Desktop\LogsBackup\59972.zip")
+                .StartServer();
         }
 
         public static string GetLocalIPAddress()

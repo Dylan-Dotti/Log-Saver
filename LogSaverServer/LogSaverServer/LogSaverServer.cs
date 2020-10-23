@@ -14,8 +14,21 @@ namespace LogSaverServer
 {
     class LogSaverServer
     {
-        public void StartServer(IPAddress ip, int port,
+        private readonly IPAddress ip;
+        private readonly int port;
+        private readonly string logSourcePath;
+        private readonly string logDestPath;
+
+        public LogSaverServer(IPAddress ip, int port,
             string logSourcePath, string logDestPath)
+        {
+            this.ip = ip;
+            this.port = port;
+            this.logSourcePath = logSourcePath;
+            this.logDestPath = logDestPath;
+        }
+
+        public void StartServer()
         {
             TcpListener listener = new TcpListener(ip, port);
             listener.Start();
@@ -26,7 +39,8 @@ namespace LogSaverServer
                 TcpClient client = listener.AcceptTcpClient();
                 // blocks here until a client connects
                 Console.WriteLine("Received connection.");
-                new Thread(HandleClient).Start(client);
+                //new Thread(HandleClient).Start(client);
+                new Thread(() => new ClientHandler(client, logSourcePath, logDestPath).HandleClient()).Start();
             }
         }
 
