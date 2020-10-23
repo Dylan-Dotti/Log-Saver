@@ -1,24 +1,26 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Messages
 {
     public class ResponseMessage : LogSaverMessage
     {
-        private readonly ReturnCode returnCode;
+        private readonly ResponseCode responseCode;
+        private readonly string errorMessage;
 
-        public ResponseMessage(ReturnCode returnCode) : base(MessageType.Response)
+        public ResponseMessage(ResponseCode resCode) : this(resCode, "") { }
+
+        public ResponseMessage(ResponseCode resCode, string errMsg) : base(MessageType.Response)
         {
-            this.returnCode = returnCode;
+            responseCode = resCode;
+            errorMessage = errMsg;
         }
 
         public override JObject ToJObject()
         {
-            return base.ToJObject();
+            JObject jObject = base.ToJObject();
+            jObject.Add("ResponseCode", responseCode.ToString());
+            jObject.Add("ErrorMessage", errorMessage);
+            return jObject;
         }
     }
 }

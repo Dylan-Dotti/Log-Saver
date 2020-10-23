@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Messages;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LogSaverServer
@@ -14,17 +16,29 @@ namespace LogSaverServer
         private readonly TcpClient client;
         private readonly string logsSourcePath;
         private readonly string logsDestPath;
+        private Thread workThread;
 
         public ClientHandler(TcpClient client, string logsSourcePath, string logsDestPath)
         {
-            string src = @"C:\Users\Dylan\Desktop\test_m_logs";
-            string dst = @"C:\Users\Dylan\Desktop\59972.zip";
+            this.client = client;
+            this.logsSourcePath = logsSourcePath;
+            this.logsDestPath = logsDestPath;
+        }
+
+        public void HandleClientThreaded()
+        {
+            workThread = new Thread(HandleClientWork);
+            workThread.Start();
+        }
+
+        private void HandleClientWork()
+        {
             FileOperator fileOperator = new FileOperator();
             BinaryReader reader = new BinaryReader(client.GetStream());
             BinaryWriter writer = new BinaryWriter(client.GetStream());
-            while (true)
+            try
             {
-                try
+                while (true)
                 {
                     string request = reader.ReadString();
                     Console.WriteLine("Request: " + request);
@@ -33,33 +47,26 @@ namespace LogSaverServer
                     if (msgType == MessageType.SaveRequest)
                     {
                         // zip directory
-                        Console.WriteLine("Zipping directory...");
-                        fileOperator.ZipDirectory(src, dst);
+                        Console.WriteLine("Zipping logs...");
+                        fileOperator.ZipDirectory(logsSourcePath, logsDestPath);
                         Console.WriteLine("Zip Complete");
+                        // send response
+                        var response = new ResponseMessage(ResponseCode.Ok).ToString();
+                        writer.Write(response);
+                        Console.WriteLine("Sent response: " + response);
                     }
-
-                    // send response
-                    string response = "000";
-                    writer.Write(response);
-                    Console.WriteLine("Sent response: " + response);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Connection with client lost.");
-                    client.Close();
-                    break;
+                    else
+                    {
+                        var response = new ResponseMessage(ResponseCode.Error).ToString();
+                        writer.Write(response);
+                        Console.WriteLine("Sent response: " + response);
+                    }
                 }
             }
-        }
-
-        public void HandleClient()
-        {
-
-        }
-
-        private void HandleClientWork()
-        {
-
+            catch (Exception)
+            {
+                Console.WriteLine("Connection with client lost.");
+            }
         }
     }
 }

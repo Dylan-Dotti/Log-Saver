@@ -14,9 +14,6 @@ namespace LogSaverServer
 {
     class LogSaverServer
     {
-        public string LogsSourcePath { get; set; }
-        public string LogsDestPath { get; set; }
-
         public void StartServer(IPAddress ip, int port,
             string logSourcePath, string logDestPath)
         {
@@ -36,7 +33,7 @@ namespace LogSaverServer
         private void HandleClient(object client)
         {
             string src = @"C:\Users\Dylan\Desktop\Logs";
-            string dst = @"C:\Users\Dylan\Desktop\59972.zip";
+            string dst = @"C:\Users\Dylan\Desktop\LogsBackup\59972.zip";
             FileOperator fileOperator = new FileOperator();
             TcpClient clientLocal = (TcpClient)client;
             BinaryReader reader = new BinaryReader(clientLocal.GetStream());
@@ -53,12 +50,12 @@ namespace LogSaverServer
                     {
                         // zip directory
                         Console.WriteLine("Zipping directory...");
-                        fileOperator.ZipDirectory(src, dst);
+                        //fileOperator.ZipDirectory(src, dst);
                         Console.WriteLine("Zip Complete");
                     }
 
                     // send response
-                    string response = "000";
+                    string response = ResponseCode.Ok.ToIntString();
                     writer.Write(response);
                     Console.WriteLine("Sent response: " + response);
                 }

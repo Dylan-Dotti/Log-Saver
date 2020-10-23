@@ -9,7 +9,7 @@ public enum MessageType
 
 public static class MessageTypeExtensions
 {
-    private static IEnumerable<MessageType> messageTypeValues =
+    private static readonly IEnumerable<MessageType> messageTypeValues =
         Enum.GetValues(typeof(MessageType)).Cast<MessageType>();
 
     public static MessageType ToMessageType(this string value)
