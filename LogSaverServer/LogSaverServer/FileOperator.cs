@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Messages;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogSaverServer
 {
@@ -26,13 +25,15 @@ namespace LogSaverServer
             foreach (string file in files) CopyFile(file, destPath, true);
         }
 
-        public void ZipFiles(string[] filePaths, string zipPath)
+        public void ZipFiles(string[] filePaths, string zipPath, BinaryWriter writer)
         {
             try
             {
                 // Open zip archive if it does not already exist
+                Console.WriteLine("Creating zip archive: " + zipPath);
                 using (ZipArchive archive = ZipFile.Open(zipPath, ZipArchiveMode.Create))
                 {
+                    Console.WriteLine("Beginning zip operation...");
                     // Loop through the input files and zip one by one. Report progress to client through writer.
                     for (int i = 0; i < filePaths.Length; i++)
                     {
@@ -41,6 +42,8 @@ namespace LogSaverServer
                         {
                             Console.WriteLine("Zipping file: " + path);
                             archive.CreateEntryFromFile(path, Path.GetFileName(path));
+                            // report progress to the client
+                            writer.Write(new ZipStatusMessage(i + 1, filePaths.Length).ToString());
                         }
                         catch (Exception e)
                         {
@@ -50,6 +53,7 @@ namespace LogSaverServer
                             break;
                         }
                     }
+                    Console.WriteLine("Zip operation complete");
                 }
             }
             catch (Exception e)

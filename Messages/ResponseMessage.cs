@@ -1,18 +1,22 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Messages
 {
     public class ResponseMessage : LogSaverMessage
     {
+        [JsonProperty("ResponseCode")]
         public ResponseCode ResCode { get; private set; }
+        [JsonProperty("ErrorMessage")]
         public string ErrorMessage { get; private set; }
 
         public ResponseMessage(ResponseCode resCode) : this(resCode, "") { }
 
-        public ResponseMessage(ResponseCode resCode, string errMsg) : base(MessageType.Response)
+        [JsonConstructor]
+        public ResponseMessage(ResponseCode responseCode, string errroMessage) : base(MessageType.Response)
         {
-            ResCode = resCode;
-            ErrorMessage = errMsg;
+            ResCode = responseCode;
+            ErrorMessage = errroMessage;
         }
 
         public override JObject ToJObject()

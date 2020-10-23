@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,7 +11,7 @@ public enum MessageType
 public static class MessageTypeExtensions
 {
     private static readonly IEnumerable<MessageType> messageTypeValues =
-        Enum.GetValues(typeof(MessageType)).Cast<MessageType>();
+        EnumExtensions.GetValues<MessageType>();
 
     public static MessageType ToMessageType(this string value)
     {

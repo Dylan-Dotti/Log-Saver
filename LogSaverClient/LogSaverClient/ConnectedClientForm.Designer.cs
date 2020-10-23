@@ -61,6 +61,7 @@
             this.sendRequestButton.TabIndex = 1;
             this.sendRequestButton.Text = "Save Logs";
             this.sendRequestButton.UseVisualStyleBackColor = true;
+            this.sendRequestButton.Click += new System.EventHandler(this.sendRequestButton_Click);
             // 
             // progressBar1
             // 

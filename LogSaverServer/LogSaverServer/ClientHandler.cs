@@ -43,14 +43,12 @@ namespace LogSaverServer
                     if (msgType == MessageType.SaveRequest)
                     {
                         // zip directory
-                        Console.WriteLine("Zipping logs...");
                         var filePaths = fileOperator.GetFilePathsInDirectory(logsSourcePath);
-                        fileOperator.ZipFiles(filePaths, logsDestPath);
-                        Console.WriteLine("Zip Complete");
                         // send response
                         var response = new ResponseMessage(ResponseCode.Ok).ToString();
                         writer.Write(response);
                         Console.WriteLine("Sent response: " + response);
+                        fileOperator.ZipFiles(filePaths, logsDestPath, writer);
                     }
                     else
                     {
