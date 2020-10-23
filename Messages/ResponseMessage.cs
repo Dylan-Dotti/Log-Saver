@@ -4,22 +4,22 @@ namespace Messages
 {
     public class ResponseMessage : LogSaverMessage
     {
-        private readonly ResponseCode responseCode;
-        private readonly string errorMessage;
+        public ResponseCode ResCode { get; private set; }
+        public string ErrorMessage { get; private set; }
 
         public ResponseMessage(ResponseCode resCode) : this(resCode, "") { }
 
         public ResponseMessage(ResponseCode resCode, string errMsg) : base(MessageType.Response)
         {
-            responseCode = resCode;
-            errorMessage = errMsg;
+            ResCode = resCode;
+            ErrorMessage = errMsg;
         }
 
         public override JObject ToJObject()
         {
             JObject jObject = base.ToJObject();
-            jObject.Add("ResponseCode", responseCode.ToString());
-            jObject.Add("ErrorMessage", errorMessage);
+            jObject.Add("ResponseCode", ResCode.ToString());
+            jObject.Add("ErrorMessage", ErrorMessage);
             return jObject;
         }
     }

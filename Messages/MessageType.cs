@@ -4,7 +4,7 @@ using System.Linq;
 
 public enum MessageType
 {
-    Unknown, SaveRequest, Response
+    Unknown, SaveRequest, Response, ZipStatus
 }
 
 public static class MessageTypeExtensions

@@ -50,6 +50,7 @@
     <Compile Include="ResponseMessage.cs" />
     <Compile Include="ResponseCode.cs" />
     <Compile Include="SaveRequestMessage.cs" />
+    <Compile Include="ZipStatusMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
