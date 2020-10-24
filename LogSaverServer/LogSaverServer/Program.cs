@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
+using Topshelf;
 
 namespace LogSaverServer
 {
@@ -10,11 +12,15 @@ namespace LogSaverServer
     {
         static void Main(string[] args)
         {
+            /*var exitCode = HostFactory.Run(x =>
+            {
+                x.Service
+            });*/
             IPAddress ip = IPAddress.Parse(GetLocalIPAddress());
             new LogSaverServer(ip, 1337,
                 @"C:\Users\Dylan\Desktop\Logs\",
                 @"C:\Users\Dylan\Desktop\LogsBackup\59972.zip")
-                .StartServer();
+                .Start();
         }
 
         public static string GetLocalIPAddress()
