@@ -24,3 +24,5 @@ D:\Github\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\Newtonsoft.Json.xml
 D:\Github\Log-Saver\LogSaverServer\LogSaverServer\obj\Debug\LogSaverServer.csproj.CopyComplete
 D:\Github\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\Topshelf.dll
 D:\Github\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\Topshelf.xml
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\Topshelf.dll
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\Topshelf.xml

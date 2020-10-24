@@ -18,8 +18,8 @@ namespace LogSaverServer
             });*/
             IPAddress ip = IPAddress.Parse(GetLocalIPAddress());
             new LogSaverServer(ip, 1337,
-                @"C:\Users\Dylan\Desktop\Logs\",
-                @"C:\Users\Dylan\Desktop\LogsBackup\59972.zip")
+                @"C:\Users\h4dottd\Desktop\Logs\",
+                @"C:\Users\h4dottd\Desktop\LogsBackup\59972.zip")
                 .Start();
         }
 

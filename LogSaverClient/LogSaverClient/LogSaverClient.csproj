@@ -64,6 +64,12 @@
       <DependentUpon>ConnectionMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="FileOperationProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileOperationProgressForm.Designer.cs">
+      <DependentUpon>FileOperationProgressForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LSClient.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -84,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConnectionMenu.resx">
       <DependentUpon>ConnectionMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileOperationProgressForm.resx">
+      <DependentUpon>FileOperationProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

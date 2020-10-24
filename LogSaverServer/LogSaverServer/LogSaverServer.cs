@@ -16,8 +16,8 @@ namespace LogSaverServer
         private readonly string logSourcePath;
         private readonly string logDestPath;
 
-        private TcpListener listener;
-        private ManualResetEvent tcpClientConnected;
+        private readonly TcpListener listener;
+        private readonly ManualResetEvent tcpClientConnected;
 
         public LogSaverServer(IPAddress ip, int port,
             string logSourcePath, string logDestPath)
@@ -33,10 +33,10 @@ namespace LogSaverServer
         public void Start()
         {
             listener.Start();
+            Console.WriteLine($"Server is running at {ip}...");
             while (true)
             {
                 BeginAcceptTcpClient();
-                Console.WriteLine("After begin accept in start");
             }
             /*listener.Start();
             Console.WriteLine($"The server is running at {ip}...");
@@ -64,7 +64,6 @@ namespace LogSaverServer
             Console.WriteLine("Waiting for a connection...");
             listener.BeginAcceptTcpClient(new AsyncCallback(AcceptClientCallback), listener);
             tcpClientConnected.WaitOne();
-            Console.WriteLine("After wait one");
         }
 
         private void AcceptClientCallback(IAsyncResult result)

@@ -17,7 +17,13 @@ namespace Messages
 
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this);
+            return ToString(false);
+        }
+
+        public string ToString(bool indentedFormat)
+        {
+            return JsonConvert.SerializeObject(this,
+                indentedFormat ? Formatting.Indented : Formatting.None);
         }
 
         public virtual JObject ToJObject()

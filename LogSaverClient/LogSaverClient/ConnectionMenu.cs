@@ -42,6 +42,10 @@ namespace LogSaverClient
                     Console.WriteLine(exception.StackTrace);
                 }
             }
+            else
+            {
+                resultLabel.Text = "Invalid IP entered";
+            }
             connectButton.Enabled = true;
         }
     }

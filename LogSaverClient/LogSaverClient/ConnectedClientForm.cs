@@ -1,7 +1,5 @@
 ﻿using Messages;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LogSaverClient
@@ -22,31 +20,22 @@ namespace LogSaverClient
         {
             Console.WriteLine("Sending request");
             sendRequestButton.Enabled = false;
-            client.SendMessage(new SaveRequestMessage());
+            var request = new SaveRequestMessage();
+            client.SendMessage(request);
             string response = await client.AwaitMessageAsync();
             ResponseMessage resDecoded = decoder.DecodeMessage<ResponseMessage>(response);
             if (resDecoded.ResCode == ResponseCode.Ok)
             {
-                await HandleZipUpdates();
+                new FileOperationProgressForm(client, decoder).ShowDialog();
             }
             else if (resDecoded.ResCode == ResponseCode.Error)
             {
-                Console.WriteLine("Error");
+                MessageBox.Show("Request sent to server was in error \n" +
+                    "Request: " + request.ToString(true), 
+                    "Request Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             sendRequestButton.Enabled = true;
-        }
-
-        private async Task HandleZipUpdates()
-        {
-            Console.WriteLine("Switching to receiving mode");
-            while (true)
-            {
-                string message = await client.AwaitMessageAsync();
-                ZipStatusMessage msgDecoded = decoder.DecodeMessage<ZipStatusMessage>(message);
-                int percentComplete = (int)((float)msgDecoded.ZippedCount / msgDecoded.TotalFileCount * 100);
-                progressBar1.Value = percentComplete;
-                if (percentComplete == 100) break;
-            }
         }
     }
 }
