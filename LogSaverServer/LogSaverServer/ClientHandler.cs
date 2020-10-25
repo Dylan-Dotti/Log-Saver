@@ -15,6 +15,7 @@ namespace LogSaverServer
         private readonly BinaryReader reader;
         private readonly BinaryWriter writer;
 
+        private readonly MessageDecoder decoder;
         private readonly FileOperator fileOperator;
         private readonly string logsSourcePath;
         private readonly string logsDestPath;
@@ -24,6 +25,7 @@ namespace LogSaverServer
             this.client = client;
             this.logsSourcePath = logsSourcePath;
             this.logsDestPath = logsDestPath;
+            decoder = new MessageDecoder();
             fileOperator = new FileOperator();
             reader = new BinaryReader(client.GetStream());
             writer = new BinaryWriter(client.GetStream());
@@ -38,23 +40,19 @@ namespace LogSaverServer
                     string request = reader.ReadString();
                     // blocks here until client sends a request
                     Console.WriteLine("Request: " + request);
-                    JObject requestJson = JObject.Parse(request);
-                    MessageType msgType = requestJson.Value<string>("MessageType").ToMessageType();
-                    if (msgType == MessageType.SaveRequest)
+                    if (decoder.TryDecodeMessage(request, out SaveRequestMessage decodedSR))
                     {
-                        // zip directory
-                        var filePaths = fileOperator.GetFilePathsInDirectory(logsSourcePath);
+                        //validate message
+                        string[] filePaths = fileOperator.GetFilePathsInDirectory(logsSourcePath);
+                        string zipPath = Path.Combine(logsDestPath, decodedSR.ZipFileName);
                         // send response
-                        var response = new ResponseMessage(ResponseCode.Ok).ToString();
-                        writer.Write(response);
-                        Console.WriteLine("Sent response: " + response);
-                        fileOperator.ZipFiles(filePaths, logsDestPath, writer);
+                        SendResponseMessage(ResponseCode.Ok);
+                        // zip directory
+                        fileOperator.ZipFiles(filePaths, zipPath, writer);
                     }
                     else
                     {
-                        var response = new ResponseMessage(ResponseCode.Error).ToString();
-                        writer.Write(response);
-                        Console.WriteLine("Sent response: " + response);
+                        SendResponseMessage(ResponseCode.Error, "Invalid message received");
                     }
                 }
             }
@@ -63,6 +61,13 @@ namespace LogSaverServer
                 Console.WriteLine("Connection with client lost.");
                 client.Close();
             }
+        }
+
+        private void SendResponseMessage(ResponseCode resCode, string message = "")
+        {
+            var response = new ResponseMessage(resCode, message).ToString();
+            writer.Write(response);
+            Console.WriteLine("Sent response: " + response);
         }
     }
 }

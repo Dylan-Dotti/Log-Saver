@@ -20,7 +20,7 @@ namespace LogSaverClient
         {
             Console.WriteLine("Sending request");
             sendRequestButton.Enabled = false;
-            var request = new SaveRequestMessage();
+            var request = new SaveRequestMessage(zipNameInput.Text);
             client.SendMessage(request);
             string response = await client.AwaitMessageAsync();
             ResponseMessage resDecoded = decoder.DecodeMessage<ResponseMessage>(response);
@@ -36,6 +36,20 @@ namespace LogSaverClient
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             sendRequestButton.Enabled = true;
+        }
+
+        private void zipNameInput_TextChanged(object sender, EventArgs e)
+        {
+            string input = zipNameInput.Text;
+            if (string.IsNullOrEmpty(input) || string.IsNullOrWhiteSpace(input))
+            {
+                zipNameInput.Clear();
+                sendRequestButton.Enabled = false;
+            }
+            else
+            {
+                sendRequestButton.Enabled = true;
+            }
         }
     }
 }

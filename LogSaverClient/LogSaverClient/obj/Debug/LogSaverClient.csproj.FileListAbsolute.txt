@@ -38,3 +38,6 @@ D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.cspro
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\Newtonsoft.Json.dll
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\Newtonsoft.Json.xml
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.FileOperationProgressForm.resources
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.FileOperationProgressForm.resources
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.TimeRangeSelectionComponent.resources
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.DateTimeComboPicker.resources

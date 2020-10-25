@@ -13,6 +13,20 @@ namespace Messages
             Console.WriteLine($"Decoding message: " + message);
             return JsonConvert.DeserializeObject<T>(message);
         }
+
+        public bool TryDecodeMessage<T>(string message, out T decodedMessage)
+            where T : LogSaverMessage
+        {
+            try
+            {
+                decodedMessage = DecodeMessage<T>(message);
+            }
+            catch (Exception)
+            {
+                decodedMessage = null;
+            }
+            return decodedMessage != null;
+        }
     }
 
     public class MessageDecodingException : Exception

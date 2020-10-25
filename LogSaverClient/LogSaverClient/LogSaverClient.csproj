@@ -63,6 +63,12 @@
     <Compile Include="ConnectionMenu.Designer.cs">
       <DependentUpon>ConnectionMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="DateTimeComboPicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DateTimeComboPicker.Designer.cs">
+      <DependentUpon>DateTimeComboPicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="FileOperationProgressForm.cs">
       <SubType>Form</SubType>
@@ -79,6 +85,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeRangeSelectionComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TimeRangeSelectionComponent.Designer.cs">
+      <DependentUpon>TimeRangeSelectionComponent.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -91,11 +103,17 @@
     <EmbeddedResource Include="ConnectionMenu.resx">
       <DependentUpon>ConnectionMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DateTimeComboPicker.resx">
+      <DependentUpon>DateTimeComboPicker.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FileOperationProgressForm.resx">
       <DependentUpon>FileOperationProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeRangeSelectionComponent.resx">
+      <DependentUpon>TimeRangeSelectionComponent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

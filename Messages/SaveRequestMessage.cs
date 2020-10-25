@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,12 @@ namespace Messages
 {
     public class SaveRequestMessage : LogSaverMessage
     {
-        public SaveRequestMessage() : base(MessageType.SaveRequest)
-        {
+        [JsonProperty("ZipFileName")]
+        public string ZipFileName { get; private set; }
 
+        public SaveRequestMessage(string zipFileName) : base(MessageType.SaveRequest)
+        {
+            ZipFileName = zipFileName;
         }
     }
 }
