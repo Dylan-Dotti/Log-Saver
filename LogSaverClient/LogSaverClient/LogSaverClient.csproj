@@ -91,6 +91,12 @@
     <Compile Include="TimeRangeSelectionComponent.Designer.cs">
       <DependentUpon>TimeRangeSelectionComponent.cs</DependentUpon>
     </Compile>
+    <Compile Include="ZipNameInputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ZipNameInputControl.Designer.cs">
+      <DependentUpon>ZipNameInputControl.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TimeRangeSelectionComponent.resx">
       <DependentUpon>TimeRangeSelectionComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZipNameInputControl.resx">
+      <DependentUpon>ZipNameInputControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

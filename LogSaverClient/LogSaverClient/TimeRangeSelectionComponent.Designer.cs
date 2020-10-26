@@ -118,9 +118,9 @@
             this.label1.Location = new System.Drawing.Point(40, 10);
             this.label1.Margin = new System.Windows.Forms.Padding(7, 10, 3, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 20);
+            this.label1.Size = new System.Drawing.Size(113, 20);
             this.label1.TabIndex = 3;
-            this.label1.Text = "No time range";
+            this.label1.Text = "All time ranges";
             // 
             // radioButton3
             // 

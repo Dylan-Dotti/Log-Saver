@@ -1,5 +1,6 @@
 ﻿using Messages;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LogSaverClient
@@ -14,16 +15,26 @@ namespace LogSaverClient
             InitializeComponent();
             this.client = client;
             decoder = new MessageDecoder();
+            zipNameInput.InputTextChanged += OnZipNameChanged;
         }
 
         private async void sendRequestButton_Click(object sender, EventArgs e)
         {
             Console.WriteLine("Sending request");
             sendRequestButton.Enabled = false;
-            var request = new SaveRequestMessage(zipNameInput.Text);
+            string zipName = zipNameInput.InputText.Trim();
+            // append .zip if the string does not end with it
+            if (!zipName.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
+            {
+                zipName += ".zip";
+            }
+            // create and send request
+            var request = new SaveRequestMessage(zipName);
             client.SendMessage(request);
+            // wait for response and decode message
             string response = await client.AwaitMessageAsync();
             ResponseMessage resDecoded = decoder.DecodeMessage<ResponseMessage>(response);
+            // process message
             if (resDecoded.ResCode == ResponseCode.Ok)
             {
                 new FileOperationProgressForm(client, decoder).ShowDialog();
@@ -38,18 +49,9 @@ namespace LogSaverClient
             sendRequestButton.Enabled = true;
         }
 
-        private void zipNameInput_TextChanged(object sender, EventArgs e)
+        private void OnZipNameChanged(string newInput)
         {
-            string input = zipNameInput.Text;
-            if (string.IsNullOrEmpty(input) || string.IsNullOrWhiteSpace(input))
-            {
-                zipNameInput.Clear();
-                sendRequestButton.Enabled = false;
-            }
-            else
-            {
-                sendRequestButton.Enabled = true;
-            }
+            sendRequestButton.Enabled = newInput.Length > 0;
         }
     }
 }
