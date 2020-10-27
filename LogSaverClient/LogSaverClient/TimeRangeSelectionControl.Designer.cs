@@ -1,6 +1,6 @@
 ﻿namespace LogSaverClient
 {
-    partial class TimeRangeSelectionComponent
+    partial class TimeRangeSelectionControl
     {
         /// <summary> 
         /// Required designer variable.

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace LogSaverClient
 {
-    public partial class TimeRangeSelectionComponent : UserControl
+    public partial class TimeRangeSelectionControl : UserControl
     {
-        public TimeRangeSelectionComponent()
+        public TimeRangeSelectionControl()
         {
             InitializeComponent();
         }

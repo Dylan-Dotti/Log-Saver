@@ -30,7 +30,7 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.sendRequestButton = new System.Windows.Forms.Button();
-            this.timeRangeSelectionComponent1 = new LogSaverClient.TimeRangeSelectionComponent();
+            this.timeRangeSelectionComponent1 = new LogSaverClient.TimeRangeSelectionControl();
             this.zipNameInput = new LogSaverClient.ZipNameInputControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -115,7 +115,7 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button sendRequestButton;
-        private TimeRangeSelectionComponent timeRangeSelectionComponent1;
+        private TimeRangeSelectionControl timeRangeSelectionComponent1;
         private ZipNameInputControl zipNameInput;
     }
 }
