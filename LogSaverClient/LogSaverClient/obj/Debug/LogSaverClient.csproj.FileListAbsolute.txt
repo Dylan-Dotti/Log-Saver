@@ -42,6 +42,6 @@ D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.FileO
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.DateTimeComboPicker.resources
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.ZipNameInputControl.resources
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.DateTimeComboPicker.resources
-C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.TimeRangeSelectionComponent.resources
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.ZipNameInputControl.resources
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.TimeRangeSelectionControl.resources
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.TimeRangeSelectionControl.resources

@@ -14,13 +14,16 @@ namespace LogSaverClient
     public partial class FileOperationProgressForm : Form
     {
         private readonly LSClient client;
+        private readonly FileOperationType operationType;
         private readonly MessageDecoder decoder;
 
-        public FileOperationProgressForm(LSClient client, MessageDecoder decoder)
+        public FileOperationProgressForm(LSClient client,
+            FileOperationType operationType)
         {
             InitializeComponent();
             this.client = client;
-            this.decoder = decoder;
+            this.operationType = operationType;
+            decoder = new MessageDecoder();
         }
 
         protected override async void OnShown(EventArgs e)
@@ -32,13 +35,18 @@ namespace LogSaverClient
 
         private async Task HandleOperationUpdates()
         {
+            operationLabel.Text =
+                (operationType == FileOperationType.Zip ? "Zip" : "Transfer") +
+                " operation in progress...";
             int percentComplete = 0;
+            progressLabel.Text = "0% completed";
             while (percentComplete < 100)
             {
                 string message = await client.AwaitMessageAsync();
                 ZipOperationMessage msgDecoded = decoder.DecodeMessage<ZipOperationMessage>(message);
                 percentComplete = (int)((float)msgDecoded.NumFilesCompleted / msgDecoded.NumTotalFiles * 100);
-                progressBar1.Value = percentComplete;
+                operationProgressBar.Value = percentComplete;
+                progressLabel.Text = percentComplete + "% completed";
             }
         }
     }

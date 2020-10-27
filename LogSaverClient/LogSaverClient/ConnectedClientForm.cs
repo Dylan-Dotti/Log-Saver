@@ -40,7 +40,7 @@ namespace LogSaverClient
             // process message
             if (resDecoded.ResCode == ResponseCode.Ok)
             {
-                new FileOperationProgressForm(client, decoder).ShowDialog();
+                new FileOperationProgressForm(client, FileOperationType.Zip).ShowDialog();
             }
             else if (resDecoded.ResCode == ResponseCode.Error)
             {
