@@ -46,12 +46,13 @@
             this.tableLayoutPanel1.Controls.Add(this.zipNameInput, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(592, 339);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(673, 486);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // sendRequestButton
@@ -60,10 +61,10 @@
             this.sendRequestButton.AutoSize = true;
             this.sendRequestButton.Enabled = false;
             this.sendRequestButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendRequestButton.Location = new System.Drawing.Point(196, 290);
-            this.sendRequestButton.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            this.sendRequestButton.Location = new System.Drawing.Point(186, 397);
+            this.sendRequestButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 23);
             this.sendRequestButton.Name = "sendRequestButton";
-            this.sendRequestButton.Size = new System.Drawing.Size(200, 34);
+            this.sendRequestButton.Size = new System.Drawing.Size(300, 66);
             this.sendRequestButton.TabIndex = 1;
             this.sendRequestButton.Text = "Save Logs";
             this.sendRequestButton.UseVisualStyleBackColor = true;
@@ -74,10 +75,10 @@
             this.timeRangeSelectionComponent1.AutoSize = true;
             this.timeRangeSelectionComponent1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.timeRangeSelectionComponent1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.timeRangeSelectionComponent1.Location = new System.Drawing.Point(15, 15);
-            this.timeRangeSelectionComponent1.Margin = new System.Windows.Forms.Padding(15);
+            this.timeRangeSelectionComponent1.Location = new System.Drawing.Point(22, 23);
+            this.timeRangeSelectionComponent1.Margin = new System.Windows.Forms.Padding(22, 23, 22, 23);
             this.timeRangeSelectionComponent1.Name = "timeRangeSelectionComponent1";
-            this.timeRangeSelectionComponent1.Size = new System.Drawing.Size(562, 183);
+            this.timeRangeSelectionComponent1.Size = new System.Drawing.Size(629, 244);
             this.timeRangeSelectionComponent1.TabIndex = 3;
             // 
             // zipNameInput
@@ -85,20 +86,21 @@
             this.zipNameInput.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.zipNameInput.AutoSize = true;
             this.zipNameInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.zipNameInput.Location = new System.Drawing.Point(137, 223);
-            this.zipNameInput.Margin = new System.Windows.Forms.Padding(10);
+            this.zipNameInput.Location = new System.Drawing.Point(101, 305);
+            this.zipNameInput.Margin = new System.Windows.Forms.Padding(15);
             this.zipNameInput.Name = "zipNameInput";
-            this.zipNameInput.Size = new System.Drawing.Size(318, 37);
+            this.zipNameInput.Size = new System.Drawing.Size(471, 53);
             this.zipNameInput.TabIndex = 4;
             // 
             // ConnectedClientForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(592, 339);
+            this.ClientSize = new System.Drawing.Size(673, 486);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ConnectedClientForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ConnectedClientForm";
