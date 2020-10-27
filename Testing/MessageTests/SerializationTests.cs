@@ -17,8 +17,6 @@ namespace MessageTests
             FileOperationStatus operationStatus = FileOperationStatus.Ok;
             int filesCompleted = 50;
             int totalFiles = 100;
-            FileOperationMessage message = new FileOperationMessage(
-                operationType, operationStatus, filesCompleted, totalFiles);
         }
     }
 }

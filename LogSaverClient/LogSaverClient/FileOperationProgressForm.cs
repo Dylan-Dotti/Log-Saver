@@ -26,18 +26,18 @@ namespace LogSaverClient
         protected override async void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            await HandleZipUpdates();
+            await HandleOperationUpdates();
             Close();
         }
 
-        private async Task HandleZipUpdates()
+        private async Task HandleOperationUpdates()
         {
             int percentComplete = 0;
             while (percentComplete < 100)
             {
                 string message = await client.AwaitMessageAsync();
-                ZipStatusMessage msgDecoded = decoder.DecodeMessage<ZipStatusMessage>(message);
-                percentComplete = (int)((float)msgDecoded.ZippedCount / msgDecoded.TotalFileCount * 100);
+                ZipOperationMessage msgDecoded = decoder.DecodeMessage<ZipOperationMessage>(message);
+                percentComplete = (int)((float)msgDecoded.NumFilesCompleted / msgDecoded.NumTotalFiles * 100);
                 progressBar1.Value = percentComplete;
             }
         }

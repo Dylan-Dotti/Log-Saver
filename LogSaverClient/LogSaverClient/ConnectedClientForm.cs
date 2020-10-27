@@ -25,17 +25,15 @@ namespace LogSaverClient
 
         private async void sendRequestButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Sending request");
+            Console.WriteLine("Sending request...");
             sendRequestButton.Enabled = false;
             string zipName = zipNameInput.InputText.Trim();
             // append .zip if the string does not end with it
-            if (!zipName.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
-            {
-                zipName += ".zip";
-            }
+            if (!zipName.ToLower().EndsWith(".zip")) zipName += ".zip";
             // create and send request
             var request = new SaveRequestMessage(zipName);
             client.SendMessage(request);
+            Console.WriteLine("Message sent. Awaiting response...");
             // wait for response and decode message
             string response = await client.AwaitMessageAsync();
             ResponseMessage resDecoded = decoder.DecodeMessage<ResponseMessage>(response);

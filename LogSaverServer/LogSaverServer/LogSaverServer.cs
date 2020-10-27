@@ -68,6 +68,7 @@ namespace LogSaverServer
 
         private void AcceptClientCallback(IAsyncResult result)
         {
+            Console.WriteLine("Connection received");
             TcpListener listenerLocal = (TcpListener)result.AsyncState;
             TcpClient client = listenerLocal.EndAcceptTcpClient(result);
             new Thread(() => new ClientHandler(client, logSourcePath, logDestPath).HandleClient()).Start();

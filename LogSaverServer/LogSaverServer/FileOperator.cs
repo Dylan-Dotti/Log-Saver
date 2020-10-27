@@ -43,7 +43,7 @@ namespace LogSaverServer
                             Console.WriteLine("Zipping file: " + path);
                             archive.CreateEntryFromFile(path, Path.GetFileName(path));
                             // report progress to the client
-                            writer.Write(new ZipStatusMessage(i + 1, filePaths.Length).ToString());
+                            writer.Write(new ZipOperationMessage(i + 1, filePaths.Length).ToString());
                         }
                         catch (Exception e)
                         {
