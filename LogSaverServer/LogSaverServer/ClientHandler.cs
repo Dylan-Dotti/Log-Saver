@@ -42,13 +42,20 @@ namespace LogSaverServer
                     Console.WriteLine("Request: " + request);
                     if (decoder.TryDecodeMessage(request, out SaveRequestMessage decodedSR))
                     {
-                        //validate message
                         string[] filePaths = fileOperator.GetFilePathsInDirectory(logsSourcePath);
                         string zipPath = Path.Combine(logsDestPath, decodedSR.ZipFileName);
-                        // send response
-                        SendResponseMessage(ResponseCode.Ok);
-                        // zip directory
-                        fileOperator.ZipFiles(filePaths, zipPath, writer);
+                        if (File.Exists(zipPath))
+                        {
+                            SendResponseMessage(ResponseCode.Error,
+                                $"Zip archive with the name {decodedSR.ZipFileName} already exists.");
+                        }
+                        else
+                        {
+                            // send response
+                            SendResponseMessage(ResponseCode.Ok);
+                            // zip directory
+                            fileOperator.ZipFiles(filePaths, zipPath, writer);
+                        }
                     }
                     else
                     {
@@ -65,9 +72,9 @@ namespace LogSaverServer
 
         private void SendResponseMessage(ResponseCode resCode, string message = "")
         {
-            var response = new ResponseMessage(resCode, message).ToString();
+            var response = new ResponseMessage(resCode, message);
             writer.Write(response);
-            Console.WriteLine("Sent response: " + response);
+            Console.WriteLine("Sent response: " + response.ToString(true));
         }
     }
 }

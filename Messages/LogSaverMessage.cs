@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Messages
 {
@@ -24,6 +25,14 @@ namespace Messages
         {
             return JsonConvert.SerializeObject(this,
                 indentedFormat ? Formatting.Indented : Formatting.None);
+        }
+    }
+
+    public static class LogSaverMessageExtensions
+    {
+        public static void Write(this BinaryWriter writer, LogSaverMessage message)
+        {
+            writer.Write(message.ToString());
         }
     }
 }

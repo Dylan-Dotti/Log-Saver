@@ -38,19 +38,6 @@ namespace LogSaverServer
             {
                 BeginAcceptTcpClient();
             }
-            /*listener.Start();
-            Console.WriteLine($"The server is running at {ip}...");
-
-            while (true)
-            {
-                using (TcpClient client = listener.AcceptTcpClient())
-                {
-                    // blocks here until a client connects
-                    Console.WriteLine("Received connection.");
-                    // start new thread to handle the client's requests, then go back to listening
-                    new Thread(() => new ClientHandler(client, logSourcePath, logDestPath).HandleClient()).Start();
-                }
-            }*/
         }
 
         public void Stop()

@@ -44,8 +44,8 @@ namespace LogSaverClient
             }
             else if (resDecoded.ResCode == ResponseCode.Error)
             {
-                MessageBox.Show("Request sent to server was in error \n" +
-                    "Request: " + request.ToString(true), 
+                MessageBox.Show("Your request was rejected by the server.\n" +
+                    "Reason: " + resDecoded.ErrorMessage,
                     "Request Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
