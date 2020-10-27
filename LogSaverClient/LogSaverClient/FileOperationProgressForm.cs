@@ -1,11 +1,7 @@
 ﻿using Messages;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -39,7 +35,6 @@ namespace LogSaverClient
                 (operationType == FileOperationType.Zip ? "Zip" : "Transfer") +
                 " operation in progress...";
             int percentComplete = 0;
-            progressLabel.Text = "0% completed";
             while (percentComplete < 100)
             {
                 string message = await client.AwaitMessageAsync();

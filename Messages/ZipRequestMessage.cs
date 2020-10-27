@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace Messages
 {
-    public class SaveRequestMessage : LogSaverMessage
+    public class ZipRequestMessage : FileOperationRequestMessage
     {
         [JsonProperty("ZipFileName")]
         public string ZipFileName { get; private set; }
 
-        public SaveRequestMessage(string zipFileName) : base(MessageType.SaveRequest)
+        public ZipRequestMessage(string zipFileName) : 
+            base(FileOperationType.Zip)
         {
             ZipFileName = zipFileName;
         }

@@ -57,12 +57,12 @@
             this.progressLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.progressLabel.AutoSize = true;
             this.progressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.progressLabel.Location = new System.Drawing.Point(215, 168);
+            this.progressLabel.Location = new System.Drawing.Point(221, 168);
             this.progressLabel.Margin = new System.Windows.Forms.Padding(3, 20, 3, 0);
             this.progressLabel.Name = "progressLabel";
-            this.progressLabel.Size = new System.Drawing.Size(147, 25);
+            this.progressLabel.Size = new System.Drawing.Size(136, 25);
             this.progressLabel.TabIndex = 2;
-            this.progressLabel.Text = "99% completed";
+            this.progressLabel.Text = "0% completed";
             // 
             // operationProgressBar
             // 
@@ -77,12 +77,12 @@
             this.operationLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.operationLabel.AutoSize = true;
             this.operationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operationLabel.Location = new System.Drawing.Point(139, 53);
+            this.operationLabel.Location = new System.Drawing.Point(135, 53);
             this.operationLabel.Margin = new System.Windows.Forms.Padding(3, 0, 3, 10);
             this.operationLabel.Name = "operationLabel";
-            this.operationLabel.Size = new System.Drawing.Size(300, 29);
+            this.operationLabel.Size = new System.Drawing.Size(307, 29);
             this.operationLabel.TabIndex = 1;
-            this.operationLabel.Text = "Zip operation in progress...";
+            this.operationLabel.Text = "File operation in progress...";
             // 
             // FileOperationProgressForm
             // 

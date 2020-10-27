@@ -27,17 +27,21 @@ namespace LogSaverClient
         {
             Console.WriteLine("Sending request...");
             sendRequestButton.Enabled = false;
+
             string zipName = zipNameInput.InputText.Trim();
             // append .zip if the string does not end with it
             if (!zipName.ToLower().EndsWith(".zip")) zipName += ".zip";
+
             // create and send request
-            var request = new SaveRequestMessage(zipName);
+            var request = new ZipRequestMessage(zipName);
             client.SendMessage(request);
             Console.WriteLine("Message sent. Awaiting response...");
-            // wait for response and decode message
+
+            // wait for response and decode
             string response = await client.AwaitMessageAsync();
             ResponseMessage resDecoded = decoder.DecodeMessage<ResponseMessage>(response);
-            // process message
+
+            // process response
             if (resDecoded.ResCode == ResponseCode.Ok)
             {
                 new FileOperationProgressForm(client, FileOperationType.Zip).ShowDialog();

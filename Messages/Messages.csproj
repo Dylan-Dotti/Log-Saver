@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileOperationMessage.cs" />
+    <Compile Include="FileOperationRequestMessage.cs" />
     <Compile Include="FileOperationStatus.cs" />
     <Compile Include="FileOperationType.cs" />
     <Compile Include="LogSaverMessage.cs" />
@@ -53,7 +54,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseMessage.cs" />
     <Compile Include="ResponseCode.cs" />
-    <Compile Include="SaveRequestMessage.cs" />
+    <Compile Include="TransferRequestMessage.cs" />
+    <Compile Include="ZipRequestMessage.cs" />
     <Compile Include="TransferOperationMessage.cs" />
     <Compile Include="ZipOperationMessage.cs" />
   </ItemGroup>

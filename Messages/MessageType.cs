@@ -3,6 +3,6 @@ namespace Messages
 {
     public enum MessageType
     {
-        SaveRequest, Response, ZipStatus, FileOperation
+        Response, FileOperationRequest, FileOperation
     }
 }
