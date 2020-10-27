@@ -5,9 +5,9 @@ namespace Messages
 {
     public class ZipStatusMessage : LogSaverMessage
     {
-        [JsonProperty("ZippedCount")]
+        [JsonProperty("ZippedCount", Order = 1)]
         public int ZippedCount { get; private set; }
-        [JsonProperty("TotalFileCount")]
+        [JsonProperty("TotalFileCount", Order = 2)]
         public int TotalFileCount { get; private set; }
 
         public ZipStatusMessage(int zippedCount, int totalFileCount) : base(MessageType.ZipStatus)

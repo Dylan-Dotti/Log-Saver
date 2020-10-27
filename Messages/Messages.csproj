@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumExtensions.cs" />
+    <Compile Include="FileOperationMessage.cs" />
+    <Compile Include="FileOperationStatus.cs" />
+    <Compile Include="FileOperationType.cs" />
     <Compile Include="LogSaverMessage.cs" />
     <Compile Include="MessageDecoder.cs" />
     <Compile Include="MessageType.cs" />

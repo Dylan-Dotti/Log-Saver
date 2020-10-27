@@ -1,21 +1,8 @@
-﻿using Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-public enum MessageType
+﻿
+namespace Messages
 {
-    Unknown, SaveRequest, Response, ZipStatus
-}
-
-public static class MessageTypeExtensions
-{
-    private static readonly IEnumerable<MessageType> messageTypeValues =
-        EnumExtensions.GetValues<MessageType>();
-
-    public static MessageType ToMessageType(this string value)
+    public enum MessageType
     {
-        return messageTypeValues
-            .Where(m => m.ToString().Equals(value)).FirstOrDefault();
+        SaveRequest, Response, ZipStatus, FileOperation
     }
 }

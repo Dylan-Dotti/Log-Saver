@@ -6,8 +6,8 @@ namespace Messages
 {
     public abstract class LogSaverMessage
     {
-        [JsonProperty("MessageType", Order = 1, Required = Required.Default)]
         [JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty("MessageType", Order = -1, Required = Required.Default)]
         public MessageType MsgType { get; private set; }
 
         public LogSaverMessage(MessageType messageType)
