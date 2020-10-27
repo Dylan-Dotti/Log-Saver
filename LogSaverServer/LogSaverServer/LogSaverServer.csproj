@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientHandler.cs" />
+    <Compile Include="FileCategorizer.cs" />
     <Compile Include="FileOperator.cs" />
     <Compile Include="LogSaverServer.cs" />
     <Compile Include="Program.cs" />

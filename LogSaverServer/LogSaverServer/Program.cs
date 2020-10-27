@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading;
 using Topshelf;
 
 namespace LogSaverServer
@@ -12,11 +11,15 @@ namespace LogSaverServer
     {
         static void Main(string[] args)
         {
+            string src = @"C:\Users\Dylan\Desktop\test_m_logs\";
+            string dst = @"C:\Users\Dylan\Desktop\LogsBackup\";
+            /*FileOperator fOp = new FileOperator();
+            foreach (string category in fOp.GetLogCategories(src))
+            {
+                Console.WriteLine(category);
+            }*/
             IPAddress ip = IPAddress.Parse(GetLocalIPAddress());
-            new LogSaverServer(ip, 1337,
-                @"C:\Users\Dylan\Desktop\Logs\",
-                @"C:\Users\Dylan\Desktop\LogsBackup\")
-                .Start();
+            new LogSaverServer(ip, 1337, src, dst).Start();
         }
 
         public static string GetLocalIPAddress()

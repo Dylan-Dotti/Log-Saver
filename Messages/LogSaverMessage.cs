@@ -25,12 +25,5 @@ namespace Messages
             return JsonConvert.SerializeObject(this,
                 indentedFormat ? Formatting.Indented : Formatting.None);
         }
-
-        public virtual JObject ToJObject()
-        {
-            JObject jObj = new JObject();
-            jObj.Add("MessageType", MsgType.ToString());
-            return jObj;
-        }
     }
 }

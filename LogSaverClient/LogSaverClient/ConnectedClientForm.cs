@@ -18,6 +18,11 @@ namespace LogSaverClient
             zipNameInput.InputTextChanged += OnZipNameChanged;
         }
 
+        private void OnZipNameChanged(string newInput)
+        {
+            sendRequestButton.Enabled = newInput.Length > 0;
+        }
+
         private async void sendRequestButton_Click(object sender, EventArgs e)
         {
             Console.WriteLine("Sending request");
@@ -49,9 +54,20 @@ namespace LogSaverClient
             sendRequestButton.Enabled = true;
         }
 
-        private void OnZipNameChanged(string newInput)
+        private void serverZipCheck_CheckedChanged(object sender, EventArgs e)
         {
-            sendRequestButton.Enabled = newInput.Length > 0;
+            if (!serverZipCheck.Checked && !sendCopyCheck.Checked)
+            {
+                sendCopyCheck.Checked = true;
+            }
+        }
+
+        private void sendCopyCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!serverZipCheck.Checked && !sendCopyCheck.Checked)
+            {
+                serverZipCheck.Checked = true;
+            }
         }
     }
 }

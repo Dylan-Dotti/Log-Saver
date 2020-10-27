@@ -49,7 +49,7 @@ namespace LogSaverServer
                         {
                             Console.WriteLine($"Error while zipping {path}. Zip operation aborted");
                             Console.WriteLine(e.Message);
-                            File.Delete(zipPath);
+                            File.Delete(zipPath); 
                             break;
                         }
                     }
@@ -63,9 +63,14 @@ namespace LogSaverServer
             }
         }
 
+        public void TransferFiles(string[] filePaths, BinaryWriter writer)
+        {
+
+        }
+
         public string[] GetFileNamesInDirectory(string path)
         {
-            return Directory.GetFiles(path);
+            return Directory.GetFiles(path).Select(p => Path.GetFileName(p)).ToArray();
         }
 
         public string[] GetFilePathsInDirectory(string path)
@@ -76,8 +81,9 @@ namespace LogSaverServer
         public string[] GetLogCategories(string path)
         {
             var files = GetFileNamesInDirectory(path);
-            List<string> logCategories = new List<string>();
-            return logCategories.ToArray();
+            var logCategories = files.Select(f => f.Split('.').First()).Distinct();
+            var mainCategories = logCategories.Select(c => c.Split('_').First()).Distinct();
+            return mainCategories.ToArray();
         }
 
         public DateTime GetLastUpdateTime(string filePath)

@@ -15,13 +15,5 @@ namespace Messages
             ZippedCount = zippedCount;
             TotalFileCount = totalFileCount;
         }
-
-        public override JObject ToJObject()
-        {
-            JObject jObject = base.ToJObject();
-            jObject.Add("ZippedCount", ZippedCount);
-            jObject.Add("TotalFileCount", TotalFileCount);
-            return jObject;
-        }
     }
 }

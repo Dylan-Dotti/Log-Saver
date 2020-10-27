@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogSaverServer", "LogSaverS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "..\Messages\Messages.csproj", "{4A338908-C433-4616-83C8-1986765C9593}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageTests", "..\Testing\MessageTests\MessageTests.csproj", "{4AFB0A6C-BA6E-4E90-BE1D-61EDCD34012C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{4A338908-C433-4616-83C8-1986765C9593}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A338908-C433-4616-83C8-1986765C9593}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A338908-C433-4616-83C8-1986765C9593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AFB0A6C-BA6E-4E90-BE1D-61EDCD34012C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AFB0A6C-BA6E-4E90-BE1D-61EDCD34012C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AFB0A6C-BA6E-4E90-BE1D-61EDCD34012C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AFB0A6C-BA6E-4E90-BE1D-61EDCD34012C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

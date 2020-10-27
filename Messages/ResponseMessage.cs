@@ -18,13 +18,5 @@ namespace Messages
             ResCode = responseCode;
             ErrorMessage = errroMessage;
         }
-
-        public override JObject ToJObject()
-        {
-            JObject jObject = base.ToJObject();
-            jObject.Add("ResponseCode", ResCode.ToString());
-            jObject.Add("ErrorMessage", ErrorMessage);
-            return jObject;
-        }
     }
 }

@@ -71,10 +71,7 @@ namespace LogSaverServer
             TcpListener listenerLocal = (TcpListener)result.AsyncState;
             TcpClient client = listenerLocal.EndAcceptTcpClient(result);
             new Thread(() => new ClientHandler(client, logSourcePath, logDestPath).HandleClient()).Start();
-            Console.WriteLine("Made thread for client");
             tcpClientConnected.Set();
-            Console.WriteLine("Set value. exiting");
-            //BeginAcceptTcpClient();
         }
     }
 }
