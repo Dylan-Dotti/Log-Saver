@@ -40,22 +40,32 @@ namespace LogSaverServer
                     string request = reader.ReadString();
                     // blocks here until client sends a request
                     Console.WriteLine("Request: " + request);
-                    if (decoder.TryDecodeMessage(request, out SaveRequestMessage decodedSR))
+                    if (decoder.TryDecodeMessage(request, out ZipRequestMessage decodedZR))
                     {
-                        string[] filePaths = fileOperator.GetFilePathsInDirectory(logsSourcePath);
-                        string zipPath = Path.Combine(logsDestPath, decodedSR.ZipFileName);
+                        Console.WriteLine("Decoded message as ZipRequest");
+                        string zipPath = Path.Combine(logsDestPath, decodedZR.ZipFileName);
                         if (File.Exists(zipPath))
                         {
                             SendResponseMessage(ResponseCode.Error,
-                                $"Zip archive with the name {decodedSR.ZipFileName} already exists.");
+                                $"Zip archive with the name {decodedZR.ZipFileName} already exists.");
                         }
                         else
                         {
                             // send response
                             SendResponseMessage(ResponseCode.Ok);
                             // zip directory
+                            string[] filePaths = fileOperator.GetFilePathsInDirectory(logsSourcePath);
                             fileOperator.ZipFiles(filePaths, zipPath, writer);
                         }
+                    }
+                    if (decoder.TryDecodeMessage(request, out TransferRequestMessage decodedTR))
+                    {
+                        Console.WriteLine("Transfer request decoded");
+                        // send response
+                        SendResponseMessage(ResponseCode.Ok);
+                        // zip directory
+                        string[] filePaths = fileOperator.GetFilePathsInDirectory(logsSourcePath);
+                        fileOperator.TransferFiles(filePaths, writer);
                     }
                     else
                     {

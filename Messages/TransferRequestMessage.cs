@@ -1,8 +1,10 @@
-﻿
+﻿using Newtonsoft.Json;
+
 namespace Messages
 {
-    class TransferRequestMessage : FileOperationRequestMessage
+    public class TransferRequestMessage : FileOperationRequestMessage
     {
+        [JsonConstructor]
         public TransferRequestMessage() : base(FileOperationType.Transfer)
         { }
     }

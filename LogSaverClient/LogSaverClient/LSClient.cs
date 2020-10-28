@@ -48,8 +48,19 @@ namespace LogSaverClient
         {
             return await Task.Run(() =>
             {
-                string response = reader.ReadString();
-                return response;
+                while (true)
+                {
+                    try
+                    {
+                        string response = reader.ReadString();
+                        return response;
+                    }
+                    catch (EndOfStreamException)
+                    {
+                        Console.WriteLine("No data read from stream. Waiting...");
+                        Thread.Sleep(1000);
+                    }
+                }
             });
         }
     }

@@ -38,11 +38,26 @@ namespace LogSaverClient
             while (percentComplete < 100)
             {
                 string message = await client.AwaitMessageAsync();
-                ZipOperationMessage msgDecoded = decoder.DecodeMessage<ZipOperationMessage>(message);
-                percentComplete = (int)((float)msgDecoded.NumFilesCompleted / msgDecoded.NumTotalFiles * 100);
-                operationProgressBar.Value = percentComplete;
-                progressLabel.Text = percentComplete + "% completed";
+                if (operationType == FileOperationType.Zip)
+                {
+                    ZipOperationMessage msgDecoded = decoder.DecodeMessage<ZipOperationMessage>(message);
+                    percentComplete = (int)((float)msgDecoded.NumFilesCompleted / msgDecoded.NumTotalFiles * 100);
+                    UpdateProgressDisplay(percentComplete);
+                }
+                else if (operationType == FileOperationType.Transfer)
+                {
+                    TransferOperationMessage msgDecoded = decoder.DecodeMessage<TransferOperationMessage>(message);
+                    Console.WriteLine("Received file");// + msgDecoded.ToString(true));
+                    percentComplete = (int)((float)msgDecoded.NumFilesCompleted / msgDecoded.NumTotalFiles * 100);
+                    UpdateProgressDisplay(percentComplete);
+                }
             }
+        }
+
+        private void UpdateProgressDisplay(int percentComplete)
+        {
+            operationProgressBar.Value = percentComplete;
+            progressLabel.Text = percentComplete + "% completed";
         }
     }
 }

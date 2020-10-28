@@ -76,6 +76,7 @@
     <Compile Include="FileOperationProgressForm.Designer.cs">
       <DependentUpon>FileOperationProgressForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileOperationRequestManager.cs" />
     <Compile Include="LSClient.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

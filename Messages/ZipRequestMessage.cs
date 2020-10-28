@@ -1,18 +1,13 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Messages
 {
     public class ZipRequestMessage : FileOperationRequestMessage
     {
-        [JsonProperty("ZipFileName")]
+        [JsonProperty("ZipFileName", Required = Required.Always)]
         public string ZipFileName { get; private set; }
 
+        [JsonConstructor]
         public ZipRequestMessage(string zipFileName) : 
             base(FileOperationType.Zip)
         {

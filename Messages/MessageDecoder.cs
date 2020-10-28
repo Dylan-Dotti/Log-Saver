@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Messages
 {
@@ -10,7 +7,7 @@ namespace Messages
     {
         public T DecodeMessage<T>(string message) where T : LogSaverMessage
         {
-            Console.WriteLine($"Decoding message: " + message);
+            Console.WriteLine("Decoding message: " + message);
             return JsonConvert.DeserializeObject<T>(message);
         }
 

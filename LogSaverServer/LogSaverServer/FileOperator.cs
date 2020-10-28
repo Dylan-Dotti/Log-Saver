@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace LogSaverServer
 {
@@ -43,7 +44,7 @@ namespace LogSaverServer
                             Console.WriteLine("Zipping file: " + path);
                             archive.CreateEntryFromFile(path, Path.GetFileName(path));
                             // report progress to the client
-                            writer.Write(new ZipOperationMessage(i + 1, filePaths.Length).ToString());
+                            writer.Write(new ZipOperationMessage(i + 1, filePaths.Length));
                         }
                         catch (Exception e)
                         {
@@ -65,7 +66,16 @@ namespace LogSaverServer
 
         public void TransferFiles(string[] filePaths, BinaryWriter writer)
         {
-
+            Console.WriteLine("Transferring files...");
+            for (int i = 0; i < filePaths.Length; i++)
+            {
+                string path = filePaths[i];
+                string fileName = Path.GetFileName(path);
+                byte[] fileBytes = File.ReadAllBytes(path);
+                var message = new TransferOperationMessage(
+                    i + 1, filePaths.Length, fileName, fileBytes);
+                writer.Write(message);
+            }
         }
 
         public string[] GetFileNamesInDirectory(string path)

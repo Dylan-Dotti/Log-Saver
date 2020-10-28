@@ -8,13 +8,13 @@ namespace LogSaverClient
     public partial class ConnectedClientForm : Form
     {
         private readonly LSClient client;
-        private readonly MessageDecoder decoder;
+        private readonly FileOperationRequestManager requestManager;
 
         public ConnectedClientForm(LSClient client)
         {
             InitializeComponent();
             this.client = client;
-            decoder = new MessageDecoder();
+            requestManager = new FileOperationRequestManager(client);
             zipNameInput.InputTextChanged += OnZipNameChanged;
         }
 
@@ -25,33 +25,14 @@ namespace LogSaverClient
 
         private async void sendRequestButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Sending request...");
             sendRequestButton.Enabled = false;
-
-            string zipName = zipNameInput.InputText.Trim();
-            // append .zip if the string does not end with it
-            if (!zipName.ToLower().EndsWith(".zip")) zipName += ".zip";
-
-            // create and send request
-            var request = new ZipRequestMessage(zipName);
-            client.SendMessage(request);
-            Console.WriteLine("Message sent. Awaiting response...");
-
-            // wait for response and decode
-            string response = await client.AwaitMessageAsync();
-            ResponseMessage resDecoded = decoder.DecodeMessage<ResponseMessage>(response);
-
-            // process response
-            if (resDecoded.ResCode == ResponseCode.Ok)
+            if (serverZipCheck.Checked)
             {
-                new FileOperationProgressForm(client, FileOperationType.Zip).ShowDialog();
+                await requestManager.SendAndManageZipRequest(zipNameInput.InputText);
             }
-            else if (resDecoded.ResCode == ResponseCode.Error)
+            if (sendCopyCheck.Checked)
             {
-                MessageBox.Show("Your request was rejected by the server.\n" +
-                    "Reason: " + resDecoded.ErrorMessage,
-                    "Request Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await requestManager.SendAndManageTransferRequest();
             }
             sendRequestButton.Enabled = true;
         }
