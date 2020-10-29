@@ -4,12 +4,11 @@ namespace Messages
 {
     public class ZipRequestMessage : FileOperationRequestMessage
     {
-        [JsonProperty("ZipFileName", Required = Required.Always)]
+        [JsonProperty("ZipFileName", Order = 2, Required = Required.Always)]
         public string ZipFileName { get; private set; }
 
         [JsonConstructor]
-        public ZipRequestMessage(string zipFileName) : 
-            base(FileOperationType.Zip)
+        public ZipRequestMessage(string zipFileName) : base(FileOperationType.Zip)
         {
             ZipFileName = zipFileName;
         }

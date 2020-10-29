@@ -25,39 +25,57 @@ namespace LogSaverClient
         protected override async void OnShown(EventArgs e)
         {
             base.OnShown(e);
+            operationLabel.Text =
+                (operationType == FileOperationType.Zip ? "Zip" : "Transfer") +
+                " operation in progress...";
             await HandleOperationUpdates();
             Close();
         }
 
         private async Task HandleOperationUpdates()
         {
-            operationLabel.Text =
-                (operationType == FileOperationType.Zip ? "Zip" : "Transfer") +
-                " operation in progress...";
-            int percentComplete = 0;
-            while (percentComplete < 100)
+            if (operationType == FileOperationType.Zip)
+            {
+                var receiver = new ZipOperationUpdateReceiver(client);
+                receiver.ProgressUpdated += UpdateProgressDisplay;
+                await receiver.HandleOperationUpdates();
+            }
+            else if (operationType == FileOperationType.Transfer)
+            {
+                var receiver = new TransferOperationUpdateReceiver(
+                    client, @"C:\Users\Dylan\Desktop\ReceivedLogs\");
+                receiver.ProgressUpdated += UpdateProgressDisplay;
+                await receiver.HandleOperationUpdates();
+            }
+            /*while (true)
             {
                 string message = await client.AwaitMessageAsync();
                 if (operationType == FileOperationType.Zip)
                 {
                     ZipOperationMessage msgDecoded = decoder.DecodeMessage<ZipOperationMessage>(message);
-                    percentComplete = (int)((float)msgDecoded.NumFilesCompleted / msgDecoded.NumTotalFiles * 100);
-                    UpdateProgressDisplay(percentComplete);
+                    UpdateProgressDisplay(msgDecoded.NumFilesCompleted, msgDecoded.NumTotalFiles);
                 }
                 else if (operationType == FileOperationType.Transfer)
                 {
-                    TransferOperationMessage msgDecoded = decoder.DecodeMessage<TransferOperationMessage>(message);
-                    Console.WriteLine("Received file");// + msgDecoded.ToString(true));
-                    percentComplete = (int)((float)msgDecoded.NumFilesCompleted / msgDecoded.NumTotalFiles * 100);
-                    UpdateProgressDisplay(percentComplete);
+                    TransferOperationMessage msgDecoded = null;
+                    await Task.Run(() =>
+                    {
+                        msgDecoded = decoder.DecodeMessage<TransferOperationMessage>(message);
+                        Console.WriteLine("Received file: " + msgDecoded.FileName);
+                    });
+                    UpdateProgressDisplay(msgDecoded.NumFilesCompleted, msgDecoded.NumTotalFiles);
                 }
-            }
+            }*/
         }
 
-        private void UpdateProgressDisplay(int percentComplete)
+        private void UpdateProgressDisplay(int numFilesCompleted, int numTotalFiles)
         {
-            operationProgressBar.Value = percentComplete;
-            progressLabel.Text = percentComplete + "% completed";
+            int percentComplete = (int)((float)numFilesCompleted / numTotalFiles * 100);
+            operationProgressBar.BeginInvoke(
+                new Action(() => operationProgressBar.Value = percentComplete));
+            progressLabel.BeginInvoke(
+                new Action(() => progressLabel.Text = percentComplete + "% completed"));
+            ;
         }
     }
 }

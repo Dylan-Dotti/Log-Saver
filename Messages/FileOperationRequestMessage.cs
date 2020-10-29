@@ -6,7 +6,7 @@ namespace Messages
     public abstract class FileOperationRequestMessage : LogSaverMessage
     {
         [JsonConverter(typeof(StringEnumConverter))]
-        [JsonProperty("OperationType")]
+        [JsonProperty("OperationType", Order = 1)]
         public FileOperationType OperationType { get; private set; }
 
         public FileOperationRequestMessage(FileOperationType operationType) : 

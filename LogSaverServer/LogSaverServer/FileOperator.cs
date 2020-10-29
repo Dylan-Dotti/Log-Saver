@@ -70,6 +70,7 @@ namespace LogSaverServer
             for (int i = 0; i < filePaths.Length; i++)
             {
                 string path = filePaths[i];
+                Console.WriteLine("Transferring: " + path);
                 string fileName = Path.GetFileName(path);
                 byte[] fileBytes = File.ReadAllBytes(path);
                 var message = new TransferOperationMessage(
