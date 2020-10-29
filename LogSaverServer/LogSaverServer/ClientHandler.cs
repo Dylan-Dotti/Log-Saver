@@ -58,7 +58,7 @@ namespace LogSaverServer
                             fileOperator.ZipFiles(filePaths, zipPath, writer);
                         }
                     }
-                    if (decoder.TryDecodeMessage(request, out TransferRequestMessage decodedTR))
+                    else if (decoder.TryDecodeMessage(request, out TransferRequestMessage decodedTR))
                     {
                         Console.WriteLine("Transfer request decoded");
                         // send response

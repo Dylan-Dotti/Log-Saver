@@ -11,8 +11,8 @@ namespace LogSaverServer
     {
         static void Main(string[] args)
         {
-            string src = @"C:\Users\h4dottd\Desktop\Logs\";
-            string dst = @"C:\Users\h4dottd\Desktop\LogsBackup\";
+            string src = @"C:\Users\Dylan\Desktop\Logs\";
+            string dst = @"C:\Users\Dylan\Desktop\LogsBackup\";
             /*FileOperator fOp = new FileOperator();
             foreach (string category in fOp.GetLogCategories(src))
             {
