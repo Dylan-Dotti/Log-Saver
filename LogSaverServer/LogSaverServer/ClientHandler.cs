@@ -37,12 +37,13 @@ namespace LogSaverServer
             {
                 while (true)
                 {
+                    FileLogger.Log("Waiting for user request...");
                     string request = reader.ReadString();
                     // blocks here until client sends a request
-                    Console.WriteLine("Request: " + request);
+                    FileLogger.Log("Request: " + request);
                     if (decoder.TryDecodeMessage(request, out ZipRequestMessage decodedZR))
                     {
-                        Console.WriteLine("Decoded message as ZipRequest");
+                        FileLogger.Log("Decoded message as ZipRequest");
                         string zipPath = Path.Combine(logsDestPath, decodedZR.ZipFileName);
                         if (File.Exists(zipPath))
                         {
@@ -60,7 +61,7 @@ namespace LogSaverServer
                     }
                     else if (decoder.TryDecodeMessage(request, out TransferRequestMessage decodedTR))
                     {
-                        Console.WriteLine("Transfer request decoded");
+                        FileLogger.Log("Decoded message as TransferRequest");
                         // send response
                         SendResponseMessage(ResponseCode.Ok);
                         // zip directory
@@ -73,9 +74,11 @@ namespace LogSaverServer
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine("Connection with client lost.");
+                FileLogger.Log(e.Message);
+                FileLogger.Log(e.StackTrace);
+                FileLogger.Log("Connection with client closed.");
                 client.Close();
             }
         }
@@ -84,7 +87,7 @@ namespace LogSaverServer
         {
             var response = new ResponseMessage(resCode, message);
             writer.Write(response);
-            Console.WriteLine("Sent response: " + response.ToString(true));
+            FileLogger.Log("Sent response: " + response.ToString(true));
         }
     }
 }

@@ -81,6 +81,7 @@ namespace LogSaverServer
 
         public string[] GetFileNamesInDirectory(string path)
         {
+            FileLogger.Log("Getting file names in " + path + "...");
             return Directory.GetFiles(path).Select(p => Path.GetFileName(p)).ToArray();
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -11,15 +12,29 @@ namespace LogSaverServer
     {
         static void Main(string[] args)
         {
-            string src = @"C:\Users\Dylan\Desktop\Logs\";
-            string dst = @"C:\Users\Dylan\Desktop\LogsBackup\";
-            /*FileOperator fOp = new FileOperator();
-            foreach (string category in fOp.GetLogCategories(src))
+            var exitCode = HostFactory.Run(x =>
             {
-                Console.WriteLine(category);
-            }*/
-            IPAddress ip = IPAddress.Parse(GetLocalIPAddress());
-            new LogSaverServer(ip, 1337, src, dst).Start();
+                x.Service<LogSaverServer>(s =>
+                {
+                    s.ConstructUsing(server =>
+                    {
+                        string src = ConfigurationManager.AppSettings.Get("LogsSourcePath");
+                        string dst = ConfigurationManager.AppSettings.Get("LogsDestPath");
+                        IPAddress ip = IPAddress.Parse(GetLocalIPAddress());
+                        return new LogSaverServer(ip, 1337, src, dst);
+                    });
+                    s.WhenStarted(server => server.Start());
+                    s.WhenStopped(server => server.Stop());
+                });
+
+                x.SetServiceName("SWISSLOG_LOG_SAVER");
+                x.SetDisplayName("SWISSLOG_LOG_SAVER");
+                x.SetDescription("App for archiving logs on the server");
+            });
+
+            int exitCodeValue = (int)Convert.ChangeType(exitCode, exitCode.GetTypeCode());
+            Environment.ExitCode = exitCodeValue;
+            Console.ReadKey();
         }
 
         public static string GetLocalIPAddress()
