@@ -11,11 +11,15 @@ namespace LogSaverClient
     {
         public event Action<int, int> ProgressUpdated;
 
+        public FileOperationType OperationType { get; private set; }
+
         protected LSClient Client { get; private set; }
         protected MessageDecoder Decoder { get; private set; }
 
-        public FileOperationUpdateReceiver(LSClient client)
+        public FileOperationUpdateReceiver(
+            FileOperationType operationType, LSClient client)
         {
+            OperationType = operationType;
             Client = client;
             Decoder = new MessageDecoder();
         }

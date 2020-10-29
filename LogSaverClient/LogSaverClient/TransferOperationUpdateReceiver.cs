@@ -16,7 +16,9 @@ namespace LogSaverClient
         private readonly AutoResetEvent autoEvent;
         private bool doneReceiving;
 
-        public TransferOperationUpdateReceiver(LSClient client, string dstDirectory) : base(client)
+        public TransferOperationUpdateReceiver(
+            LSClient client, string dstDirectory) 
+            : base(FileOperationType.Transfer, client)
         {
             this.dstDirectory = dstDirectory;
             autoEvent = new AutoResetEvent(false);

@@ -32,7 +32,8 @@ namespace LogSaverClient
             // process response
             if (resDecoded.ResCode == ResponseCode.Ok)
             {
-                new FileOperationProgressForm(client, FileOperationType.Zip).ShowDialog();
+                new FileOperationProgressForm(
+                    new ZipOperationUpdateReceiver(client)).ShowDialog();
             }
             else if (resDecoded.ResCode == ResponseCode.Error)
             {
@@ -52,7 +53,9 @@ namespace LogSaverClient
             // process response
             if (response.ResCode == ResponseCode.Ok)
             {
-                new FileOperationProgressForm(client, FileOperationType.Transfer).ShowDialog();
+                new FileOperationProgressForm(
+                    new TransferOperationUpdateReceiver(client,
+                        @"C:\Users\h4dottd\Desktop\ReceivedLogs\")).ShowDialog();
             }
             else if (response.ResCode == ResponseCode.Error)
             {

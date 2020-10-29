@@ -12,12 +12,17 @@ namespace Messages
         public int MessageID { get; private set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        [JsonProperty("MessageType", Order = -1, Required = Required.Default)]
+        [JsonProperty("MessageType", Order = -1, Required = Required.Always)]
         public MessageType MsgType { get; private set; }
 
         public LogSaverMessage(MessageType messageType)
+            :this(new Random().Next(1, 101), messageType)
+        { }
+
+        [JsonConstructor]
+        public LogSaverMessage(int messageID, MessageType messageType)
         {
-            MessageID = new Random().Next(1, 101);
+            MessageID = messageID;
             MsgType = messageType;
         }
 

@@ -5,7 +5,8 @@ namespace LogSaverClient
 {
     public class ZipOperationUpdateReceiver : FileOperationUpdateReceiver
     {
-        public ZipOperationUpdateReceiver(LSClient client) : base(client)
+        public ZipOperationUpdateReceiver(LSClient client) 
+            : base(FileOperationType.Zip, client)
         { }
 
         public async override Task HandleOperationUpdates()
