@@ -1,18 +1,23 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using System;
 using System.IO;
 
 namespace Messages
 {
     public abstract class LogSaverMessage
     {
+        [JsonProperty(Order = -2, Required = Required.Always)]
+        public int MessageID { get; private set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("MessageType", Order = -1, Required = Required.Default)]
         public MessageType MsgType { get; private set; }
 
         public LogSaverMessage(MessageType messageType)
         {
+            MessageID = new Random().Next(1, 101);
             MsgType = messageType;
         }
 

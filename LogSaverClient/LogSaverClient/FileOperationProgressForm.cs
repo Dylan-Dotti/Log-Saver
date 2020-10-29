@@ -43,7 +43,7 @@ namespace LogSaverClient
             else if (operationType == FileOperationType.Transfer)
             {
                 var receiver = new TransferOperationUpdateReceiver(
-                    client, @"C:\Users\Dylan\Desktop\ReceivedLogs\");
+                    client, @"C:\Users\h4dottd\Desktop\ReceivedLogs\");
                 receiver.ProgressUpdated += UpdateProgressDisplay;
                 await receiver.HandleOperationUpdates();
             }
