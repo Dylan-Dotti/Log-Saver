@@ -1,10 +1,8 @@
 ﻿using Messages;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace LogSaverServer
 {
@@ -31,57 +29,57 @@ namespace LogSaverServer
             try
             {
                 // Open zip archive if it does not already exist
-                Console.WriteLine("Creating zip archive: " + zipPath);
+                FileLogger.Log("Creating zip archive: " + zipPath);
                 using (ZipArchive archive = ZipFile.Open(zipPath, ZipArchiveMode.Create))
                 {
-                    Console.WriteLine("Beginning zip operation...");
+                    FileLogger.Log("Beginning zip operation...");
                     // Loop through the input files and zip one by one. Report progress to client through writer.
                     for (int i = 0; i < filePaths.Length; i++)
                     {
                         string path = filePaths[i];
                         try
                         {
-                            Console.WriteLine("Zipping file: " + path);
+                            FileLogger.Log("Zipping file: " + path);
                             archive.CreateEntryFromFile(path, Path.GetFileName(path));
                             // report progress to the client
                             writer.Write(new ZipOperationMessage(i + 1, filePaths.Length));
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine($"Error while zipping {path}. Zip operation aborted");
-                            Console.WriteLine(e.Message);
+                            FileLogger.Log($"Error while zipping {path}. Zip operation aborted");
+                            FileLogger.Log(e.Message);
                             File.Delete(zipPath); 
                             break;
                         }
                     }
-                    Console.WriteLine("Zip operation complete");
+                    FileLogger.Log("Zip operation complete");
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error creating zip archive:");
-                Console.WriteLine(e.Message);
+                FileLogger.Log("Error creating zip archive:");
+                FileLogger.Log(e.Message);
             }
         }
 
         public void TransferFiles(string[] filePaths, BinaryWriter writer)
         {
-            Console.WriteLine("Transferring files...");
+            FileLogger.Log("Transferring files...");
             for (int i = 0; i < filePaths.Length; i++)
             {
                 string path = filePaths[i];
-                Console.WriteLine("Transferring: " + path);
+                FileLogger.Log("Transferring: " + path);
                 string fileName = Path.GetFileName(path);
                 byte[] fileBytes = File.ReadAllBytes(path);
                 var message = new TransferOperationMessage(
                     i + 1, filePaths.Length, fileName, fileBytes);
                 writer.Write(message);
             }
+            FileLogger.Log("Transfer operation complete");
         }
 
         public string[] GetFileNamesInDirectory(string path)
         {
-            FileLogger.Log("Getting file names in " + path + "...");
             return Directory.GetFiles(path).Select(p => Path.GetFileName(p)).ToArray();
         }
 

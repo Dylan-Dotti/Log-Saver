@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace LogSaverServer
@@ -17,7 +13,6 @@ namespace LogSaverServer
         private readonly string logDestPath;
 
         private readonly TcpListener listener;
-        private readonly ManualResetEvent tcpClientConnected;
 
         public bool IsRunning { get; private set; }
 
@@ -29,22 +24,14 @@ namespace LogSaverServer
             this.logSourcePath = logSourcePath;
             this.logDestPath = logDestPath;
             listener = new TcpListener(ip, port);
-            tcpClientConnected = new ManualResetEvent(false);
         }
 
         public void Start()
         {
-            ThreadPool.QueueUserWorkItem(stateInfo =>
-            {
-                listener.Start();
-                FileLogger.Log($"Server is running at {ip}...");
-                IsRunning = true;
-                while (IsRunning)
-                {
-                    BeginAcceptTcpClient();
-                }
-                FileLogger.Log("Exited server loop");
-            });
+            listener.Start();
+            FileLogger.Log($"Server is running at {ip}...");
+            IsRunning = true;
+            BeginAcceptTcpClient();
         }
 
         public void Stop()
@@ -55,10 +42,8 @@ namespace LogSaverServer
 
         private void BeginAcceptTcpClient()
         {
-            tcpClientConnected.Reset();
-            FileLogger.Log("Waiting for a connection...");
             listener.BeginAcceptTcpClient(new AsyncCallback(AcceptClientCallback), listener);
-            tcpClientConnected.WaitOne();
+            FileLogger.Log("Waiting for a connection...");
         }
 
         private void AcceptClientCallback(IAsyncResult result)
@@ -70,24 +55,19 @@ namespace LogSaverServer
                     TcpListener listenerLocal = (TcpListener)result.AsyncState;
                     TcpClient client = listenerLocal.EndAcceptTcpClient(result);
                     FileLogger.Log("Connection received");
-                    FileLogger.Log("Creating thread for user...");
                     ThreadPool.QueueUserWorkItem(stateInfo =>
                     {
                         new ClientHandler(client, logSourcePath, logDestPath).HandleClient();
                     });
                     FileLogger.Log("Created thread for user");
+                    BeginAcceptTcpClient();
                 }
                 catch (Exception e)
                 {
-                    FileLogger.Log(e.Message);
-                    FileLogger.Log(e.StackTrace);
+                    FileLogger.Log(e.Message + Environment.NewLine +
+                        e.StackTrace + Environment.NewLine);
                 }
             }
-            else
-            {
-                FileLogger.Log("Server is no longer running. Stopped listening for connections");
-            }
-            tcpClientConnected.Set();
         }
     }
 }

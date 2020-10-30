@@ -64,7 +64,7 @@ namespace LogSaverServer
                         FileLogger.Log("Decoded message as TransferRequest");
                         // send response
                         SendResponseMessage(ResponseCode.Ok);
-                        // zip directory
+                        // transfer files
                         string[] filePaths = fileOperator.GetFilePathsInDirectory(logsSourcePath);
                         fileOperator.TransferFiles(filePaths, writer);
                     }
@@ -78,8 +78,8 @@ namespace LogSaverServer
             {
                 FileLogger.Log(e.Message);
                 FileLogger.Log(e.StackTrace);
-                FileLogger.Log("Connection with client closed.");
                 client.Close();
+                FileLogger.Log("Connection with client closed.");
             }
         }
 
