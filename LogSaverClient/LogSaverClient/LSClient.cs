@@ -48,7 +48,7 @@ namespace LogSaverClient
         {
             return await Task.Run(() =>
             {
-                while (true)
+                for (int i = 0; i < 10; i++)
                 {
                     try
                     {
@@ -61,6 +61,7 @@ namespace LogSaverClient
                         Thread.Sleep(1000);
                     }
                 }
+                throw new TimeoutException("Operation timed out after 10 attempts");
             });
         }
     }

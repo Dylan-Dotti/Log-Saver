@@ -94,11 +94,11 @@
       <DependentUpon>TimeRangeSelectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TransferOperationUpdateReceiver.cs" />
-    <Compile Include="ZipNameInputControl.cs">
+    <Compile Include="FileNameInputControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ZipNameInputControl.Designer.cs">
-      <DependentUpon>ZipNameInputControl.cs</DependentUpon>
+    <Compile Include="FileNameInputControl.Designer.cs">
+      <DependentUpon>FileNameInputControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ZipOperationUpdateReceiver.cs" />
   </ItemGroup>
@@ -125,8 +125,8 @@
     <EmbeddedResource Include="TimeRangeSelectionControl.resx">
       <DependentUpon>TimeRangeSelectionControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ZipNameInputControl.resx">
-      <DependentUpon>ZipNameInputControl.cs</DependentUpon>
+    <EmbeddedResource Include="FileNameInputControl.resx">
+      <DependentUpon>FileNameInputControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
