@@ -44,7 +44,7 @@ namespace LogSaverClient
             }
         }
 
-        public async Task SendAndManageTransferRequest()
+        public async Task SendAndManageTransferRequest(string localDstPath)
         {
             // create and send request
             var request = new TransferRequestMessage();
@@ -54,8 +54,7 @@ namespace LogSaverClient
             if (response.ResCode == ResponseCode.Ok)
             {
                 new FileOperationProgressForm(
-                    new TransferOperationUpdateReceiver(client,
-                        @"C:\Users\h4dottd\Desktop\ReceivedLogs\")).ShowDialog();
+                    new TransferOperationUpdateReceiver(client, localDstPath)).ShowDialog();
             }
             else if (response.ResCode == ResponseCode.Error)
             {

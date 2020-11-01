@@ -15,12 +15,11 @@ namespace LogSaverClient
             InitializeComponent();
             this.client = client;
             requestManager = new FileOperationRequestManager(client);
-            //zipNameInput.InputTextChanged += OnZipNameChanged;
         }
 
         private void OnZipNameChanged(string newInput)
         {
-            sendRequestButton.Enabled = newInput.Length > 0;
+            UpdateButtonEnabled();
         }
 
         private async void sendRequestButton_Click(object sender, EventArgs e)
@@ -32,7 +31,7 @@ namespace LogSaverClient
             }
             if (sendCopyCheck.Checked)
             {
-                await requestManager.SendAndManageTransferRequest();
+                await requestManager.SendAndManageTransferRequest(localFolderBrowser.SelectedPath);
             }
             sendRequestButton.Enabled = true;
         }
@@ -47,10 +46,13 @@ namespace LogSaverClient
 
         private void sendCopyCheck_CheckedChanged(object sender, EventArgs e)
         {
+            localFolderButton.Enabled = sendCopyCheck.Checked;
+            localFolderLabel.Enabled = sendCopyCheck.Checked;
             if (!serverZipCheck.Checked && !sendCopyCheck.Checked)
             {
                 serverZipCheck.Checked = true;
             }
+            UpdateButtonEnabled();
         }
 
         private void localFolderButton_Click(object sender, EventArgs e)
@@ -58,6 +60,13 @@ namespace LogSaverClient
             localFolderBrowser.ShowDialog();
             localFolderLabel.Text = localFolderBrowser.SelectedPath == "" ?
                 "No folder selected" : localFolderBrowser.SelectedPath;
+            UpdateButtonEnabled();
+        }
+
+        private void UpdateButtonEnabled()
+        {
+            sendRequestButton.Enabled = zipNameInput.InputText.Length > 0 &&
+                (!sendCopyCheck.Checked || localFolderBrowser.SelectedPath != "");
         }
     }
 }
