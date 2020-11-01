@@ -15,7 +15,7 @@ namespace LogSaverClient
             InitializeComponent();
             this.client = client;
             requestManager = new FileOperationRequestManager(client);
-            zipNameInput.InputTextChanged += OnZipNameChanged;
+            //zipNameInput.InputTextChanged += OnZipNameChanged;
         }
 
         private void OnZipNameChanged(string newInput)
@@ -28,7 +28,7 @@ namespace LogSaverClient
             sendRequestButton.Enabled = false;
             if (serverZipCheck.Checked)
             {
-                await requestManager.SendAndManageZipRequest(zipNameInput.InputText);
+                await requestManager.SendAndManageZipRequest(zipNameInput.Text);
             }
             if (sendCopyCheck.Checked)
             {
@@ -51,6 +51,13 @@ namespace LogSaverClient
             {
                 serverZipCheck.Checked = true;
             }
+        }
+
+        private void localFolderButton_Click(object sender, EventArgs e)
+        {
+            localFolderBrowser.ShowDialog();
+            localFolderLabel.Text = localFolderBrowser.SelectedPath == "" ?
+                "No folder selected" : localFolderBrowser.SelectedPath;
         }
     }
 }

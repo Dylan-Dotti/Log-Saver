@@ -8,11 +8,6 @@ namespace LogSaverClient
     {
         public event Action<string> InputTextChanged;
 
-        public string PromptText
-        {
-            get => promptLabel.Text;
-            set => promptLabel.Text = value;
-        }
         public string InputText => fileNameInput.Text;
 
         private int lastLength = 0;
