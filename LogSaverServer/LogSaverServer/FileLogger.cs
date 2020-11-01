@@ -8,6 +8,7 @@ namespace LogSaverServer
     {
         private static readonly string logsDirectory = 
             ConfigurationManager.AppSettings.Get("LSLogsPath");
+        private static readonly object logLockObject = new object();
 
         static FileLogger()
         {
@@ -17,16 +18,19 @@ namespace LogSaverServer
         public static void Log(string data)
         {
             string logsPath = Path.Combine(logsDirectory, "ls_logs.txt");
-            using (var fileWriter = new StreamWriter(logsPath, true))
+            lock (logLockObject)
             {
-                fileWriter.WriteLine(data);
+                File.AppendAllText(logsPath, data + Environment.NewLine);
             }
         }
 
         public static void ClearLog()
         {
             string logsPath = Path.Combine(logsDirectory, "ls_logs.txt");
-            File.WriteAllText(logsPath, "");
+            lock (logLockObject)
+            {
+                File.WriteAllText(logsPath, "");
+            }
         }
     }
 }

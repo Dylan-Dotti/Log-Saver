@@ -40,8 +40,8 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\De
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.FileOperationProgressForm.resources
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.FileOperationProgressForm.resources
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.DateTimeComboPicker.resources
-D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.ZipNameInputControl.resources
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.DateTimeComboPicker.resources
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.TimeRangeSelectionControl.resources
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.TimeRangeSelectionControl.resources
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.FileNameInputControl.resources
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.FileNameInputControl.resources
