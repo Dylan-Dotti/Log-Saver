@@ -25,8 +25,7 @@ namespace LogSaverClient
         private async void sendRequestButton_Click(object sender, EventArgs e)
         {
             sendRequestButton.Enabled = false;
-            (DateTime, DateTime) timeRangeUtc = 
-                timeRangeSelectionControl1.GetTimeRange().ToUtc().ToTuple();
+            var timeRangeUtc = timeRangeSelectionControl1.GetTimeRange().ToUtc().ToTuple();
             if (serverZipCheck.Checked)
             {
                 await requestManager.SendAndManageZipRequest(zipNameInput.Text, timeRangeUtc);
