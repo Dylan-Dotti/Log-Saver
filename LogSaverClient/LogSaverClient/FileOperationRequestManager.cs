@@ -19,15 +19,16 @@ namespace LogSaverClient
             decoder = new MessageDecoder();
         }
 
-        public async Task SendAndManageZipRequest(string zipFileName)
+        public async Task SendAndManageZipRequest(string zipFileName,
+            (DateTime, DateTime) timeRange)
         {
             zipFileName = zipFileName.Trim();
             // append .zip if the string does not end with it
             if (!zipFileName.ToLower().EndsWith(".zip")) zipFileName += ".zip";
 
             // create and send request
-            var request = new ZipRequestMessage(zipFileName);
-            var resDecoded = await SendRequestAndAwaitResponse(request);
+            var request = new ZipRequestMessage(zipFileName, timeRange);
+            var resDecoded = await SendRequestAwaitResponse(request);
 
             // process response
             if (resDecoded.ResCode == ResponseCode.Ok)
@@ -44,11 +45,12 @@ namespace LogSaverClient
             }
         }
 
-        public async Task SendAndManageTransferRequest(string localDstPath)
+        public async Task SendAndManageTransferRequest(string localDstPath,
+            (DateTime, DateTime) timeRange)
         {
             // create and send request
-            var request = new TransferRequestMessage();
-            var response = await SendRequestAndAwaitResponse(request);
+            var request = new TransferRequestMessage(timeRange);
+            var response = await SendRequestAwaitResponse(request);
 
             // process response
             if (response.ResCode == ResponseCode.Ok)
@@ -65,7 +67,7 @@ namespace LogSaverClient
             }
         }
 
-        private async Task<ResponseMessage> SendRequestAndAwaitResponse(
+        private async Task<ResponseMessage> SendRequestAwaitResponse(
             FileOperationRequestMessage requestMessage)
         {
             // create and send request

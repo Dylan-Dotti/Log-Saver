@@ -51,53 +51,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectedClientForm.cs">
+    <Compile Include="GUI\ConnectedClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConnectedClientForm.Designer.cs">
+    <Compile Include="GUI\ConnectedClientForm.Designer.cs">
       <DependentUpon>ConnectedClientForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConnectionMenu.cs">
+    <Compile Include="GUI\ConnectionMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ConnectionMenu.Designer.cs">
+    <Compile Include="GUI\ConnectionMenu.Designer.cs">
       <DependentUpon>ConnectionMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="DateTimeComboPicker.cs">
+    <Compile Include="GUI\DateTimeComboPicker.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DateTimeComboPicker.Designer.cs">
+    <Compile Include="GUI\DateTimeComboPicker.Designer.cs">
       <DependentUpon>DateTimeComboPicker.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
-    <Compile Include="FileOperationProgressForm.cs">
+    <Compile Include="GUI\FileOperationProgressForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FileOperationProgressForm.Designer.cs">
+    <Compile Include="GUI\FileOperationProgressForm.Designer.cs">
       <DependentUpon>FileOperationProgressForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileOperationRequestManager.cs" />
     <Compile Include="FileOperationUpdateReceiver.cs" />
     <Compile Include="LSClient.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="GUI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="GUI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimeRangeSelectionControl.cs">
+    <Compile Include="TimeRange.cs" />
+    <Compile Include="GUI\TimeRangeSelectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TimeRangeSelectionControl.Designer.cs">
+    <Compile Include="GUI\TimeRangeSelectionControl.Designer.cs">
       <DependentUpon>TimeRangeSelectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TransferOperationUpdateReceiver.cs" />
-    <Compile Include="FileNameInputControl.cs">
+    <Compile Include="GUI\FileNameInputControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FileNameInputControl.Designer.cs">
+    <Compile Include="GUI\FileNameInputControl.Designer.cs">
       <DependentUpon>FileNameInputControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ZipOperationUpdateReceiver.cs" />
@@ -107,25 +108,25 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ConnectedClientForm.resx">
+    <EmbeddedResource Include="GUI\ConnectedClientForm.resx">
       <DependentUpon>ConnectedClientForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConnectionMenu.resx">
+    <EmbeddedResource Include="GUI\ConnectionMenu.resx">
       <DependentUpon>ConnectionMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DateTimeComboPicker.resx">
+    <EmbeddedResource Include="GUI\DateTimeComboPicker.resx">
       <DependentUpon>DateTimeComboPicker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FileOperationProgressForm.resx">
+    <EmbeddedResource Include="GUI\FileOperationProgressForm.resx">
       <DependentUpon>FileOperationProgressForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="GUI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TimeRangeSelectionControl.resx">
+    <EmbeddedResource Include="GUI\TimeRangeSelectionControl.resx">
       <DependentUpon>TimeRangeSelectionControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FileNameInputControl.resx">
+    <EmbeddedResource Include="GUI\FileNameInputControl.resx">
       <DependentUpon>FileNameInputControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

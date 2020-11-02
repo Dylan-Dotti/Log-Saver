@@ -44,6 +44,7 @@ namespace LogSaverServer
                     if (decoder.TryDecodeMessage(request, out ZipRequestMessage decodedZR))
                     {
                         FileLogger.Log("Decoded message as ZipRequest");
+                        FileLogger.Log("Time range: " + decodedZR.TimeRangeLocal);
                         string zipPath = Path.Combine(logsDestPath, decodedZR.ZipFileName);
                         if (File.Exists(zipPath))
                         {
@@ -74,10 +75,16 @@ namespace LogSaverServer
                     }
                 }
             }
+            catch (EndOfStreamException)
+            {
+                // disconnected from client
+            }
             catch (Exception e)
             {
-                FileLogger.Log(e.Message);
-                FileLogger.Log(e.StackTrace);
+                FileLogger.Log(e.ToString());
+            }
+            finally
+            {
                 client.Close();
                 FileLogger.Log("Connection with client closed.");
             }

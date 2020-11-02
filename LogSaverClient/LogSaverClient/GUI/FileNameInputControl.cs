@@ -8,7 +8,11 @@ namespace LogSaverClient
     {
         public event Action<string> InputTextChanged;
 
-        public string InputText => fileNameInput.Text;
+        public override string Text 
+        {
+            get => fileNameInput.Text;
+            set => fileNameInput.Text = value;
+        }
 
         private int lastLength = 0;
         private readonly char[] invalidChars = new char[]

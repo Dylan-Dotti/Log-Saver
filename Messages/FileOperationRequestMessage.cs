@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
 
 namespace Messages
 {
@@ -9,10 +10,19 @@ namespace Messages
         [JsonProperty("OperationType", Order = 1)]
         public FileOperationType OperationType { get; private set; }
 
-        public FileOperationRequestMessage(FileOperationType operationType) : 
+        [JsonProperty("TimeRangeUTC", Order = 2)]
+        public (DateTime lowerBound, DateTime upperBound) TimeRangeUTC { get; private set; }
+
+        [JsonIgnore]
+        public (DateTime lowerBound, DateTime upperBound) TimeRangeLocal =>
+            (TimeRangeUTC.lowerBound.ToLocalTime(), TimeRangeUTC.upperBound.ToLocalTime());
+
+        public FileOperationRequestMessage(FileOperationType operationType,
+            (DateTime lowerBound, DateTime upperBound) timeRangeUtc) : 
             base(MessageType.FileOperationRequest)
         {
             OperationType = operationType;
+            TimeRangeUTC = timeRangeUtc;
         }
     }
 }

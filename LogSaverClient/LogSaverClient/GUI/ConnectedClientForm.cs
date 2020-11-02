@@ -25,13 +25,16 @@ namespace LogSaverClient
         private async void sendRequestButton_Click(object sender, EventArgs e)
         {
             sendRequestButton.Enabled = false;
+            (DateTime, DateTime) timeRangeUtc = 
+                timeRangeSelectionControl1.GetTimeRange().ToUtc().ToTuple();
             if (serverZipCheck.Checked)
             {
-                await requestManager.SendAndManageZipRequest(zipNameInput.Text);
+                await requestManager.SendAndManageZipRequest(zipNameInput.Text, timeRangeUtc);
             }
             if (sendCopyCheck.Checked)
             {
-                await requestManager.SendAndManageTransferRequest(localFolderBrowser.SelectedPath);
+                await requestManager.SendAndManageTransferRequest(
+                    localFolderBrowser.SelectedPath, timeRangeUtc);
             }
             sendRequestButton.Enabled = true;
         }
@@ -65,7 +68,7 @@ namespace LogSaverClient
 
         private void UpdateButtonEnabled()
         {
-            sendRequestButton.Enabled = zipNameInput.InputText.Length > 0 &&
+            sendRequestButton.Enabled = zipNameInput.Text.Length > 0 &&
                 (!sendCopyCheck.Checked || localFolderBrowser.SelectedPath != "");
         }
     }

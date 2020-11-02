@@ -30,7 +30,6 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.sendRequestButton = new System.Windows.Forms.Button();
-            this.timeRangeSelectionControl1 = new LogSaverClient.TimeRangeSelectionControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -38,11 +37,12 @@
             this.localFolderLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.zipNameInput = new LogSaverClient.FileNameInputControl();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.sendCopyCheck = new System.Windows.Forms.CheckBox();
             this.serverZipCheck = new System.Windows.Forms.CheckBox();
             this.localFolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            this.timeRangeSelectionControl1 = new LogSaverClient.TimeRangeSelectionControl();
+            this.zipNameInput = new LogSaverClient.FileNameInputControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -82,17 +82,7 @@
             this.sendRequestButton.TabIndex = 8;
             this.sendRequestButton.Text = "Send Request";
             this.sendRequestButton.UseVisualStyleBackColor = true;
-            // 
-            // timeRangeSelectionControl1
-            // 
-            this.timeRangeSelectionControl1.AutoSize = true;
-            this.timeRangeSelectionControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.timeRangeSelectionControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.timeRangeSelectionControl1.Location = new System.Drawing.Point(10, 10);
-            this.timeRangeSelectionControl1.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
-            this.timeRangeSelectionControl1.Name = "timeRangeSelectionControl1";
-            this.timeRangeSelectionControl1.Size = new System.Drawing.Size(451, 167);
-            this.timeRangeSelectionControl1.TabIndex = 2;
+            this.sendRequestButton.Click += new System.EventHandler(this.sendRequestButton_Click);
             // 
             // groupBox1
             // 
@@ -202,16 +192,6 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Archive folder name:";
             // 
-            // zipNameInput
-            // 
-            this.zipNameInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.zipNameInput.Location = new System.Drawing.Point(220, 3);
-            this.zipNameInput.Margin = new System.Windows.Forms.Padding(3, 3, 50, 3);
-            this.zipNameInput.Name = "zipNameInput";
-            this.zipNameInput.Size = new System.Drawing.Size(165, 35);
-            this.zipNameInput.TabIndex = 8;
-            this.zipNameInput.InputTextChanged += new System.Action<string>(this.OnZipNameChanged);
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.AutoSize = true;
@@ -256,6 +236,27 @@
             this.serverZipCheck.Text = "Zip on the server";
             this.serverZipCheck.UseVisualStyleBackColor = true;
             this.serverZipCheck.CheckedChanged += new System.EventHandler(this.serverZipCheck_CheckedChanged);
+            // 
+            // timeRangeSelectionControl1
+            // 
+            this.timeRangeSelectionControl1.AutoSize = true;
+            this.timeRangeSelectionControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.timeRangeSelectionControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.timeRangeSelectionControl1.Location = new System.Drawing.Point(10, 10);
+            this.timeRangeSelectionControl1.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.timeRangeSelectionControl1.Name = "timeRangeSelectionControl1";
+            this.timeRangeSelectionControl1.Size = new System.Drawing.Size(451, 167);
+            this.timeRangeSelectionControl1.TabIndex = 2;
+            // 
+            // zipNameInput
+            // 
+            this.zipNameInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.zipNameInput.Location = new System.Drawing.Point(220, 3);
+            this.zipNameInput.Margin = new System.Windows.Forms.Padding(3, 3, 50, 3);
+            this.zipNameInput.Name = "zipNameInput";
+            this.zipNameInput.Size = new System.Drawing.Size(165, 35);
+            this.zipNameInput.TabIndex = 8;
+            this.zipNameInput.InputTextChanged += new System.Action<string>(this.OnZipNameChanged);
             // 
             // ConnectedClientForm
             // 
