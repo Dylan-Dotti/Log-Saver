@@ -85,6 +85,12 @@
     </Compile>
     <Compile Include="FileOperationRequestManager.cs" />
     <Compile Include="FileOperationUpdateReceiver.cs" />
+    <Compile Include="GUI\SavedConnectionsSelectionDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\SavedConnectionsSelectionDisplay.Designer.cs">
+      <DependentUpon>SavedConnectionsSelectionDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="LSClient.cs" />
     <Compile Include="GUI\MainForm.cs">
       <SubType>Form</SubType>
@@ -112,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\connections.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\SavedConnectionsSelectionDisplay.resx">
+      <DependentUpon>SavedConnectionsSelectionDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\TimeRangeSelectionControl.resx">
       <DependentUpon>TimeRangeSelectionControl.cs</DependentUpon>

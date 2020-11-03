@@ -5,20 +5,17 @@ namespace LogSaverClient
 {
     public partial class MainForm : Form
     {
-        private ConnectionMenu connectionMenu;
+        private ConnectionInfo selectedConnection;
 
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void OnConnectionSelected(ConnectionInfo connection)
         {
-            // initialize connection menu
-            connectionMenu = new ConnectionMenu();
-            connectionMenu.Dock = DockStyle.Fill;
-            connectionMenu.ConnectionMade += OnConnectionMade;
-            Controls.Add(connectionMenu);
+            selectedConnection = connection;
+            connectButton.Enabled = selectedConnection != null;
         }
 
         private void OnConnectionMade(LSClient client)

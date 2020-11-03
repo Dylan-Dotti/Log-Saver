@@ -45,3 +45,5 @@ D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.TimeR
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.TimeRangeSelectionControl.resources
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.FileNameInputControl.resources
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.FileNameInputControl.resources
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.GUI.ConnectionEditForm.resources
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.GUI.SavedConnectionsSelectionDisplay.resources
