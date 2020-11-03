@@ -24,7 +24,7 @@ namespace LogSaverServer
             mainCategories = fileCategoryQueues
                 .Select(cq => cq.Value.Dequeue()).Distinct()
                 .Select(c => new CategoryTreeNode(c)).ToList();
-            mainCategories.ForEach(c => FileLogger.Log("Main category: " + c.Category));
+            //mainCategories.ForEach(c => FileLogger.Log("Main category: " + c.Category));
 
             List<CategoryTreeNode> currentNodes = new List<CategoryTreeNode>(mainCategories);
             List<CategoryTreeNode> nextNodes = new List<CategoryTreeNode>();
@@ -38,18 +38,20 @@ namespace LogSaverServer
                 foreach (CategoryTreeNode node in currentNodes)
                 {
                     string fullCategory = node.FullCategory;
-                    FileLogger.Log("Full category: " + fullCategory);
-                    var matchingQueues = fileCategoryQueues
-                        .Where(cq => cq.Key.StartsWith(fullCategory))
-                        .Select(cq => cq.Value);
-                    var subCategories = matchingQueues.Select(q => q.Dequeue()).Distinct();
+                    //FileLogger.Log("Full category: " + fullCategory);
+                    var matchingFileQueues = fileCategoryQueues
+                        .Where(cq => cq.Key.StartsWith(fullCategory)).ToList();
+                    //matchingFileQueues.ForEach(fq => FileLogger.Log("Matching file queue: " + fq.Key));
+
+                    var matchingQueues = matchingFileQueues.Select(cq => cq.Value);
+                    // breaks unless subcategories is a list
+                    var subCategories = matchingQueues.Select(q => q.Dequeue()).Distinct().ToList();
                     IEnumerable<CategoryTreeNode> childNodes = subCategories
                         .Select(c => new CategoryTreeNode(c, node));
                     node.AddChildren(childNodes);
-                    foreach (var n in childNodes) FileLogger.Log("Adding child node: " + n.Category);
                     nextNodes.AddRange(childNodes);
                 }
-                currentNodes = nextNodes;
+                currentNodes = new List<CategoryTreeNode>(nextNodes);
                 nextNodes.Clear();
             }
         }
