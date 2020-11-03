@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionInfo.cs" />
+    <Compile Include="ConnectionsDAL.cs" />
     <Compile Include="GUI\ConnectedClientForm.cs">
       <SubType>Form</SubType>
     </Compile>

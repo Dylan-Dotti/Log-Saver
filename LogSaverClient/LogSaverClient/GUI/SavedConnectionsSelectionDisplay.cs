@@ -26,7 +26,7 @@ namespace LogSaverClient.GUI
 
         private void addButton_Click(object sender, EventArgs e)
         {
-
+            DialogResult result = new ConnectionEditForm().ShowDialog();
         }
 
         private void editButton_Click(object sender, EventArgs e)

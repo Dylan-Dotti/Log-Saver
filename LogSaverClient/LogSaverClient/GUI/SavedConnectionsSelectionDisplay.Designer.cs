@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("No saved connections");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("No saved connections");
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.connectionsListView = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(293, 427);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(270, 313);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // connectionsListView
@@ -65,12 +65,12 @@
             this.connectionsListView.Enabled = false;
             this.connectionsListView.HideSelection = false;
             this.connectionsListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4});
+            listViewItem1});
             this.connectionsListView.Location = new System.Drawing.Point(1, 35);
             this.connectionsListView.Margin = new System.Windows.Forms.Padding(1);
             this.connectionsListView.MultiSelect = false;
             this.connectionsListView.Name = "connectionsListView";
-            this.connectionsListView.Size = new System.Drawing.Size(291, 349);
+            this.connectionsListView.Size = new System.Drawing.Size(268, 235);
             this.connectionsListView.TabIndex = 2;
             this.connectionsListView.UseCompatibleStateImageBehavior = false;
             this.connectionsListView.View = System.Windows.Forms.View.List;
@@ -81,7 +81,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(59, 5);
+            this.label1.Location = new System.Drawing.Point(48, 5);
             this.label1.Margin = new System.Windows.Forms.Padding(5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(174, 24);
@@ -98,22 +98,22 @@
             this.tableLayoutPanel3.Controls.Add(this.editButton, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.addButton, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 385);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 271);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(293, 42);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(270, 42);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
             // deleteButton
             // 
             this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.deleteButton.Enabled = false;
-            this.deleteButton.Location = new System.Drawing.Point(195, 6);
+            this.deleteButton.Location = new System.Drawing.Point(181, 6);
             this.deleteButton.Margin = new System.Windows.Forms.Padding(1);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(97, 30);
+            this.deleteButton.Size = new System.Drawing.Size(88, 30);
             this.deleteButton.TabIndex = 2;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -123,10 +123,10 @@
             // 
             this.editButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.editButton.Enabled = false;
-            this.editButton.Location = new System.Drawing.Point(98, 6);
+            this.editButton.Location = new System.Drawing.Point(91, 6);
             this.editButton.Margin = new System.Windows.Forms.Padding(1);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(95, 30);
+            this.editButton.Size = new System.Drawing.Size(88, 30);
             this.editButton.TabIndex = 1;
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = true;
@@ -138,7 +138,7 @@
             this.addButton.Location = new System.Drawing.Point(1, 6);
             this.addButton.Margin = new System.Windows.Forms.Padding(1);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(95, 30);
+            this.addButton.Size = new System.Drawing.Size(88, 30);
             this.addButton.TabIndex = 0;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
@@ -152,7 +152,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "SavedConnectionsSelectionDisplay";
-            this.Size = new System.Drawing.Size(293, 427);
+            this.Size = new System.Drawing.Size(270, 313);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
