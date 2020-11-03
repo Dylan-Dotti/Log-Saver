@@ -12,6 +12,12 @@ namespace LogSaverServer
     {
         static void Main(string[] args)
         {
+            FileOperator op = new FileOperator();
+            foreach (var category in op.GetLogCategories(
+                ConfigurationManager.AppSettings.Get("LogsSourcePath")))
+            {
+                Console.WriteLine(category);
+            }
             var exitCode = HostFactory.Run(x =>
             {
                 x.Service<LogSaverServer>(s =>

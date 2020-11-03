@@ -83,17 +83,16 @@ namespace LogSaverServer
             return Directory.GetFiles(path).Select(p => Path.GetFileName(p)).ToArray();
         }
 
-        public string[] GetFilePathsInDirectory(string path)
+        public string[] GetFilePathsInDirectory(string directory)
         {
-            return GetFileNamesInDirectory(path).Select(f => Path.Combine(path, f)).ToArray();
+            return GetFileNamesInDirectory(directory)
+                .Select(f => Path.Combine(directory, f)).ToArray();
         }
 
-        public string[] GetLogCategories(string path)
+        public string[] GetLogCategories(string directory)
         {
-            var files = GetFileNamesInDirectory(path);
-            var logCategories = files.Select(f => f.Split('.').First()).Distinct();
-            var mainCategories = logCategories.Select(c => c.Split('_').First()).Distinct();
-            return mainCategories.ToArray();
+            var files = GetFileNamesInDirectory(directory);
+            return new FileCategoryTree(files).MainCategories.ToArray();
         }
 
         public DateTime GetLastUpdateTime(string filePath)
