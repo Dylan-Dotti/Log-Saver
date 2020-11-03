@@ -51,11 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionInfo.cs" />
     <Compile Include="GUI\ConnectedClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\ConnectedClientForm.Designer.cs">
       <DependentUpon>ConnectedClientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConnectionEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConnectionEditForm.Designer.cs">
+      <DependentUpon>ConnectionEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\ConnectionMenu.cs">
       <SubType>UserControl</SubType>
@@ -110,6 +117,9 @@
   <ItemGroup>
     <EmbeddedResource Include="GUI\ConnectedClientForm.resx">
       <DependentUpon>ConnectedClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConnectionEditForm.resx">
+      <DependentUpon>ConnectionEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ConnectionMenu.resx">
       <DependentUpon>ConnectionMenu.cs</DependentUpon>
