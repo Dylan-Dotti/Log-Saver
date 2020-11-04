@@ -27,11 +27,21 @@ namespace LogSaverClient
             client.Close();
         }
 
-        public async Task ConnectAsync(IPAddress address, int port)
+        public async Task<bool> TryConnectAsync(IPAddress address, int port)
         {
-            await client.ConnectAsync(address, port);
-            writer = new BinaryWriter(client.GetStream());
-            reader = new BinaryReader(client.GetStream());
+            try
+            {
+                await client.ConnectAsync(address, port);
+                writer = new BinaryWriter(client.GetStream());
+                reader = new BinaryReader(client.GetStream());
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Connection failed:");
+                Console.WriteLine(e.ToString());
+                return false;
+            }
         }
 
         public void Close()

@@ -20,23 +20,36 @@ namespace LogSaverClient
 
         public static bool TryAddConnection(ConnectionInfo newConnection)
         {
-            if (ConnectionExists(newConnection))
+            if (ConnectionExists(newConnection.ConnectionName))
             {
                 return false;
             }
-            var connections = LoadConnections();
+            List<ConnectionInfo> connections = LoadConnections();
+            connections.Add(newConnection);
+            SaveConnections(connections);
             return true;
         }
 
-        public static void RemoveConnection(ConnectionInfo connection)
+        public static bool RemoveConnection(ConnectionInfo connection)
         {
-
+            List<ConnectionInfo> connections = LoadConnections();
+            if (connections.Remove(connection))
+            {
+                SaveConnections(connections);
+                return true;
+            }
+            return false;
         }
 
-        public static bool ConnectionExists(ConnectionInfo connection)
+        public static ConnectionInfo GetConnectionByName(string connectionName)
+        {
+            return GetConnections().Single(c => c.ConnectionName == connectionName);
+        }
+
+        public static bool ConnectionExists(string connectionName)
         {
             var connections = GetConnections();
-            return connections.Any(c => c.ConnectionName == connection.ConnectionName);
+            return connections.Any(c => c.ConnectionName == connectionName);
         }
 
         private static List<ConnectionInfo> LoadConnections()

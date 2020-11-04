@@ -38,6 +38,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.nameInput = new System.Windows.Forms.TextBox();
+            this.connectionResultLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -84,6 +85,7 @@
             this.ipInput.Name = "ipInput";
             this.ipInput.Size = new System.Drawing.Size(146, 26);
             this.ipInput.TabIndex = 2;
+            this.ipInput.TextChanged += new System.EventHandler(this.ipInput_TextChanged);
             // 
             // label2
             // 
@@ -100,11 +102,13 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.AutoSize = true;
-            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.cancelButton, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.okTestButton, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cancelButton, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.okTestButton, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.connectionResultLabel, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 159);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -129,7 +133,7 @@
             // okTestButton
             // 
             this.okTestButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.okTestButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.okTestButton.Enabled = false;
             this.okTestButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.okTestButton.Location = new System.Drawing.Point(173, 10);
             this.okTestButton.Margin = new System.Windows.Forms.Padding(10, 10, 5, 10);
@@ -175,6 +179,17 @@
             this.nameInput.Name = "nameInput";
             this.nameInput.Size = new System.Drawing.Size(146, 26);
             this.nameInput.TabIndex = 1;
+            this.nameInput.TextChanged += new System.EventHandler(this.nameInput_TextChanged);
+            // 
+            // connectionResultLabel
+            // 
+            this.connectionResultLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.connectionResultLabel.AutoSize = true;
+            this.connectionResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.connectionResultLabel.Location = new System.Drawing.Point(3, 17);
+            this.connectionResultLabel.Name = "connectionResultLabel";
+            this.connectionResultLabel.Size = new System.Drawing.Size(0, 16);
+            this.connectionResultLabel.TabIndex = 2;
             // 
             // ConnectionEditForm
             // 
@@ -190,6 +205,7 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
@@ -208,5 +224,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TextBox ipInput;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label connectionResultLabel;
     }
 }

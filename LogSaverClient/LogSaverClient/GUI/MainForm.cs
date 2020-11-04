@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Windows.Forms;
 
 namespace LogSaverClient
@@ -15,13 +16,21 @@ namespace LogSaverClient
         private void OnConnectionSelected(ConnectionInfo connection)
         {
             selectedConnection = connection;
+            selectedConnectionLabel.Text = connection.ConnectionName +
+                Environment.NewLine + connection.ConnectionIP;
             connectButton.Enabled = selectedConnection != null;
         }
 
-        private void OnConnectionMade(LSClient client)
+        private async void connectButton_Click(object sender, EventArgs e)
         {
-            new ConnectedClientForm(client).ShowDialog(this);
-            client.Close();
+            connectButton.Enabled = false;
+            LSClient client = new LSClient();
+            if (await client.TryConnectAsync(IPAddress.Parse(selectedConnection.ConnectionIP), 1337))
+            {
+                new ConnectedClientForm(client).ShowDialog(this);
+                client.Close();
+            }
+            connectButton.Enabled = true;
         }
     }
 }
