@@ -12,10 +12,16 @@ namespace LogSaverClient
     {
         private static readonly string filePath = Path.Combine(
                 "..", "..", "Data", "connections.json");
+        private static List<ConnectionInfo> connectionCache;
+
+        static ConnectionsDAL()
+        {
+            LoadConnections();
+        }
 
         public static IReadOnlyList<ConnectionInfo> GetConnections()
         {
-            return LoadConnections();
+            return connectionCache;
         }
 
         public static bool TryAddConnection(ConnectionInfo newConnection)
@@ -24,18 +30,29 @@ namespace LogSaverClient
             {
                 return false;
             }
-            List<ConnectionInfo> connections = LoadConnections();
-            connections.Add(newConnection);
-            SaveConnections(connections);
+            connectionCache.Add(newConnection);
+            SaveConnections();
+            return true;
+        }
+
+        public static bool EditConnection(ConnectionInfo connection,
+            string newName, string newIP)
+        {
+            if (!ConnectionExists(connection.ConnectionName))
+            {
+                return false;
+            }
+            int index = connectionCache.IndexOf(connection);
+            connectionCache[index] = new ConnectionInfo(newName, newIP);
+            SaveConnections();
             return true;
         }
 
         public static bool RemoveConnection(ConnectionInfo connection)
         {
-            List<ConnectionInfo> connections = LoadConnections();
-            if (connections.Remove(connection))
+            if (connectionCache.Remove(connection))
             {
-                SaveConnections(connections);
+                SaveConnections();
                 return true;
             }
             return false;
@@ -52,15 +69,16 @@ namespace LogSaverClient
             return connections.Any(c => c.ConnectionName == connectionName);
         }
 
-        private static List<ConnectionInfo> LoadConnections()
+        private static void LoadConnections()
         {
             string json = File.ReadAllText(filePath);
-            return JsonConvert.DeserializeObject<List<ConnectionInfo>>(json);
+            connectionCache = JsonConvert.DeserializeObject<List<ConnectionInfo>>(json);
         }
 
-        public static void SaveConnections(List<ConnectionInfo> connections)
+        private static void SaveConnections()
         {
-            string json = JsonConvert.SerializeObject(connections, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(
+                connectionCache, Formatting.Indented);
             File.WriteAllText(filePath, json);
         }
     }

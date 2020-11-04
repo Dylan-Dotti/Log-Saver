@@ -16,8 +16,10 @@ namespace LogSaverClient
         private void OnConnectionSelected(ConnectionInfo connection)
         {
             selectedConnection = connection;
-            selectedConnectionLabel.Text = connection.ConnectionName +
-                Environment.NewLine + connection.ConnectionIP;
+            selectedConnectionLabel.Text = connection == null ?
+                "No connection selected" :
+                connection.ConnectionName + Environment.NewLine + 
+                connection.ConnectionIP;
             connectButton.Enabled = selectedConnection != null;
         }
 

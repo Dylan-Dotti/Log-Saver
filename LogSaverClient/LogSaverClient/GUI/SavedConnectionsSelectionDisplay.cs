@@ -12,6 +12,7 @@ namespace LogSaverClient.GUI
 {
     public partial class SavedConnectionsSelectionDisplay : UserControl
     {
+        private ConnectionInfo selectedConnection;
         public event Action<ConnectionInfo> ConnectionSelected;
 
         public SavedConnectionsSelectionDisplay()
@@ -33,11 +34,10 @@ namespace LogSaverClient.GUI
             if (hasSelected)
             {
                 string selectedConName = connectionsListView.SelectedItems[0].Text;
-                ConnectionInfo connection = ConnectionsDAL.GetConnectionByName(selectedConName);
-                ConnectionSelected?.Invoke(connection);
+                selectedConnection = ConnectionsDAL.GetConnectionByName(selectedConName);
+                ConnectionSelected?.Invoke(selectedConnection);
             }
-            editButton.Enabled = hasSelected;
-            deleteButton.Enabled = hasSelected;
+            UpdateButtons(hasSelected);
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -48,12 +48,19 @@ namespace LogSaverClient.GUI
 
         private void editButton_Click(object sender, EventArgs e)
         {
-
+            DialogResult result = new ConnectionEditForm(selectedConnection).ShowDialog();
+            if (result == DialogResult.OK) ReloadConnections();
+            ConnectionSelected?.Invoke(selectedConnection);
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-
+            if (ConnectionsDAL.RemoveConnection(selectedConnection))
+            {
+                selectedConnection = null;
+                ReloadConnections();
+                ConnectionSelected?.Invoke(null);
+            }
         }
 
         private void ReloadConnections()
@@ -71,7 +78,14 @@ namespace LogSaverClient.GUI
             {
                 connectionsListView.Items.Add("No saved connections");
             }
+            UpdateButtons(false);
             connectionsListView.Enabled = connections.Count > 0;
+        }
+
+        private void UpdateButtons(bool enabled)
+        {
+            editButton.Enabled = enabled;
+            deleteButton.Enabled = enabled;
         }
     }
 }

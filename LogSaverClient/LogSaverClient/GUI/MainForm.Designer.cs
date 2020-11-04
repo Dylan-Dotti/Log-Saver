@@ -81,6 +81,7 @@
             this.selectedConnectionLabel.Size = new System.Drawing.Size(210, 24);
             this.selectedConnectionLabel.TabIndex = 0;
             this.selectedConnectionLabel.Text = "No connection selected";
+            this.selectedConnectionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // connectButton
             // 
