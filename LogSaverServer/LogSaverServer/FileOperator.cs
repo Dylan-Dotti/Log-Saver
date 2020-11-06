@@ -1,4 +1,5 @@
-﻿using Messages;
+﻿using FileUtilities;
+using Messages;
 using System;
 using System.IO;
 using System.IO.Compression;
@@ -89,10 +90,10 @@ namespace LogSaverServer
                 .Select(f => Path.Combine(directory, f)).ToArray();
         }
 
-        public string[] GetLogCategories(string directory)
+        public FileCategory[] GetLogCategories(string directory)
         {
             var files = GetFileNamesInDirectory(directory);
-            return new FileCategoryTree(files).MainCategories.ToArray();
+            return new FileCategorizer().Categorize(files).ToArray();
         }
 
         public DateTime GetLastUpdateTime(string filePath)

@@ -19,6 +19,14 @@ namespace LogSaverClient
             decoder = new MessageDecoder();
         }
 
+        public async Task<ServerInfoMessage> AwaitServerInfo()
+        {
+
+            string message = await client.AwaitMessageAsync();
+            return decoder.DecodeMessage<ServerInfoMessage>(message);
+
+        }
+
         public async Task SendAndManageZipRequest(string zipFileName,
             (DateTime, DateTime) timeRange)
         {

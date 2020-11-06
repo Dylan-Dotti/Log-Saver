@@ -16,11 +16,11 @@ namespace Messages
         public MessageType MsgType { get; private set; }
 
         public LogSaverMessage(MessageType messageType)
-            :this(new Random().Next(1, 101), messageType)
+            :this(messageType, new Random().Next(1, 101))
         { }
 
         [JsonConstructor]
-        public LogSaverMessage(int messageID, MessageType messageType)
+        public LogSaverMessage(MessageType messageType, int messageID)
         {
             MessageID = messageID;
             MsgType = messageType;

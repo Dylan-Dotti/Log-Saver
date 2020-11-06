@@ -49,3 +49,6 @@ D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.GUI.C
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.GUI.SavedConnectionsSelectionDisplay.resources
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.GUI.ConnectionEditForm.resources
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.GUI.SavedConnectionsSelectionDisplay.resources
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.GUI.CategorySelectionDisplay.resources
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\FileUtilities.dll
+D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\FileUtilities.pdb

@@ -35,6 +35,10 @@ namespace LogSaverServer
         {
             try
             {
+                ServerInfoMessage serverInfo = new ServerInfoMessage(
+                    fileOperator.GetLogCategories(logsSourcePath));
+                writer.Write(serverInfo);
+                FileLogger.Log("Sent server info");
                 while (true)
                 {
                     FileLogger.Log("Waiting for user request...");

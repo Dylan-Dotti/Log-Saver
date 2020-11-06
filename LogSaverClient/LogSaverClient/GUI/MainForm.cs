@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Messages;
+using Newtonsoft.Json;
+using System;
 using System.Net;
 using System.Windows.Forms;
 
@@ -29,7 +31,11 @@ namespace LogSaverClient
             LSClient client = new LSClient();
             if (await client.TryConnectAsync(IPAddress.Parse(selectedConnection.ConnectionIP), 1337))
             {
-                new ConnectedClientForm(client).ShowDialog(this);
+                Console.WriteLine("Waiting for server info...");
+                ServerInfoMessage serverInfo = await new FileOperationRequestManager(client).AwaitServerInfo();
+                //Console.WriteLine("Received server info: " + 
+                  //  JsonConvert.SerializeObject(serverInfo, Formatting.Indented));
+                new ConnectedClientForm(client, serverInfo).ShowDialog(this);
                 client.Close();
             }
             connectButton.Enabled = true;

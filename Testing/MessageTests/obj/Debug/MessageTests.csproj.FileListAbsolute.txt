@@ -40,3 +40,5 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\Testing\MessageTests\obj\Debug\Messa
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\Testing\MessageTests\obj\Debug\MessageTests.csproj.CopyComplete
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\Testing\MessageTests\obj\Debug\MessageTests.dll
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\Testing\MessageTests\obj\Debug\MessageTests.pdb
+D:\Github\Log-Saver\Testing\MessageTests\bin\Debug\FileUtilities.dll
+D:\Github\Log-Saver\Testing\MessageTests\bin\Debug\FileUtilities.pdb

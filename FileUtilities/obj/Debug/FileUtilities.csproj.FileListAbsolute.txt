@@ -1,0 +1,9 @@
+D:\Github\Log-Saver\FileUtilities\bin\Debug\FileUtilities.dll
+D:\Github\Log-Saver\FileUtilities\bin\Debug\FileUtilities.pdb
+D:\Github\Log-Saver\FileUtilities\bin\Debug\Newtonsoft.Json.dll
+D:\Github\Log-Saver\FileUtilities\bin\Debug\Newtonsoft.Json.xml
+D:\Github\Log-Saver\FileUtilities\obj\Debug\FileUtilities.csprojAssemblyReference.cache
+D:\Github\Log-Saver\FileUtilities\obj\Debug\FileUtilities.csproj.CoreCompileInputs.cache
+D:\Github\Log-Saver\FileUtilities\obj\Debug\FileUtilities.csproj.CopyComplete
+D:\Github\Log-Saver\FileUtilities\obj\Debug\FileUtilities.dll
+D:\Github\Log-Saver\FileUtilities\obj\Debug\FileUtilities.pdb

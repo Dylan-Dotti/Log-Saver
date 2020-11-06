@@ -16,3 +16,5 @@ D:\Github\Log-Saver\Messages\obj\Debug\Messages.csproj.CopyComplete
 D:\Github\Log-Saver\Messages\obj\Debug\Messages.dll
 D:\Github\Log-Saver\Messages\obj\Debug\Messages.pdb
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\obj\Debug\Messages.csprojAssemblyReference.cache
+D:\Github\Log-Saver\Messages\bin\Debug\FileUtilities.dll
+D:\Github\Log-Saver\Messages\bin\Debug\FileUtilities.pdb

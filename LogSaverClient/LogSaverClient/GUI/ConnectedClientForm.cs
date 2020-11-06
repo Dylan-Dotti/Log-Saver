@@ -10,10 +10,11 @@ namespace LogSaverClient
         private readonly LSClient client;
         private readonly FileOperationRequestManager requestManager;
 
-        public ConnectedClientForm(LSClient client)
+        public ConnectedClientForm(LSClient client, ServerInfoMessage serverInfo)
         {
             InitializeComponent();
             this.client = client;
+            categorySelector.Categories = serverInfo.fileCategories;
             requestManager = new FileOperationRequestManager(client);
         }
 
@@ -25,7 +26,7 @@ namespace LogSaverClient
         private async void sendRequestButton_Click(object sender, EventArgs e)
         {
             sendRequestButton.Enabled = false;
-            var timeRangeUtc = timeRangeSelectionControl1.GetTimeRange().ToUtc().ToTuple();
+            var timeRangeUtc = timeRangeSelector.GetTimeRange().ToUtc().ToTuple();
             if (serverZipCheck.Checked)
             {
                 await requestManager.SendAndManageZipRequest(zipNameInput.Text, timeRangeUtc);

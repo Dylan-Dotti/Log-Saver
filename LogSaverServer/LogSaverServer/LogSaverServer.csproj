@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientHandler.cs" />
-    <Compile Include="FileCategoryTree.cs" />
     <Compile Include="FileOperator.cs" />
     <Compile Include="LogSaverServer.cs" />
     <Compile Include="Program.cs" />
@@ -67,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\FileUtilities\FileUtilities.csproj">
+      <Project>{7C267A9C-E2FE-4A8E-9302-562CBF797024}</Project>
+      <Name>FileUtilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Messages\Messages.csproj">
       <Project>{4a338908-c433-4616-83c8-1986765c9593}</Project>
       <Name>Messages</Name>

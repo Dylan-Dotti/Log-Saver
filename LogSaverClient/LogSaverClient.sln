@@ -12,6 +12,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "..\Messages\Mes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageTests", "..\Testing\MessageTests\MessageTests.csproj", "{4AFB0A6C-BA6E-4E90-BE1D-61EDCD34012C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUtilities", "..\FileUtilities\FileUtilities.csproj", "{7C267A9C-E2FE-4A8E-9302-562CBF797024}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUtilitiesTests", "..\Testing\FileUtilitiesTests\FileUtilitiesTests.csproj", "{6204E3ED-E33D-4B59-A11C-B83F44F54AE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +34,14 @@ Global
 		{4AFB0A6C-BA6E-4E90-BE1D-61EDCD34012C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AFB0A6C-BA6E-4E90-BE1D-61EDCD34012C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AFB0A6C-BA6E-4E90-BE1D-61EDCD34012C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C267A9C-E2FE-4A8E-9302-562CBF797024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C267A9C-E2FE-4A8E-9302-562CBF797024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C267A9C-E2FE-4A8E-9302-562CBF797024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C267A9C-E2FE-4A8E-9302-562CBF797024}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6204E3ED-E33D-4B59-A11C-B83F44F54AE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6204E3ED-E33D-4B59-A11C-B83F44F54AE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6204E3ED-E33D-4B59-A11C-B83F44F54AE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6204E3ED-E33D-4B59-A11C-B83F44F54AE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
