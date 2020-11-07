@@ -7,3 +7,12 @@ D:\Github\Log-Saver\FileUtilities\obj\Debug\FileUtilities.csproj.CoreCompileInpu
 D:\Github\Log-Saver\FileUtilities\obj\Debug\FileUtilities.csproj.CopyComplete
 D:\Github\Log-Saver\FileUtilities\obj\Debug\FileUtilities.dll
 D:\Github\Log-Saver\FileUtilities\obj\Debug\FileUtilities.pdb
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\bin\Debug\FileUtilities.dll
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\bin\Debug\FileUtilities.pdb
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\bin\Debug\Newtonsoft.Json.dll
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\bin\Debug\Newtonsoft.Json.xml
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\obj\Debug\FileUtilities.csprojAssemblyReference.cache
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\obj\Debug\FileUtilities.csproj.CoreCompileInputs.cache
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\obj\Debug\FileUtilities.csproj.CopyComplete
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\obj\Debug\FileUtilities.dll
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\obj\Debug\FileUtilities.pdb

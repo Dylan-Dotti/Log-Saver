@@ -53,15 +53,14 @@ namespace LogSaverClient.GUI
             List<string> fullCategories = new List<string>();
             foreach (TreeNode node in categoriesTreeView.Nodes)
             {
-                fullCategories.AddRange(
-                    GetFullCategoriesRecursive(node, "", new List<string>()));
+                fullCategories.AddRange(GetFullCategoriesRecursive(node, ""));
             }
             return fullCategories.ToArray();
         }
 
-        private List<string> GetFullCategoriesRecursive(TreeNode node, string runningCategory,
-            List<string> fullCategories)
+        private List<string> GetFullCategoriesRecursive(TreeNode node, string runningCategory)
         {
+            List<string> fullCategories = new List<string>();
             runningCategory += (runningCategory.Length == 0 ? "" : "_") + node.Text;
             if (node.Nodes.Count == 0)
             {
@@ -77,7 +76,7 @@ namespace LogSaverClient.GUI
                 foreach (TreeNode childNode in node.Nodes)
                 {
                     fullCategories.AddRange(
-                        GetFullCategoriesRecursive(childNode, runningCategory, fullCategories));
+                        GetFullCategoriesRecursive(childNode, runningCategory));
                 }
             }
             return fullCategories;

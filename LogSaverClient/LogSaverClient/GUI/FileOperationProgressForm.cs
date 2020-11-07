@@ -24,6 +24,7 @@ namespace LogSaverClient
             operationLabel.Text =
                 (receiver.OperationType == FileOperationType.Zip ? 
                 "Zip" : "Transfer") + " operation in progress...";
+            //invalid operationexception if window closed
             await receiver.HandleOperationUpdates();
             Close();
         }
