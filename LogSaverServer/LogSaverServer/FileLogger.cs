@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Threading;
 
 namespace LogSaverServer
 {
@@ -10,26 +13,24 @@ namespace LogSaverServer
             ConfigurationManager.AppSettings.Get("LSLogsPath");
         private static readonly object logLockObject = new object();
 
+        private static readonly ConcurrentQueue<string> messageQueue =
+            new ConcurrentQueue<string>();
+
         static FileLogger()
         {
-            ClearLog();
+            ThreadPool.QueueUserWorkItem(LoggerThreadWork);
         }
 
         public static void Log(string message)
         {
-            string logsPath = Path.Combine(logsDirectory, "ls_logs.txt");
-            lock (logLockObject)
-            {
-                File.AppendAllText(logsPath, message + Environment.NewLine);
-            }
+            LogLines(message);
         }
 
         public static void LogLines(params string[] lines)
         {
-            string logsPath = Path.Combine(logsDirectory, "ls_logs.txt");
-            lock (logLockObject)
+            foreach (string line in lines)
             {
-                File.AppendAllLines(logsPath, lines);
+                messageQueue.Enqueue(line);
             }
         }
 
@@ -39,6 +40,35 @@ namespace LogSaverServer
             lock (logLockObject)
             {
                 File.WriteAllText(logsPath, "");
+            }
+        }
+
+        private static void LoggerThreadWork(object stateInfo)
+        {
+            ClearLog();
+            List<string> messagesToLog = new List<string>();
+            string logsPath = Path.Combine(logsDirectory, "ls_logs.txt");
+            while (true)
+            {
+                // Clear out queue and add to a list
+                while (!messageQueue.IsEmpty)
+                {
+                    if (messageQueue.TryDequeue(out string nextMessage))
+                    {
+                        messagesToLog.Add(nextMessage);
+                    }
+                }
+                // write all lines at once
+                if (messagesToLog.Count > 0)
+                {
+                    lock (logLockObject)
+                    {
+                        File.AppendAllLines(logsPath, messagesToLog.ToArray());
+                    }
+                    messagesToLog.Clear();
+                }
+                // wait to prevent overloading file
+                Thread.Sleep(500);
             }
         }
     }

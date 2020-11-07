@@ -41,7 +41,7 @@ namespace LogSaverServer
                         string path = filePaths[i];
                         try
                         {
-                            //FileLogger.Log("Zipping file: " + path);
+                            FileLogger.Log("Zipping file: " + path);
                             archive.CreateEntryFromFile(path, Path.GetFileName(path));
                             // report progress to the client
                             writer.Write(new ZipOperationMessage(i + 1, filePaths.Length));
