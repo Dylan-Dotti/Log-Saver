@@ -20,7 +20,7 @@ namespace LogSaverClient
 
         private void OnZipNameChanged(string newInput)
         {
-            UpdateButtonEnabled();
+            UpdateSendButtonEnabled();
         }
 
         private async void sendRequestButton_Click(object sender, EventArgs e)
@@ -29,12 +29,13 @@ namespace LogSaverClient
             var timeRangeUtc = timeRangeSelector.GetTimeRange().ToUtc().ToTuple();
             if (serverZipCheck.Checked)
             {
-                await requestManager.SendAndManageZipRequest(zipNameInput.Text, timeRangeUtc);
+                await requestManager.SendAndManageZipRequest(
+                    zipNameInput.Text, timeRangeUtc, categorySelector.FullCategories);
             }
             if (sendCopyCheck.Checked)
             {
                 await requestManager.SendAndManageTransferRequest(
-                    localFolderBrowser.SelectedPath, timeRangeUtc);
+                    localFolderBrowser.SelectedPath, timeRangeUtc, categorySelector.FullCategories);
             }
             sendRequestButton.Enabled = true;
         }
@@ -55,7 +56,7 @@ namespace LogSaverClient
             {
                 serverZipCheck.Checked = true;
             }
-            UpdateButtonEnabled();
+            UpdateSendButtonEnabled();
         }
 
         private void localFolderButton_Click(object sender, EventArgs e)
@@ -63,13 +64,19 @@ namespace LogSaverClient
             localFolderBrowser.ShowDialog();
             localFolderLabel.Text = localFolderBrowser.SelectedPath == "" ?
                 "No folder selected" : localFolderBrowser.SelectedPath;
-            UpdateButtonEnabled();
+            UpdateSendButtonEnabled();
         }
 
-        private void UpdateButtonEnabled()
+        private void UpdateSendButtonEnabled()
         {
             sendRequestButton.Enabled = zipNameInput.Text.Length > 0 &&
                 (!sendCopyCheck.Checked || localFolderBrowser.SelectedPath != "");
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            client.Close();
+            Close();
         }
     }
 }

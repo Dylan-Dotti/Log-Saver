@@ -1,6 +1,7 @@
 ﻿using FileUtilities;
 using Messages;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -88,6 +89,24 @@ namespace LogSaverServer
         {
             return GetFileNamesInDirectory(directory)
                 .Select(f => Path.Combine(directory, f)).ToArray();
+        }
+
+        public string[] GetFilteredFilePaths(string directory,
+            (DateTime, DateTime) timeRangeLocal, string[] categories)
+        {
+            IEnumerable<string> filePaths = GetFilePathsInDirectory(directory);
+            var nameToPathsGrouping = filePaths
+                .GroupBy(p => Path.GetFileNameWithoutExtension(p))
+                .Where(grp => categories.Any(c => grp.Key.StartsWith(c)));
+            List<string> filePathsFiltered = new List<string>();
+            foreach (var grouping in nameToPathsGrouping)
+            {
+                foreach (string path in grouping)
+                {
+                    filePathsFiltered.Add(path);
+                }
+            }
+            return filePathsFiltered.ToArray();
         }
 
         public FileCategory[] GetLogCategories(string directory)

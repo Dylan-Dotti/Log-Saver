@@ -116,6 +116,7 @@
             this.allCategoriesRadio.TabIndex = 0;
             this.allCategoriesRadio.TabStop = true;
             this.allCategoriesRadio.UseVisualStyleBackColor = true;
+            this.allCategoriesRadio.CheckedChanged += new System.EventHandler(this.OnRadioSelected);
             // 
             // selectedCategoriesRadio
             // 
@@ -127,6 +128,7 @@
             this.selectedCategoriesRadio.Size = new System.Drawing.Size(14, 13);
             this.selectedCategoriesRadio.TabIndex = 1;
             this.selectedCategoriesRadio.UseVisualStyleBackColor = true;
+            this.selectedCategoriesRadio.CheckedChanged += new System.EventHandler(this.OnRadioSelected);
             // 
             // allCategoriesLabel
             // 
@@ -157,11 +159,14 @@
             // 
             this.categoriesTreeView.CheckBoxes = true;
             this.categoriesTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoriesTreeView.Enabled = false;
+            this.categoriesTreeView.FullRowSelect = true;
             this.categoriesTreeView.Location = new System.Drawing.Point(10, 80);
             this.categoriesTreeView.Margin = new System.Windows.Forms.Padding(10);
             this.categoriesTreeView.Name = "categoriesTreeView";
             this.categoriesTreeView.Size = new System.Drawing.Size(273, 284);
             this.categoriesTreeView.TabIndex = 4;
+            this.categoriesTreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.categoriesTreeView_AfterCheck);
             // 
             // CategorySelectionDisplay
             // 

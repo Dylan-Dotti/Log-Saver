@@ -15,12 +15,21 @@ namespace LogSaverServer
             ClearLog();
         }
 
-        public static void Log(string data)
+        public static void Log(string message)
         {
             string logsPath = Path.Combine(logsDirectory, "ls_logs.txt");
             lock (logLockObject)
             {
-                File.AppendAllText(logsPath, data + Environment.NewLine);
+                File.AppendAllText(logsPath, message + Environment.NewLine);
+            }
+        }
+
+        public static void LogLines(params string[] lines)
+        {
+            string logsPath = Path.Combine(logsDirectory, "ls_logs.txt");
+            lock (logLockObject)
+            {
+                File.AppendAllLines(logsPath, lines);
             }
         }
 

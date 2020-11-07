@@ -16,7 +16,7 @@ namespace LogSaverServer
         private readonly BinaryWriter writer;
 
         private readonly MessageDecoder decoder;
-        private readonly FileOperator fileOperator;
+        private readonly FileOperator fileOp;
         private readonly string logsSourcePath;
         private readonly string logsDestPath;
 
@@ -26,7 +26,7 @@ namespace LogSaverServer
             this.logsSourcePath = logsSourcePath;
             this.logsDestPath = logsDestPath;
             decoder = new MessageDecoder();
-            fileOperator = new FileOperator();
+            fileOp = new FileOperator();
             reader = new BinaryReader(client.GetStream());
             writer = new BinaryWriter(client.GetStream());
         }
@@ -36,7 +36,7 @@ namespace LogSaverServer
             try
             {
                 ServerInfoMessage serverInfo = new ServerInfoMessage(
-                    fileOperator.GetLogCategories(logsSourcePath));
+                    fileOp.GetLogCategories(logsSourcePath));
                 writer.Write(serverInfo);
                 FileLogger.Log("Sent server info");
                 while (true)
@@ -48,30 +48,12 @@ namespace LogSaverServer
                     if (decoder.TryDecodeMessage(request, out ZipRequestMessage decodedZR))
                     {
                         FileLogger.Log("Decoded message as ZipRequest");
-                        FileLogger.Log("Time range: " + decodedZR.TimeRangeLocal);
-                        string zipPath = Path.Combine(logsDestPath, decodedZR.ZipFileName);
-                        if (File.Exists(zipPath))
-                        {
-                            SendResponseMessage(ResponseCode.Error,
-                                $"Zip archive with the name {decodedZR.ZipFileName} already exists.");
-                        }
-                        else
-                        {
-                            // send response
-                            SendResponseMessage(ResponseCode.Ok);
-                            // zip directory
-                            string[] filePaths = fileOperator.GetFilePathsInDirectory(logsSourcePath);
-                            fileOperator.ZipFiles(filePaths, zipPath, writer);
-                        }
+                        HandleZipRequest(decodedZR);
                     }
                     else if (decoder.TryDecodeMessage(request, out TransferRequestMessage decodedTR))
                     {
                         FileLogger.Log("Decoded message as TransferRequest");
-                        // send response
-                        SendResponseMessage(ResponseCode.Ok);
-                        // transfer files
-                        string[] filePaths = fileOperator.GetFilePathsInDirectory(logsSourcePath);
-                        fileOperator.TransferFiles(filePaths, writer);
+                        HandleTransferRequest(decodedTR);
                     }
                     else
                     {
@@ -92,6 +74,35 @@ namespace LogSaverServer
                 client.Close();
                 FileLogger.Log("Connection with client closed.");
             }
+        }
+
+        private void HandleZipRequest(ZipRequestMessage request)
+        {
+            string zipPath = Path.Combine(logsDestPath, request.ZipFileName);
+            if (File.Exists(zipPath))
+            {
+                SendResponseMessage(ResponseCode.Error,
+                    $"Zip archive with the name {request.ZipFileName} already exists.");
+            }
+            else
+            {
+                // send response
+                SendResponseMessage(ResponseCode.Ok);
+                // zip directory
+                string[] filePaths = fileOp.GetFilteredFilePaths(logsSourcePath, 
+                    request.TimeRangeLocal, request.FullCategories);
+                fileOp.ZipFiles(filePaths, zipPath, writer);
+            }
+        }
+
+        private void HandleTransferRequest(TransferRequestMessage request)
+        {
+            // send response
+            SendResponseMessage(ResponseCode.Ok);
+            // transfer files
+            string[] filePaths = fileOp.GetFilteredFilePaths(logsSourcePath,
+                request.TimeRangeLocal, request.FullCategories);
+            fileOp.TransferFiles(filePaths, writer);
         }
 
         private void SendResponseMessage(ResponseCode resCode, string message = "")

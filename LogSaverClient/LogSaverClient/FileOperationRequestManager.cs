@@ -28,14 +28,14 @@ namespace LogSaverClient
         }
 
         public async Task SendAndManageZipRequest(string zipFileName,
-            (DateTime, DateTime) timeRange)
+            (DateTime, DateTime) timeRange, string[] fullCategories)
         {
             zipFileName = zipFileName.Trim();
             // append .zip if the string does not end with it
             if (!zipFileName.ToLower().EndsWith(".zip")) zipFileName += ".zip";
 
             // create and send request
-            var request = new ZipRequestMessage(zipFileName, timeRange);
+            var request = new ZipRequestMessage(zipFileName, timeRange, fullCategories);
             var resDecoded = await SendRequestAwaitResponse(request);
 
             // process response
@@ -54,10 +54,10 @@ namespace LogSaverClient
         }
 
         public async Task SendAndManageTransferRequest(string localDstPath,
-            (DateTime, DateTime) timeRange)
+            (DateTime, DateTime) timeRange, string[] fullCategories)
         {
             // create and send request
-            var request = new TransferRequestMessage(timeRange);
+            var request = new TransferRequestMessage(timeRange, fullCategories);
             var response = await SendRequestAwaitResponse(request);
 
             // process response

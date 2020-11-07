@@ -63,6 +63,7 @@
             this.connectionsListView.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.connectionsListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.connectionsListView.Enabled = false;
+            this.connectionsListView.FullRowSelect = true;
             this.connectionsListView.HideSelection = false;
             this.connectionsListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
