@@ -8,6 +8,7 @@ namespace LogSaverClient.GUI
 {
     public partial class CategorySelectionDisplay : UserControl
     {
+        //dictionary 
         private IReadOnlyList<FileCategory> categories;
 
         public string[] FullCategories => GetFullCategories();
