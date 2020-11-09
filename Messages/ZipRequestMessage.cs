@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
+using TimeUtilities;
 
 namespace Messages
 {
@@ -10,7 +10,7 @@ namespace Messages
 
         [JsonConstructor]
         public ZipRequestMessage(string zipFileName, 
-            (DateTime lowerBound, DateTime upperBound) timeRangeUtc, string[] fullCategories) 
+            DateTimeRange timeRangeUtc, string[] fullCategories) 
             : base(FileOperationType.Zip, timeRangeUtc, fullCategories)
         {
             ZipFileName = zipFileName;

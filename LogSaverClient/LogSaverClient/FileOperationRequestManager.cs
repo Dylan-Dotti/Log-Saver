@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TimeUtilities;
 
 namespace LogSaverClient
 {
@@ -21,14 +22,12 @@ namespace LogSaverClient
 
         public async Task<ServerInfoMessage> AwaitServerInfo()
         {
-
             string message = await client.AwaitMessageAsync();
             return decoder.DecodeMessage<ServerInfoMessage>(message);
-
         }
 
         public async Task SendAndManageZipRequest(string zipFileName,
-            (DateTime, DateTime) timeRange, string[] fullCategories)
+            DateTimeRange timeRange, string[] fullCategories)
         {
             zipFileName = zipFileName.Trim();
             // append .zip if the string does not end with it
@@ -54,7 +53,7 @@ namespace LogSaverClient
         }
 
         public async Task SendAndManageTransferRequest(string localDstPath,
-            (DateTime, DateTime) timeRange, string[] fullCategories)
+            DateTimeRange timeRange, string[] fullCategories)
         {
             // create and send request
             var request = new TransferRequestMessage(timeRange, fullCategories);

@@ -74,6 +74,10 @@
       <Project>{4a338908-c433-4616-83c8-1986765c9593}</Project>
       <Name>Messages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\TimeUtilities\TimeUtilities.csproj">
+      <Project>{0445D08A-C1C1-43F5-AE61-2499551C301F}</Project>
+      <Name>TimeUtilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

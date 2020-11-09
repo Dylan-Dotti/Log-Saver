@@ -1,0 +1,9 @@
+D:\Github\Log-Saver\TimeUtilities\bin\Debug\TimeUtilities.dll
+D:\Github\Log-Saver\TimeUtilities\bin\Debug\TimeUtilities.pdb
+D:\Github\Log-Saver\TimeUtilities\obj\Debug\TimeUtilities.csprojAssemblyReference.cache
+D:\Github\Log-Saver\TimeUtilities\obj\Debug\TimeUtilities.csproj.CoreCompileInputs.cache
+D:\Github\Log-Saver\TimeUtilities\obj\Debug\TimeUtilities.dll
+D:\Github\Log-Saver\TimeUtilities\obj\Debug\TimeUtilities.pdb
+D:\Github\Log-Saver\TimeUtilities\bin\Debug\Newtonsoft.Json.dll
+D:\Github\Log-Saver\TimeUtilities\bin\Debug\Newtonsoft.Json.xml
+D:\Github\Log-Saver\TimeUtilities\obj\Debug\TimeUtilities.csproj.CopyComplete

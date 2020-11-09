@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using TimeUtilities;
 
 namespace LogSaverServer
 {
@@ -92,7 +93,7 @@ namespace LogSaverServer
         }
 
         public string[] GetFilteredFilePaths(string directory,
-            (DateTime, DateTime) timeRangeLocal, string[] categories)
+            DateTimeRange timeRangeLocal, string[] categories)
         {
             IEnumerable<string> filePaths = GetFilePathsInDirectory(directory);
             var nameToPathsGrouping = filePaths

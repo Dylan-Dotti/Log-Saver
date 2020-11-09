@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
+using TimeUtilities;
 
 namespace Messages
 {
     public class TransferRequestMessage : FileOperationRequestMessage
     {
         [JsonConstructor]
-        public TransferRequestMessage((DateTime, DateTime) timeRangeUtc, string[] fullCategories) 
+        public TransferRequestMessage(DateTimeRange timeRangeUtc, string[] fullCategories) 
             : base(FileOperationType.Transfer, timeRangeUtc, fullCategories)
         { }
     }

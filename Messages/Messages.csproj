@@ -68,6 +68,10 @@
       <Project>{7C267A9C-E2FE-4A8E-9302-562CBF797024}</Project>
       <Name>FileUtilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TimeUtilities\TimeUtilities.csproj">
+      <Project>{0445D08A-C1C1-43F5-AE61-2499551C301F}</Project>
+      <Name>TimeUtilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
