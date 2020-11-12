@@ -1,4 +1,5 @@
-﻿using Messages;
+﻿using FileUtilities;
+using Messages;
 using System;
 using System.Collections.Concurrent;
 using System.IO;
@@ -29,7 +30,7 @@ namespace LogSaverClient
         {
             doneReceiving = false;
             // producer thread
-            new Thread(ReceivingAndDecodingWork).Start();
+            ThreadPool.QueueUserWorkItem(ReceivingAndDecodingWork);
 
             // consumer thread
             await Task.Run(() =>
@@ -39,9 +40,7 @@ namespace LogSaverClient
                 {
                     if (operationMessageQueue.IsEmpty)
                     {
-                        Console.WriteLine("Waiting for signal...");
                         autoEvent.WaitOne();
-                        Console.WriteLine("Signal received");
                         // wait here until a message is decoded and added to the queue
                     }
                     // create a file from the message
@@ -56,11 +55,13 @@ namespace LogSaverClient
 
         private void CreateFileFromMessage(TransferOperationMessage message)
         {
+            Console.WriteLine("Decompressing: " + message.FileName);
+            byte[] bytesUncompressed = ByteCompression.GZipDecompress(message.FileBytesCompressed);
             Console.WriteLine("Creating file: " + message.FileName);
-            File.WriteAllBytes(Path.Combine(dstDirectory, message.FileName), message.FileBytes);
+            File.WriteAllBytes(Path.Combine(dstDirectory, message.FileName), bytesUncompressed);
         }
 
-        private async void ReceivingAndDecodingWork()
+        private async void ReceivingAndDecodingWork(object state)
         {
             while (!doneReceiving)
             {

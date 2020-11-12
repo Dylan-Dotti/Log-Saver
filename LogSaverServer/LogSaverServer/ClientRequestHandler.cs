@@ -79,8 +79,12 @@ namespace LogSaverServer
                 FileLogger.Log("Transferring: " + path);
                 string fileName = Path.GetFileName(path);
                 byte[] fileBytes = File.ReadAllBytes(path);
+                int sizeBefore = fileBytes.Length;
+                byte[] fileBytesCompressed = ByteCompression.GZipCompress(fileBytes);
+                int sizeAfter = fileBytesCompressed.Length;
+                FileLogger.Log("Compression Ratio: " + ((float)sizeAfter / sizeBefore));
                 var message = new TransferOperationMessage(
-                    i + 1, filePaths.Length, fileName, fileBytes);
+                    i + 1, filePaths.Length, fileName, fileBytesCompressed);
                 client.Writer.Write(message);
             }
             FileLogger.Log("Transfer operation complete");
