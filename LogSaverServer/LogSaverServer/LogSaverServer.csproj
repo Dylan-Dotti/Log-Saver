@@ -57,7 +57,6 @@
     <Compile Include="BinaryTcpClient.cs" />
     <Compile Include="ClientHandler.cs" />
     <Compile Include="ClientRequestHandler.cs" />
-    <Compile Include="FileOperator.cs" />
     <Compile Include="LogSaverServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

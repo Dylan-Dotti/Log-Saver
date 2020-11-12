@@ -43,3 +43,5 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\Testing\MessageTests\obj\Debug\Messa
 D:\Github\Log-Saver\Testing\MessageTests\bin\Debug\FileUtilities.dll
 D:\Github\Log-Saver\Testing\MessageTests\bin\Debug\FileUtilities.pdb
 D:\Github\Log-Saver\Testing\MessageTests\bin\Debug\SevenZip.dll
+D:\Github\Log-Saver\Testing\MessageTests\bin\Debug\TimeUtilities.dll
+D:\Github\Log-Saver\Testing\MessageTests\bin\Debug\TimeUtilities.pdb

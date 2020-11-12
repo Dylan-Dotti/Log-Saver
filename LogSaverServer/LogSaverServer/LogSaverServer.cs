@@ -53,7 +53,7 @@ namespace LogSaverServer
                 try
                 {
                     TcpListener listenerLocal = (TcpListener)result.AsyncState;
-                    TcpClient client = listenerLocal.EndAcceptTcpClient(result);
+                    BinaryTcpClient client = new BinaryTcpClient(listenerLocal.EndAcceptTcpClient(result));
                     FileLogger.Log("Connection received");
                     ThreadPool.QueueUserWorkItem(stateInfo =>
                     {
