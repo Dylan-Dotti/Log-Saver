@@ -6,9 +6,10 @@ namespace FileUtilities
 {
     public class FileCategorizer
     {
-        public IReadOnlyList<FileCategory> Categorize(string[] fileNames)
+        public IReadOnlyList<FileCategory> Categorize(
+            string[] fileNames, IFileCategorizationStrategy cStrategy)
         {
-            var extensionlessNames = fileNames.Select(f => f.Split('.').First());
+            var extensionlessNames = cStrategy.GetFullCategoryNames(fileNames);
             var fileCategoryQueues = GenerateCategoryQueues(extensionlessNames);
             List<FileCategory> mainCategories = fileCategoryQueues
                 .Select(cq => cq.Value.Dequeue()).Distinct()
@@ -44,9 +45,9 @@ namespace FileUtilities
         }
 
         internal Dictionary<string, Queue<string>> GenerateCategoryQueues(
-            IEnumerable<string> extensionlessNames)
+            IEnumerable<string> fullCategoryNames)
         {
-            return extensionlessNames.Distinct().ToDictionary(
+            return fullCategoryNames.Distinct().ToDictionary(
                 f => f, f => new Queue<string>(f.Split('_')));
         }
 

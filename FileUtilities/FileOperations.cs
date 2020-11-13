@@ -59,10 +59,11 @@ namespace FileUtilities
             return filePathsFiltered.ToArray();
         }
 
-        public static FileCategory[] GetLogCategories(string directory)
+        public static FileCategory[] GetLogCategories(
+            string directory, IFileCategorizationStrategy cStrategy)
         {
             var files = GetFileNamesInDirectory(directory);
-            return new FileCategorizer().Categorize(files).ToArray();
+            return new FileCategorizer().Categorize(files, cStrategy).ToArray();
         }
 
         public static DateTime GetLastUpdateTime(string filePath)

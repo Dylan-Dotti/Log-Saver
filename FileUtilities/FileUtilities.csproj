@@ -53,6 +53,9 @@
     <Compile Include="FileCategory.cs" />
     <Compile Include="FileCategorizer.cs" />
     <Compile Include="FileOperations.cs" />
+    <Compile Include="FirstSegmentCategorization.cs" />
+    <Compile Include="IFileCategorizationStrategy.cs" />
+    <Compile Include="LastSegmentCategorization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ByteCompression.cs" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 using Messages;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace LogSaverServer
         private readonly string logsSourcePath;
         private readonly string logsDestPath;
 
+        private readonly IFileCategorizationStrategy categorizationStrategy;
+
         public ClientHandler(BinaryTcpClient client, string logsSourcePath, string logsDestPath)
         {
             this.client = client;
@@ -24,6 +27,7 @@ namespace LogSaverServer
             this.logsDestPath = logsDestPath;
             requestHandler = new ClientRequestHandler(client, logsSourcePath, logsDestPath);
             decoder = new MessageDecoder();
+            categorizationStrategy = GetCategorizationStrategy();
         }
 
         public void HandleClient()
@@ -31,7 +35,8 @@ namespace LogSaverServer
             try
             {
                 ServerInfoMessage serverInfo = new ServerInfoMessage(
-                    FileOperations.GetLogCategories(logsSourcePath));
+                    FileOperations.GetLogCategories(
+                        logsSourcePath, categorizationStrategy));
                 client.Writer.Write(serverInfo);
                 FileLogger.Log("Sent server info");
                 while (true)
@@ -76,6 +81,15 @@ namespace LogSaverServer
             var response = new ResponseMessage(resCode, message);
             client.Writer.Write(response);
             FileLogger.Log("Sent response: " + response.ToString(true));
+        }
+
+        private IFileCategorizationStrategy GetCategorizationStrategy()
+        {
+            string strategyStr = ConfigurationManager.AppSettings
+                .Get("CategorizationStrategy");
+            if (strategyStr == "FirstSegment") return new FirstSegmentCategorization();
+            else if (strategyStr == "LastSegment") return new LastSegmentCategorization();
+            return null;
         }
     }
 }
