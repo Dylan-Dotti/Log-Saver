@@ -1,6 +1,7 @@
 ﻿using Messages;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace LogSaverClient
             return decoder.DecodeMessage<ServerInfoMessage>(message);
         }
 
-        public async Task SendAndManageZipRequest(string zipFileName,
+        public async Task<bool> SendAndManageZipRequest(string zipFileName,
             DateTimeRange timeRange, string[] fullCategories)
         {
             zipFileName = zipFileName.Trim();
@@ -42,6 +43,7 @@ namespace LogSaverClient
             {
                 new FileOperationProgressForm(
                     new ZipOperationUpdateReceiver(client)).ShowDialog();
+                return true;
             }
             else if (resDecoded.ResCode == ResponseCode.Error)
             {
@@ -50,10 +52,11 @@ namespace LogSaverClient
                     "Request Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            return false;
         }
 
-        public async Task SendAndManageTransferRequest(string localDstPath,
-            DateTimeRange timeRange, string[] fullCategories)
+        public async Task<bool> SendAndManageTransferRequest(
+            string localDstPath, DateTimeRange timeRange, string[] fullCategories)
         {
             // create and send request
             var request = new TransferRequestMessage(timeRange, fullCategories);
@@ -62,8 +65,12 @@ namespace LogSaverClient
             // process response
             if (response.ResCode == ResponseCode.Ok)
             {
+                DirectoryInfo info = Directory.CreateDirectory(localDstPath);
+                foreach (var file in info.EnumerateFiles()) file.Delete();
+                foreach (var directory in info.EnumerateDirectories()) directory.Delete(true);
                 new FileOperationProgressForm(
                     new TransferOperationUpdateReceiver(client, localDstPath)).ShowDialog();
+                return true;
             }
             else if (response.ResCode == ResponseCode.Error)
             {
@@ -72,6 +79,7 @@ namespace LogSaverClient
                     "Request Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            return false;
         }
 
         private async Task<ResponseMessage> SendRequestAwaitResponse(

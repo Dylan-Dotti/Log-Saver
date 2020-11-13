@@ -55,6 +55,5 @@ D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\FileUtilities.pdb
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\FileUtilities.dll
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\FileUtilities.pdb
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.GUI.CategorySelectionDisplay.resources
-D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\SevenZip.dll
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\TimeUtilities.dll
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\TimeUtilities.pdb

@@ -17,7 +17,7 @@ namespace LogSaverClient
         private int lastLength = 0;
         private readonly char[] invalidChars = new char[]
         {
-            '/', '\\', ':', '*', '?', '"', '<', '>', '|'
+            '/', '\\', '.', ':', '*', '?', '"', '<', '>', '|'
         };
 
         public FileNameInputControl()

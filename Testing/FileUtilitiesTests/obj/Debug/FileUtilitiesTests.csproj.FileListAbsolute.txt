@@ -19,4 +19,5 @@ D:\Github\Log-Saver\Testing\FileUtilitiesTests\obj\Debug\FileUtilitiesTests.cspr
 D:\Github\Log-Saver\Testing\FileUtilitiesTests\obj\Debug\FileUtilitiesTests.csproj.CopyComplete
 D:\Github\Log-Saver\Testing\FileUtilitiesTests\obj\Debug\FileUtilitiesTests.dll
 D:\Github\Log-Saver\Testing\FileUtilitiesTests\obj\Debug\FileUtilitiesTests.pdb
-D:\Github\Log-Saver\Testing\FileUtilitiesTests\bin\Debug\SevenZip.dll
+D:\Github\Log-Saver\Testing\FileUtilitiesTests\bin\Debug\TimeUtilities.dll
+D:\Github\Log-Saver\Testing\FileUtilitiesTests\bin\Debug\TimeUtilities.pdb
