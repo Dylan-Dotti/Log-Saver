@@ -53,7 +53,12 @@ namespace FileUtilities
             {
                 foreach (string path in grouping)
                 {
-                    filePathsFiltered.Add(path);
+                    // filter by time range
+                    if (timeRangeLocal.IsWithinRange(File.GetLastWriteTime(path)) ||
+                        timeRangeLocal.IsWithinRange(File.GetCreationTime(path)))
+                    {
+                        filePathsFiltered.Add(path);
+                    }
                 }
             }
             return filePathsFiltered.ToArray();

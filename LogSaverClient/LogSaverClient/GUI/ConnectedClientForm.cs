@@ -38,7 +38,7 @@ namespace LogSaverClient
                 var result = MessageBox.Show($"The path {localFolderPath} already exists. " +
                     "Do you wish to overwrite? Operation cannot continue otherwise",
                     "Request Error",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 continueOperation = result == DialogResult.Yes;
             }
             // send requests

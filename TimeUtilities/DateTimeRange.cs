@@ -46,5 +46,21 @@ namespace TimeUtilities
         {
             return (LowerDateTime, UpperDateTime);
         }
+
+        public bool IsWithinRange(DateTime time)
+        {
+            double upperMinuteDiff = Math.Abs((UpperDateTime - time).TotalMinutes);
+            return LowerDateTime <= time && (time <= UpperDateTime || upperMinuteDiff < 1);
+        }
+
+        public bool IsBeforeRange(DateTime time)
+        {
+            return time < LowerDateTime;
+        }
+
+        public bool IsAfterRange(DateTime time)
+        {
+            return (time - UpperDateTime).TotalMinutes >= 1;
+        }
     }
 }

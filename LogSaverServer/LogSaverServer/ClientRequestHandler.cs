@@ -26,6 +26,14 @@ namespace LogSaverServer
         public void HandleZipRequest(ZipRequestMessage request)
         {
             string zipPath = Path.Combine(logsDestPath, request.ZipFileName);
+            string[] filePaths = FileOperations.GetFilteredFilePaths(logsSourcePath,
+                request.TimeRangeLocal, request.FullCategories);
+            if (filePaths.Length == 0)
+            {
+                SendResponseMessage(ResponseCode.Error,
+                    "No files found that match request");
+                return;
+            }
             if (File.Exists(zipPath))
             {
                 SendResponseMessage(ResponseCode.Error,
@@ -34,13 +42,12 @@ namespace LogSaverServer
             }
             // send response
             SendResponseMessage(ResponseCode.Ok);
-            // zip directory
-            string[] filePaths = FileOperations.GetFilteredFilePaths(logsSourcePath,
-                request.TimeRangeLocal, request.FullCategories);
             // Open zip archive if it does not already exist
             FileLogger.Log("Creating zip archive: " + zipPath);
             using (ZipArchive archive = FileOperations.CreateZipArchive(zipPath))
             {
+                // track number of files that could not be processed
+                int numSkipped = 0;
                 FileLogger.Log("Beginning zip operation...");
                 // Loop through the input files and zip one by one. Report progress to client through writer.
                 for (int i = 0; i < filePaths.Length; i++)
@@ -48,10 +55,23 @@ namespace LogSaverServer
                     string path = filePaths[i];
                     try
                     {
-                        FileLogger.Log("Zipping file: " + path);
-                        archive.CreateEntryFromFile(path, Path.GetFileName(path));
+                        if (!File.Exists(path) ||
+                            request.TimeRangeLocal.IsAfterRange(File.GetCreationTime(path)))
+                        {
+                            // file was deleted while processing and/or recreated
+                            FileLogger.Log($"File {path} was deleted during the operation. Skipping");
+                            numSkipped += 1;
+                        }
+                        else
+                        {
+                            FileLogger.Log("Zipping file: " + path);
+                            archive.CreateEntryFromFile(path, Path.GetFileName(path));
+                        }
                         // report progress to the client
-                        client.Writer.Write(new ZipOperationMessage(i + 1, filePaths.Length));
+                        var message = new ZipOperationMessage(
+                            i + 1 - numSkipped, filePaths.Length - numSkipped);
+                        client.Writer.Write(message);
+
                     }
                     catch (Exception e)
                     {
@@ -67,11 +87,17 @@ namespace LogSaverServer
 
         public void HandleTransferRequest(TransferRequestMessage request)
         {
+            string[] filePaths = FileOperations.GetFilteredFilePaths(logsSourcePath,
+                request.TimeRangeLocal, request.FullCategories);
+            if (filePaths.Length == 0)
+            {
+                SendResponseMessage(ResponseCode.Error,
+                    "No files found that match request");
+                return;
+            }
             // send response
             SendResponseMessage(ResponseCode.Ok);
             // transfer files
-            string[] filePaths = FileOperations.GetFilteredFilePaths(logsSourcePath,
-                request.TimeRangeLocal, request.FullCategories);
             FileLogger.Log("Transferring files...");
             for (int i = 0; i < filePaths.Length; i++)
             {
