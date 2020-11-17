@@ -1,9 +1,6 @@
 ﻿using FileUtilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace FileUtilitiesTests
@@ -16,7 +13,8 @@ namespace FileUtilitiesTests
         public void DoubleLayerTreeTest()
         {
             string[] fileNames = { "a_b_d", "a_c_e" };
-            IReadOnlyList<FileCategory> categories = categorizer.Categorize(fileNames);
+            IReadOnlyList<FileCategory> categories = categorizer.Categorize(
+                fileNames, new FirstSegmentCategorization());
             Assert.Equal(1, categories.Count);
             Assert.Equal("a", categories[0].Category);
             IReadOnlyList<FileCategory> subCategories = categories[0].SubCategories;

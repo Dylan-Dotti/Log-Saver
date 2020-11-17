@@ -75,8 +75,8 @@ namespace LogSaverServer
                     }
                     catch (Exception e)
                     {
-                        FileLogger.Log($"Error while zipping {path}. Zip operation aborted");
-                        FileLogger.Log(e.Message);
+                        FileLogger.Log($"Error while zipping {path}. Zip operation cancelled");
+                        FileLogger.Log(e.ToString());
                         File.Delete(zipPath);
                         break;
                     }
