@@ -28,11 +28,13 @@ namespace LogSaverClient
         private async void sendRequestButton_Click(object sender, EventArgs e)
         {
             sendRequestButton.Enabled = false;
+            string fileNameInput = zipNameInput.Text.Trim();
+            zipNameInput.Text = fileNameInput;
             var timeRangeUtc = timeRangeSelector.GetTimeRange().ToUtc();
             // validate target local path if send copy option selected
             bool continueOperation = true;
             string localFolderPath = sendCopyCheck.Checked ?
-                Path.Combine(localFolderBrowser.SelectedPath, zipNameInput.Text) : "";
+                Path.Combine(localFolderBrowser.SelectedPath, fileNameInput) : "";
             if (Directory.Exists(localFolderPath))
             {
                 var result = MessageBox.Show($"The path {localFolderPath} already exists. " +
@@ -45,7 +47,7 @@ namespace LogSaverClient
             if (serverZipCheck.Checked && continueOperation)
             {
                 continueOperation = await requestManager.SendAndManageZipRequest(
-                    zipNameInput.Text, timeRangeUtc, categorySelector.FullCategories);
+                    fileNameInput, timeRangeUtc, categorySelector.FullCategories);
             }
             if (sendCopyCheck.Checked && continueOperation)
             {

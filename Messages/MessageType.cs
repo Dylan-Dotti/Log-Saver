@@ -3,6 +3,7 @@ namespace Messages
 {
     public enum MessageType
     {
-        Response, FileOperationRequest, FileOperation, ServerInfo
+        Response, FileOperationRequest, ZipRequest, TransferRequest, 
+        ArchiveDeleteRequest, FileOperation, ServerInfo
     }
 }

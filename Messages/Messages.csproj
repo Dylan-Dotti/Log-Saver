@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArchiveDeleteRequestMessage.cs" />
     <Compile Include="FileOperationMessage.cs" />
     <Compile Include="FileOperationRequestMessage.cs" />
     <Compile Include="FileOperationStatus.cs" />
