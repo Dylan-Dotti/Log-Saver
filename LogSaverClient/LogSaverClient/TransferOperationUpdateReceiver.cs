@@ -3,6 +3,7 @@ using Messages;
 using System;
 using System.Collections.Concurrent;
 using System.IO;
+using System.IO.Compression;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,7 +11,8 @@ namespace LogSaverClient
 {
     class TransferOperationUpdateReceiver : FileOperationUpdateReceiver
     {
-        private readonly string dstDirectory;
+        private readonly string folderPath;
+        private readonly bool zipLocal;
         
         // producer/consumer queue
         private readonly ConcurrentQueue<TransferOperationMessage> operationMessageQueue;
@@ -18,10 +20,11 @@ namespace LogSaverClient
         private bool doneReceiving;
 
         public TransferOperationUpdateReceiver(
-            LSClient client, string dstDirectory) 
+            LSClient client, string folderPath, bool zipLocal) 
             : base(FileOperationType.Transfer, client)
         {
-            this.dstDirectory = dstDirectory;
+            this.folderPath = folderPath;
+            this.zipLocal = zipLocal;
             autoEvent = new AutoResetEvent(false);
             operationMessageQueue = new ConcurrentQueue<TransferOperationMessage>();
         }
@@ -46,19 +49,37 @@ namespace LogSaverClient
                     // create a file from the message
                     if (operationMessageQueue.TryDequeue(out TransferOperationMessage msg))
                     {
-                        CreateFileFromMessage(msg);
+                        string filePath = Path.Combine(folderPath, msg.FileName);
+                        Console.WriteLine("Decompressing: " + msg.FileName);
+                        byte[] bytesUncompressed = ByteCompression.GZipDecompress(
+                            msg.FileBytesCompressed);
+                        if (zipLocal)
+                        {
+                            using (ZipArchive archive = ZipFile.Open(folderPath, ZipArchiveMode.Update))
+                            {
+                                var zipEntry = archive.CreateEntry(msg.FileName);
+                                using (var originalFileStream = new MemoryStream(bytesUncompressed))
+                                using (var zipEntryStream = zipEntry.Open())
+                                {
+                                    //Copy the attachment stream to the zip entry stream
+                                    originalFileStream.CopyTo(zipEntryStream);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            CreateLogFile(filePath, bytesUncompressed);
+                        }
                         OnProgressUpdated(msg.NumFilesCompleted, msg.NumTotalFiles);
                     }
                 }
             });
         }
 
-        private void CreateFileFromMessage(TransferOperationMessage message)
+        private void CreateLogFile(string filePath, byte[] fileBytes)
         {
-            Console.WriteLine("Decompressing: " + message.FileName);
-            byte[] bytesUncompressed = ByteCompression.GZipDecompress(message.FileBytesCompressed);
-            Console.WriteLine("Creating file: " + message.FileName);
-            File.WriteAllBytes(Path.Combine(dstDirectory, message.FileName), bytesUncompressed);
+            Console.WriteLine("Creating file: " + filePath);
+            File.WriteAllBytes(filePath, fileBytes);
         }
 
         private async void ReceivingAndDecodingWork(object state)

@@ -44,7 +44,7 @@ namespace LogSaverServer
             SendResponseMessage(ResponseCode.Ok);
             // Open zip archive if it does not already exist
             FileLogger.Log("Creating zip archive: " + zipPath);
-            using (ZipArchive archive = FileOperations.CreateZipArchive(zipPath))
+            using (ZipArchive archive = FileOperations.OpenZipArchive(zipPath))
             {
                 // track number of files that could not be processed
                 int numSkipped = 0;
@@ -105,10 +105,7 @@ namespace LogSaverServer
                 FileLogger.Log("Transferring: " + path);
                 string fileName = Path.GetFileName(path);
                 byte[] fileBytes = File.ReadAllBytes(path);
-                int sizeBefore = fileBytes.Length;
                 byte[] fileBytesCompressed = ByteCompression.GZipCompress(fileBytes);
-                int sizeAfter = fileBytesCompressed.Length;
-                FileLogger.Log("Compression Ratio: " + ((float)sizeAfter / sizeBefore));
                 var message = new TransferOperationMessage(
                     i + 1, filePaths.Length, fileName, fileBytesCompressed);
                 client.Writer.Write(message);

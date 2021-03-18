@@ -56,8 +56,10 @@ namespace LogSaverClient
         }
 
         public async Task<bool> SendAndManageTransferRequest(
-            string localDstPath, DateTimeRange timeRange, string[] fullCategories)
+            string localDstPath, DateTimeRange timeRange, string[] fullCategories,
+            bool zipLocal)
         {
+            if (zipLocal && !localDstPath.EndsWith(".zip")) localDstPath += ".zip";
             // create and send request
             var request = new TransferRequestMessage(timeRange, fullCategories);
             var response = await SendRequestAwaitResponse(request);
@@ -65,11 +67,11 @@ namespace LogSaverClient
             // process response
             if (response.ResCode == ResponseCode.Ok)
             {
-                DirectoryInfo info = Directory.CreateDirectory(localDstPath);
-                foreach (var file in info.EnumerateFiles()) file.Delete();
-                foreach (var directory in info.EnumerateDirectories()) directory.Delete(true);
+                if (zipLocal && File.Exists(localDstPath)) File.Delete(localDstPath);
+                else if (Directory.Exists(localDstPath)) Directory.Delete(localDstPath);
                 new FileOperationProgressForm(
-                    new TransferOperationUpdateReceiver(client, localDstPath)).ShowDialog();
+                    new TransferOperationUpdateReceiver(client, localDstPath, zipLocal))
+                    .ShowDialog();
                 return true;
             }
             else if (response.ResCode == ResponseCode.Error)

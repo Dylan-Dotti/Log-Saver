@@ -53,7 +53,7 @@ namespace LogSaverClient
             {
                 await requestManager.SendAndManageTransferRequest(
                     localFolderPath, 
-                    timeRangeUtc, categorySelector.FullCategories);
+                    timeRangeUtc, categorySelector.FullCategories, localZipCheck.Checked);
             }
             sendRequestButton.Enabled = true;
         }
@@ -70,6 +70,7 @@ namespace LogSaverClient
         {
             localFolderButton.Enabled = sendCopyCheck.Checked;
             localFolderLabel.Enabled = sendCopyCheck.Checked;
+            localZipCheck.Enabled = sendCopyCheck.Checked;
             if (!serverZipCheck.Checked && !sendCopyCheck.Checked)
             {
                 serverZipCheck.Checked = true;

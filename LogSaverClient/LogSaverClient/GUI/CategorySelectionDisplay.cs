@@ -30,11 +30,18 @@ namespace LogSaverClient.GUI
 
         private void OnCategoriesChanged()
         {
-            foreach (FileCategory category in categories)
+            if (categories == null)
             {
-                TreeNode node = categoriesTreeView.Nodes.Add(category.Category);
-                node.Checked = true;
-                AddSubCategoriesRecursive(node, category);
+                categoriesTreeView.Nodes.Clear();
+            }
+            else
+            {
+                foreach (FileCategory category in categories)
+                {
+                    TreeNode node = categoriesTreeView.Nodes.Add(category.Category);
+                    node.Checked = true;
+                    AddSubCategoriesRecursive(node, category);
+                }
             }
         }
 

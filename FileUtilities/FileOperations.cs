@@ -25,7 +25,7 @@ namespace FileUtilities
             foreach (string file in files) CopyFile(file, destPath, true);
         }
 
-        public static ZipArchive CreateZipArchive(string path)
+        public static ZipArchive OpenZipArchive(string path)
         {
             return ZipFile.Open(path, ZipArchiveMode.Create);
         }

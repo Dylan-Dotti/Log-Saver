@@ -36,11 +36,12 @@
             this.localFolderLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.sendCopyCheck = new System.Windows.Forms.CheckBox();
             this.serverZipCheck = new System.Windows.Forms.CheckBox();
+            this.localZipCheck = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.sendRequestButton = new System.Windows.Forms.Button();
             this.localFolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
@@ -159,13 +160,11 @@
             // 
             this.tableLayoutPanel3.AutoSize = true;
             this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.zipNameInput, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(5, 43);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(5);
@@ -180,7 +179,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(35, 10);
+            this.label1.Location = new System.Drawing.Point(51, 10);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(142, 18);
@@ -188,26 +187,16 @@
             this.label1.Text = "Archive folder name:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(335, 13);
-            this.label2.Margin = new System.Windows.Forms.Padding(0, 5, 20, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 18);
-            this.label2.TabIndex = 9;
-            this.label2.Text = ".zip";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.AutoSize = true;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.sendCopyCheck, 1, 0);
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.sendCopyCheck, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.serverZipCheck, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.localZipCheck, 2, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 5);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(5);
@@ -222,11 +211,11 @@
             this.sendCopyCheck.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.sendCopyCheck.AutoSize = true;
             this.sendCopyCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendCopyCheck.Location = new System.Drawing.Point(222, 3);
+            this.sendCopyCheck.Location = new System.Drawing.Point(122, 3);
             this.sendCopyCheck.Name = "sendCopyCheck";
             this.sendCopyCheck.Size = new System.Drawing.Size(134, 22);
-            this.sendCopyCheck.TabIndex = 1;
-            this.sendCopyCheck.Text = "Send me a copy";
+            this.sendCopyCheck.TabIndex = 3;
+            this.sendCopyCheck.Text = "Transfer to local";
             this.sendCopyCheck.UseVisualStyleBackColor = true;
             this.sendCopyCheck.CheckedChanged += new System.EventHandler(this.sendCopyCheck_CheckedChanged);
             // 
@@ -237,22 +226,37 @@
             this.serverZipCheck.Checked = true;
             this.serverZipCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.serverZipCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.serverZipCheck.Location = new System.Drawing.Point(28, 3);
+            this.serverZipCheck.Location = new System.Drawing.Point(3, 3);
             this.serverZipCheck.Name = "serverZipCheck";
-            this.serverZipCheck.Size = new System.Drawing.Size(137, 22);
+            this.serverZipCheck.Size = new System.Drawing.Size(113, 22);
             this.serverZipCheck.TabIndex = 0;
-            this.serverZipCheck.Text = "Zip on the server";
+            this.serverZipCheck.Text = "Zip on server";
             this.serverZipCheck.UseVisualStyleBackColor = true;
             this.serverZipCheck.CheckedChanged += new System.EventHandler(this.serverZipCheck_CheckedChanged);
             // 
+            // localZipCheck
+            // 
+            this.localZipCheck.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.localZipCheck.AutoSize = true;
+            this.localZipCheck.Enabled = false;
+            this.localZipCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.localZipCheck.Location = new System.Drawing.Point(271, 3);
+            this.localZipCheck.Name = "localZipCheck";
+            this.localZipCheck.Size = new System.Drawing.Size(103, 22);
+            this.localZipCheck.TabIndex = 2;
+            this.localZipCheck.Text = "Zip on local";
+            this.localZipCheck.UseVisualStyleBackColor = true;
+            // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnCount = 3;
             this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel6, 2);
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Controls.Add(this.closeButton, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.sendRequestButton, 0, 0);
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel6.Controls.Add(this.button1, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.closeButton, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.sendRequestButton, 1, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 357);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
@@ -262,14 +266,27 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(703, 58);
             this.tableLayoutPanel6.TabIndex = 10;
             // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button1.Enabled = false;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.button1.Location = new System.Drawing.Point(15, 13);
+            this.button1.Margin = new System.Windows.Forms.Padding(15, 7, 7, 7);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 32);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Undo Requests";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // closeButton
             // 
             this.closeButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.closeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.closeButton.Location = new System.Drawing.Point(358, 13);
-            this.closeButton.Margin = new System.Windows.Forms.Padding(7);
+            this.closeButton.Location = new System.Drawing.Point(518, 13);
+            this.closeButton.Margin = new System.Windows.Forms.Padding(7, 7, 15, 7);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(200, 32);
+            this.closeButton.Size = new System.Drawing.Size(170, 32);
             this.closeButton.TabIndex = 10;
             this.closeButton.Text = "Disconnect";
             this.closeButton.UseVisualStyleBackColor = true;
@@ -280,10 +297,10 @@
             this.sendRequestButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.sendRequestButton.Enabled = false;
             this.sendRequestButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.sendRequestButton.Location = new System.Drawing.Point(144, 13);
+            this.sendRequestButton.Location = new System.Drawing.Point(334, 13);
             this.sendRequestButton.Margin = new System.Windows.Forms.Padding(7);
             this.sendRequestButton.Name = "sendRequestButton";
-            this.sendRequestButton.Size = new System.Drawing.Size(200, 32);
+            this.sendRequestButton.Size = new System.Drawing.Size(170, 32);
             this.sendRequestButton.TabIndex = 9;
             this.sendRequestButton.Text = "Send Request";
             this.sendRequestButton.UseVisualStyleBackColor = true;
@@ -303,7 +320,7 @@
             // zipNameInput
             // 
             this.zipNameInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.zipNameInput.Location = new System.Drawing.Point(180, 3);
+            this.zipNameInput.Location = new System.Drawing.Point(196, 3);
             this.zipNameInput.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.zipNameInput.Name = "zipNameInput";
             this.zipNameInput.Size = new System.Drawing.Size(155, 33);
@@ -312,6 +329,7 @@
             // 
             // categorySelector
             // 
+            this.categorySelector.Categories = null;
             this.categorySelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.categorySelector.Location = new System.Drawing.Point(7, 7);
             this.categorySelector.Margin = new System.Windows.Forms.Padding(7);
@@ -357,16 +375,17 @@
         private System.Windows.Forms.Button localFolderButton;
         private System.Windows.Forms.Label localFolderLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.CheckBox sendCopyCheck;
         private System.Windows.Forms.CheckBox serverZipCheck;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label1;
         private FileNameInputControl zipNameInput;
-        private System.Windows.Forms.Label label2;
         private TimeRangeSelectionControl timeRangeSelector;
         private GUI.CategorySelectionDisplay categorySelector;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Button sendRequestButton;
+        private System.Windows.Forms.CheckBox sendCopyCheck;
+        private System.Windows.Forms.CheckBox localZipCheck;
+        private System.Windows.Forms.Button button1;
     }
 }
