@@ -6,6 +6,7 @@ using System.Configuration;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using TcpLibrary;
 
 namespace LogSaverServer
 {

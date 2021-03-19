@@ -1,74 +1,46 @@
-﻿using System;
-using System.Net;
-using System.Net.Sockets;
+﻿using System.Net;
 using System.Threading;
+using TcpLibrary;
 using TopshelfBoilerplate;
 
 namespace LogSaverServer
 {
-    class LogSaverServer : IServiceWorker
+    class LogSaverServer : TcpServer, IServiceWorker
     {
-        private readonly IPAddress ip;
-        private readonly int port;
         private readonly string logSourcePath;
         private readonly string logDestPath;
 
-        private readonly TcpListener listener;
-
-        public bool IsRunning { get; private set; }
-
         public LogSaverServer(IPAddress ip, int port,
             string logSourcePath, string logDestPath)
+            : base(ip, port)
         {
-            this.ip = ip;
-            this.port = port;
             this.logSourcePath = logSourcePath;
             this.logDestPath = logDestPath;
-            listener = new TcpListener(ip, port);
         }
 
-        public void Start()
+        protected override void OnServerStarted()
         {
-            listener.Start();
-            FileLogger.Log($"Server is running at {ip}...");
-            IsRunning = true;
-            BeginAcceptTcpClient();
+            FileLogger.Log($"Server is running at {IP}...");
         }
 
-        public void Stop()
+        protected override void OnServerStopped()
         {
-            IsRunning = false;
-            listener.Stop();
+            FileLogger.Log("Server stopped");
         }
 
-        private void BeginAcceptTcpClient()
+        protected override void OnBeginListen()
         {
-            listener.BeginAcceptTcpClient(new AsyncCallback(AcceptClientCallback), listener);
             FileLogger.Log("Waiting for a connection...");
         }
 
-        private void AcceptClientCallback(IAsyncResult result)
+        protected override void OnAcceptClient(BinaryTcpClient client)
         {
-            if (IsRunning)
+            FileLogger.Log("Connection received");
+            ThreadPool.QueueUserWorkItem(stateInfo =>
             {
-                try
-                {
-                    TcpListener listenerLocal = (TcpListener)result.AsyncState;
-                    BinaryTcpClient client = new BinaryTcpClient(listenerLocal.EndAcceptTcpClient(result));
-                    FileLogger.Log("Connection received");
-                    ThreadPool.QueueUserWorkItem(stateInfo =>
-                    {
-                        new ClientHandler(client, logSourcePath, logDestPath).HandleClient();
-                    });
-                    FileLogger.Log("Created thread for user");
-                    BeginAcceptTcpClient();
-                }
-                catch (Exception e)
-                {
-                    FileLogger.Log(e.Message + Environment.NewLine +
-                        e.StackTrace + Environment.NewLine);
-                }
-            }
+                new ClientHandler(client, logSourcePath, logDestPath).HandleClient();
+            });
+            FileLogger.Log("Created thread for user");
         }
     }
 }

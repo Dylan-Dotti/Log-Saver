@@ -57,3 +57,5 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\De
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\obj\Debug\LogSaverClient.GUI.CategorySelectionDisplay.resources
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\TimeUtilities.dll
 D:\Github\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\TimeUtilities.pdb
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\TimeUtilities.dll
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverClient\LogSaverClient\bin\Debug\TimeUtilities.pdb

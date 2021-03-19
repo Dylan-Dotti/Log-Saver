@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
-    <Compile Include="BinaryTcpClient.cs" />
     <Compile Include="ClientHandler.cs" />
     <Compile Include="ClientRequestHandler.cs" />
     <Compile Include="LogSaverServer.cs" />
@@ -65,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\NET Projects\TcpServerLibrary\TcpServerLibrary\TcpLibrary.csproj">
+      <Project>{3ffbae36-7ffb-4380-a0e3-5cd39d27b4b0}</Project>
+      <Name>TcpLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\NET Projects\TopshelfBoilerplate\TopshelfBoilerplate\TopshelfBoilerplate.csproj">
       <Project>{3435e4c2-c547-4103-9ef4-ea3281a0b1dd}</Project>
       <Name>TopshelfBoilerplate</Name>
