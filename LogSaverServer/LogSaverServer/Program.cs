@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using Topshelf;
+using TopshelfBoilerplate;
 
 namespace LogSaverServer
 {
@@ -12,29 +12,14 @@ namespace LogSaverServer
     {
         static void Main(string[] args)
         {
-            var exitCode = HostFactory.Run(x =>
-            {
-                x.Service<LogSaverServer>(s =>
-                {
-                    s.ConstructUsing(server =>
-                    {
-                        string src = AppSettings.LogsSourcePath;
-                        string dst = AppSettings.LogsDestPath;
-                        IPAddress ip = IPAddress.Parse(GetLocalIPAddress());
-                        return new LogSaverServer(ip, 1337, src, dst);
-                    });
-                    s.WhenStarted(server => server.Start());
-                    s.WhenStopped(server => server.Stop());
-                });
-
-                x.SetServiceName("SWISSLOG_LOG_SAVER");
-                x.SetDisplayName("SWISSLOG_LOG_SAVER");
-                x.SetDescription("App for archiving logs on the server");
-            });
-
-            int exitCodeValue = (int)Convert.ChangeType(exitCode, exitCode.GetTypeCode());
-            Environment.ExitCode = exitCodeValue;
-            Console.ReadKey();
+            string src = AppSettings.LogsSourcePath;
+            string dst = AppSettings.LogsDestPath;
+            IPAddress ip = IPAddress.Parse(GetLocalIPAddress());
+            IServiceWorker lsServer = new LogSaverServer(ip, 1337, src, dst);
+            new TopshelfService(
+                "SWISSLOG_LOG_SAVER", "SWISSLOG_LOG_SAVER",
+                "App for archiving logs on the server")
+                .Run(lsServer);
         }
 
         public static string GetLocalIPAddress()

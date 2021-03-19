@@ -2,10 +2,11 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using TopshelfBoilerplate;
 
 namespace LogSaverServer
 {
-    class LogSaverServer
+    class LogSaverServer : IServiceWorker
     {
         private readonly IPAddress ip;
         private readonly int port;
