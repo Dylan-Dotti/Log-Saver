@@ -18,3 +18,5 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\obj\Debug\FileUtilitie
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\obj\Debug\FileUtilities.pdb
 D:\Github\Log-Saver\FileUtilities\bin\Debug\TimeUtilities.dll
 D:\Github\Log-Saver\FileUtilities\bin\Debug\TimeUtilities.pdb
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\bin\Debug\TimeUtilities.dll
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\FileUtilities\bin\Debug\TimeUtilities.pdb

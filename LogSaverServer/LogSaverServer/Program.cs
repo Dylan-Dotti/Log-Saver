@@ -18,8 +18,8 @@ namespace LogSaverServer
                 {
                     s.ConstructUsing(server =>
                     {
-                        string src = ConfigurationManager.AppSettings.Get("LogsSourcePath");
-                        string dst = ConfigurationManager.AppSettings.Get("LogsDestPath");
+                        string src = AppSettings.LogsSourcePath;
+                        string dst = AppSettings.LogsDestPath;
                         IPAddress ip = IPAddress.Parse(GetLocalIPAddress());
                         return new LogSaverServer(ip, 1337, src, dst);
                     });

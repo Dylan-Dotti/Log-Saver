@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettings.cs" />
     <Compile Include="BinaryTcpClient.cs" />
     <Compile Include="ClientHandler.cs" />
     <Compile Include="ClientRequestHandler.cs" />

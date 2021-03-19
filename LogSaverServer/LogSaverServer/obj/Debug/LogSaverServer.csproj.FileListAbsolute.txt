@@ -32,3 +32,5 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\De
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\FileUtilities.pdb
 D:\Github\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\TimeUtilities.dll
 D:\Github\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\TimeUtilities.pdb
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\TimeUtilities.dll
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\TimeUtilities.pdb

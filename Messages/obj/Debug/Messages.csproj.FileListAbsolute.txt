@@ -22,3 +22,5 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\bin\Debug\FileUtilities.dll
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\bin\Debug\FileUtilities.pdb
 D:\Github\Log-Saver\Messages\bin\Debug\TimeUtilities.dll
 D:\Github\Log-Saver\Messages\bin\Debug\TimeUtilities.pdb
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\bin\Debug\TimeUtilities.dll
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\Messages\bin\Debug\TimeUtilities.pdb

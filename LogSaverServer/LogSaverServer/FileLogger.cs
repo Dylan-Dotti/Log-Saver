@@ -9,8 +9,7 @@ namespace LogSaverServer
 {
     static class FileLogger
     {
-        private static readonly string logsDirectory = 
-            ConfigurationManager.AppSettings.Get("LSLogsPath");
+        private static readonly string logsDirectory = AppSettings.LSLogsPath;
         private static readonly object logLockObject = new object();
 
         private static readonly ConcurrentQueue<string> messageQueue =

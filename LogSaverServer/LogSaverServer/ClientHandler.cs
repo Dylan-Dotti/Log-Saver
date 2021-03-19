@@ -85,8 +85,7 @@ namespace LogSaverServer
 
         private IFileCategorizationStrategy GetCategorizationStrategy()
         {
-            string strategyStr = ConfigurationManager.AppSettings
-                .Get("CategorizationStrategy");
+            string strategyStr = AppSettings.CategorizationStrategy;
             if (strategyStr == "FirstSegment") return new FirstSegmentCategorization();
             else if (strategyStr == "LastSegment") return new LastSegmentCategorization();
             return null;
