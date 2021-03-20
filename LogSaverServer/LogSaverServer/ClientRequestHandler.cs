@@ -1,4 +1,5 @@
 ﻿using FileUtilities;
+using LoggingLibrary;
 using Messages;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,16 @@ namespace LogSaverServer
 
         private readonly string logsSourcePath;
         private readonly string logsDestPath;
+        private readonly ILogger logger;
 
         public ClientRequestHandler(BinaryTcpClient client,
-            string logsSourcePath, string logsDestPath)
+            string logsSourcePath, string logsDestPath,
+            ILogger logger)
         {
             this.client = client;
             this.logsSourcePath = logsSourcePath;
             this.logsDestPath = logsDestPath;
+            this.logger = logger;
         }
 
         public void HandleZipRequest(ZipRequestMessage request)
@@ -44,12 +48,12 @@ namespace LogSaverServer
             // send response
             SendResponseMessage(ResponseCode.Ok);
             // Open zip archive if it does not already exist
-            FileLogger.Log("Creating zip archive: " + zipPath);
+            logger.Log("Creating zip archive: " + zipPath);
             using (ZipArchive archive = FileOperations.OpenZipArchive(zipPath))
             {
                 // track number of files that could not be processed
                 int numSkipped = 0;
-                FileLogger.Log("Beginning zip operation...");
+                logger.Log("Beginning zip operation...");
                 // Loop through the input files and zip one by one. Report progress to client through writer.
                 for (int i = 0; i < filePaths.Length; i++)
                 {
@@ -60,12 +64,12 @@ namespace LogSaverServer
                             request.TimeRangeLocal.IsAfterRange(File.GetCreationTime(path)))
                         {
                             // file was deleted while processing and/or recreated
-                            FileLogger.Log($"File {path} was deleted during the operation. Skipping");
+                            logger.Log($"File {path} was deleted during the operation. Skipping");
                             numSkipped += 1;
                         }
                         else
                         {
-                            FileLogger.Log("Zipping file: " + path);
+                            logger.Log("Zipping file: " + path);
                             archive.CreateEntryFromFile(path, Path.GetFileName(path));
                         }
                         // report progress to the client
@@ -76,13 +80,13 @@ namespace LogSaverServer
                     }
                     catch (Exception e)
                     {
-                        FileLogger.Log($"Error while zipping {path}. Zip operation cancelled");
-                        FileLogger.Log(e.ToString());
+                        logger.Log($"Error while zipping {path}. Zip operation cancelled");
+                        logger.Log(e.ToString());
                         File.Delete(zipPath);
                         break;
                     }
                 }
-                FileLogger.Log("Zip operation complete");
+                logger.Log("Zip operation complete");
             }
         }
 
@@ -99,11 +103,11 @@ namespace LogSaverServer
             // send response
             SendResponseMessage(ResponseCode.Ok);
             // transfer files
-            FileLogger.Log("Transferring files...");
+            logger.Log("Transferring files...");
             for (int i = 0; i < filePaths.Length; i++)
             {
                 string path = filePaths[i];
-                FileLogger.Log("Transferring: " + path);
+                logger.Log("Transferring: " + path);
                 string fileName = Path.GetFileName(path);
                 byte[] fileBytes = File.ReadAllBytes(path);
                 byte[] fileBytesCompressed = ByteCompression.GZipCompress(fileBytes);
@@ -111,14 +115,14 @@ namespace LogSaverServer
                     i + 1, filePaths.Length, fileName, fileBytesCompressed);
                 client.Writer.Write(message);
             }
-            FileLogger.Log("Transfer operation complete");
+            logger.Log("Transfer operation complete");
         }
 
         private void SendResponseMessage(ResponseCode resCode, string message = "")
         {
             var response = new ResponseMessage(resCode, message);
             client.Writer.Write(response);
-            FileLogger.Log("Sent response: " + response.ToString(true));
+            logger.Log("Sent response: " + response.ToString(true));
         }
     }
 }

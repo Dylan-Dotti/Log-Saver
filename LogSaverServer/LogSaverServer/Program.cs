@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
+using LoggingLibrary;
 using System.Net;
 using System.Net.Sockets;
 using TopshelfBoilerplate;
+using System.IO;
 
 namespace LogSaverServer
 {
@@ -12,14 +11,19 @@ namespace LogSaverServer
     {
         static void Main(string[] args)
         {
+            string lsLogsPath = Path.Combine(AppSettings.LSLogsPath, "ls_logs.txt");
             string src = AppSettings.LogsSourcePath;
             string dst = AppSettings.LogsDestPath;
             IPAddress ip = IPAddress.Parse(GetLocalIPAddress());
-            IServiceWorker lsServer = new LogSaverServer(ip, 1337, src, dst);
-            new TopshelfService(
-                "SWISSLOG_LOG_SAVER", "SWISSLOG_LOG_SAVER",
-                "App for archiving logs on the server")
-                .Run(lsServer);
+            using (ILogger logger = new FileLogger(lsLogsPath, true))
+            {
+                IServiceWorker lsServer = new LogSaverServer(
+                    ip, 1337, src, dst, logger);
+                new TopshelfService(
+                    "SWISSLOG_LOG_SAVER", "SWISSLOG_LOG_SAVER",
+                    "App for archiving logs on the server")
+                    .Run(lsServer);
+            }
         }
 
         public static string GetLocalIPAddress()

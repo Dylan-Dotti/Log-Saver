@@ -1,11 +1,8 @@
 ﻿using FileUtilities;
+using LoggingLibrary;
 using Messages;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using TcpLibrary;
 
 namespace LogSaverServer
@@ -14,19 +11,24 @@ namespace LogSaverServer
     {
         private readonly BinaryTcpClient client;
         private readonly ClientRequestHandler requestHandler;
-
         private readonly MessageDecoder decoder;
+
         private readonly string logsSourcePath;
         private readonly string logsDestPath;
+        private readonly ILogger logger;
 
         private readonly IFileCategorizationStrategy categorizationStrategy;
 
-        public ClientHandler(BinaryTcpClient client, string logsSourcePath, string logsDestPath)
+        public ClientHandler(BinaryTcpClient client,
+            string logsSourcePath, string logsDestPath,
+            ILogger logger)
         {
             this.client = client;
             this.logsSourcePath = logsSourcePath;
             this.logsDestPath = logsDestPath;
-            requestHandler = new ClientRequestHandler(client, logsSourcePath, logsDestPath);
+            this.logger = logger;
+            requestHandler = new ClientRequestHandler(
+                client, logsSourcePath, logsDestPath, this.logger);
             decoder = new MessageDecoder();
             categorizationStrategy = GetCategorizationStrategy();
         }
@@ -39,21 +41,21 @@ namespace LogSaverServer
                     FileOperations.GetLogCategories(
                         logsSourcePath, categorizationStrategy));
                 client.Writer.Write(serverInfo);
-                FileLogger.Log("Sent server info");
+                logger.Log("Sent server info");
                 while (true)
                 {
-                    FileLogger.Log("Waiting for user request...");
+                    logger.Log("Waiting for user request...");
                     string request = client.Reader.ReadString();
                     // blocks here until client sends a request
-                    FileLogger.Log("Request: " + request);
+                    logger.Log("Request: " + request);
                     if (decoder.TryDecodeMessage(request, out ZipRequestMessage decodedZR))
                     {
-                        FileLogger.Log("Decoded message as ZipRequest");
+                        logger.Log("Decoded message as ZipRequest");
                         requestHandler.HandleZipRequest(decodedZR);
                     }
                     else if (decoder.TryDecodeMessage(request, out TransferRequestMessage decodedTR))
                     {
-                        FileLogger.Log("Decoded message as TransferRequest");
+                        logger.Log("Decoded message as TransferRequest");
                         requestHandler.HandleTransferRequest(decodedTR);
                     }
                     else
@@ -68,12 +70,12 @@ namespace LogSaverServer
             }
             catch (Exception e)
             {
-                FileLogger.Log(e.ToString());
+                logger.Log(e.ToString());
             }
             finally
             {
                 client.Client.Close();
-                FileLogger.Log("Connection with client closed.");
+                logger.Log("Connection with client closed.");
             }
         }
 
@@ -81,7 +83,7 @@ namespace LogSaverServer
         {
             var response = new ResponseMessage(resCode, message);
             client.Writer.Write(response);
-            FileLogger.Log("Sent response: " + response.ToString(true));
+            logger.Log("Sent response: " + response.ToString(true));
         }
 
         private IFileCategorizationStrategy GetCategorizationStrategy()

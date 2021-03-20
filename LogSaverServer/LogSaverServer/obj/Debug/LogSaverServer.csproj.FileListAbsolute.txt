@@ -38,3 +38,5 @@ C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\De
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\TopshelfBoilerplate.pdb
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\TcpServerLibrary.dll
 C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\TcpServerLibrary.pdb
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\LoggingLibrary.dll
+C:\Users\h4dottd\Documents\GitHub\Log-Saver\LogSaverServer\LogSaverServer\bin\Debug\LoggingLibrary.pdb

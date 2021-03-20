@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using LoggingLibrary;
+using System.Net;
 using System.Threading;
 using TcpLibrary;
 using TopshelfBoilerplate;
@@ -9,38 +10,43 @@ namespace LogSaverServer
     {
         private readonly string logSourcePath;
         private readonly string logDestPath;
+        private readonly ILogger logger;
 
         public LogSaverServer(IPAddress ip, int port,
-            string logSourcePath, string logDestPath)
+            string logSourcePath, string logDestPath,
+            ILogger logger)
             : base(ip, port)
         {
             this.logSourcePath = logSourcePath;
             this.logDestPath = logDestPath;
+            this.logger = logger;
         }
 
         protected override void OnServerStarted()
         {
-            FileLogger.Log($"Server is running at {IP}...");
+            logger.Log($"Server is running at {IP}...");
         }
 
         protected override void OnServerStopped()
         {
-            FileLogger.Log("Server stopped");
+            logger.Log("Server stopped");
         }
 
         protected override void OnBeginListen()
         {
-            FileLogger.Log("Waiting for a connection...");
+            logger.Log("Waiting for a connection...");
         }
 
         protected override void OnAcceptClient(BinaryTcpClient client)
         {
-            FileLogger.Log("Connection received");
+            logger.Log("Connection received");
             ThreadPool.QueueUserWorkItem(stateInfo =>
             {
-                new ClientHandler(client, logSourcePath, logDestPath).HandleClient();
+                new ClientHandler(
+                    client, logSourcePath, logDestPath, logger)
+                .HandleClient();
             });
-            FileLogger.Log("Created thread for user");
+            logger.Log("Created thread for user");
         }
     }
 }
