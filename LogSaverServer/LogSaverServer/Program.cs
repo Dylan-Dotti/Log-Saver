@@ -21,7 +21,7 @@ namespace LogSaverServer
                     ip, 1337, src, dst, logger);
                 new TopshelfService(
                     "SWISSLOG_LOG_SAVER", "SWISSLOG_LOG_SAVER",
-                    "App for archiving logs on the server")
+                    "App for archiving and transferring server logs")
                     .Run(lsServer);
             }
         }

@@ -1,4 +1,5 @@
-﻿using Messages;
+﻿using LogSaverClient.GUI;
+using Messages;
 using System;
 using System.IO;
 using System.Linq;
@@ -9,14 +10,14 @@ namespace LogSaverClient
     public partial class ConnectedClientForm : Form
     {
         private readonly LSClient client;
-        private readonly FileOperationRequestManager requestManager;
+        private readonly RequestManager requestManager;
 
         public ConnectedClientForm(LSClient client, ServerInfoMessage serverInfo)
         {
             InitializeComponent();
             this.client = client;
-            categorySelector.Categories = serverInfo.fileCategories;
-            requestManager = new FileOperationRequestManager(client);
+            categorySelector.Categories = serverInfo.FileCategories;
+            requestManager = new RequestManager(client);
         }
 
         private void OnZipNameChanged(string newInput)
@@ -38,10 +39,10 @@ namespace LogSaverClient
             if (Directory.Exists(localFolderPath))
             {
                 var result = MessageBox.Show($"The path {localFolderPath} already exists. " +
-                    "Do you wish to overwrite? Operation cannot continue otherwise",
+                    "You must overwrite the contents to continue.",
                     "Request Error",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                continueOperation = result == DialogResult.Yes;
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                continueOperation = result == DialogResult.OK;
             }
             // send requests
             if (serverZipCheck.Checked && continueOperation)
@@ -107,6 +108,14 @@ namespace LogSaverClient
         {
             client.Close();
             Close();
+        }
+
+        private async void existingArchivesButton_Click(object sender, EventArgs e)
+        {
+            existingArchivesButton.Enabled = false;
+            new ExistingArchivesForm(await requestManager.RetrieveServerInfo())
+                .ShowDialog();
+            existingArchivesButton.Enabled = true;
         }
     }
 }

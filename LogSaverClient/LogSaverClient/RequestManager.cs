@@ -3,26 +3,26 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeUtilities;
 
 namespace LogSaverClient
 {
-    class FileOperationRequestManager
+    class RequestManager
     {
         private readonly LSClient client;
         private readonly MessageDecoder decoder;
 
-        public FileOperationRequestManager(LSClient client)
+        public RequestManager(LSClient client)
         {
             this.client = client;
             decoder = new MessageDecoder();
         }
 
-        public async Task<ServerInfoMessage> AwaitServerInfo()
+        public async Task<ServerInfoMessage> RetrieveServerInfo()
         {
+            client.SendMessage(new ServerInfoRequestMessage());
             string message = await client.AwaitMessageAsync();
             return decoder.DecodeMessage<ServerInfoMessage>(message);
         }

@@ -32,7 +32,7 @@ namespace LogSaverClient
             if (await client.TryConnectAsync(IPAddress.Parse(selectedConnection.ConnectionIP), 1337))
             {
                 Console.WriteLine("Waiting for server info...");
-                ServerInfoMessage serverInfo = await new FileOperationRequestManager(client).AwaitServerInfo();
+                ServerInfoMessage serverInfo = await new RequestManager(client).RetrieveServerInfo();
                 //Console.WriteLine("Received server info: " + 
                   //  JsonConvert.SerializeObject(serverInfo, Formatting.Indented));
                 new ConnectedClientForm(client, serverInfo).ShowDialog(this);

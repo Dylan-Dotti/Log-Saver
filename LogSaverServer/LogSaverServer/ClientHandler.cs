@@ -37,11 +37,6 @@ namespace LogSaverServer
         {
             try
             {
-                ServerInfoMessage serverInfo = new ServerInfoMessage(
-                    FileOperations.GetLogCategories(
-                        logsSourcePath, categorizationStrategy));
-                client.Writer.Write(serverInfo);
-                logger.Log("Sent server info");
                 while (true)
                 {
                     logger.Log("Waiting for user request...");
@@ -57,6 +52,11 @@ namespace LogSaverServer
                     {
                         logger.Log("Decoded message as TransferRequest");
                         requestHandler.HandleTransferRequest(decodedTR);
+                    }
+                    else if (decoder.TryDecodeMessage(request, out ServerInfoRequestMessage decodedSIR))
+                    {
+                        logger.Log("Decoded message as ServerInfoRequest");
+                        requestHandler.HandleServerInfoRequest(decodedSIR, categorizationStrategy);
                     }
                     else
                     {

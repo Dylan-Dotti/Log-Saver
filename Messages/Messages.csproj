@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchiveDeleteRequestMessage.cs" />
+    <Compile Include="ExistingArchive.cs" />
     <Compile Include="FileOperationMessage.cs" />
     <Compile Include="FileOperationRequestMessage.cs" />
     <Compile Include="FileOperationStatus.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="ResponseMessage.cs" />
     <Compile Include="ResponseCode.cs" />
     <Compile Include="ServerInfoMessage.cs" />
+    <Compile Include="ServerInfoRequestMessage.cs" />
     <Compile Include="TransferRequestMessage.cs" />
     <Compile Include="ZipRequestMessage.cs" />
     <Compile Include="TransferOperationMessage.cs" />

@@ -118,6 +118,20 @@ namespace LogSaverServer
             logger.Log("Transfer operation complete");
         }
 
+        public void HandleServerInfoRequest(ServerInfoRequestMessage request,
+            IFileCategorizationStrategy categorizationStrategy)
+        {
+            string drive = FileOperations.GetDriveFromPath(logsDestPath);
+            ServerInfoMessage serverInfo = new ServerInfoMessage(
+                FileOperations.GetLogCategories(logsSourcePath, categorizationStrategy),
+                FileOperations.GetFileNamesInDirectory(logsDestPath, ".zip"),
+                FileOperations.GetDriveAvailableBytes(drive),
+                FileOperations.GetDriveTotalBytes(drive));
+            client.Writer.Write(serverInfo);
+            logger.Log("Sent server info:");
+            logger.Log(serverInfo.ToString(true));
+        }
+
         private void SendResponseMessage(ResponseCode resCode, string message = "")
         {
             var response = new ResponseMessage(resCode, message);

@@ -34,7 +34,7 @@ namespace LogSaverServer
 
         protected override void OnBeginListen()
         {
-            logger.Log("Waiting for a connection...");
+            logger.Log("Listening for a connection...");
         }
 
         protected override void OnAcceptClient(BinaryTcpClient client)

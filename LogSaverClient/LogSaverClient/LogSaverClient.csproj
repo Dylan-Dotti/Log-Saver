@@ -98,13 +98,19 @@
       <DependentUpon>DateTimeComboPicker.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="GUI\ExistingArchivesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ExistingArchivesForm.Designer.cs">
+      <DependentUpon>ExistingArchivesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\FileOperationProgressForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\FileOperationProgressForm.Designer.cs">
       <DependentUpon>FileOperationProgressForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FileOperationRequestManager.cs" />
+    <Compile Include="RequestManager.cs" />
     <Compile Include="FileOperationUpdateReceiver.cs" />
     <Compile Include="GUI\SavedConnectionsSelectionDisplay.cs">
       <SubType>UserControl</SubType>
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\DateTimeComboPicker.resx">
       <DependentUpon>DateTimeComboPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ExistingArchivesForm.resx">
+      <DependentUpon>ExistingArchivesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\FileOperationProgressForm.resx">
       <DependentUpon>FileOperationProgressForm.cs</DependentUpon>

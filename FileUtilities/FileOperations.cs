@@ -30,9 +30,31 @@ namespace FileUtilities
             return ZipFile.Open(path, ZipArchiveMode.Create);
         }
 
+        public static string GetDriveFromPath(string path)
+        {
+            return Path.GetPathRoot(path);
+        }
+
+        public static long GetDriveAvailableBytes(string drive)
+        {
+            return new DriveInfo(drive).AvailableFreeSpace;
+        }
+
+        public static long GetDriveTotalBytes(string drive)
+        {
+            return new DriveInfo(drive).TotalSize;
+        }
+
         public static string[] GetFileNamesInDirectory(string path)
         {
             return Directory.GetFiles(path).Select(p => Path.GetFileName(p)).ToArray();
+        }
+
+        public static string[] GetFileNamesInDirectory(string path, string extension)
+        {
+            return GetFileNamesInDirectory(path)
+                .Where(f => Path.GetExtension(f).ToLower() == extension.ToLower())
+                .ToArray();
         }
 
         public static string[] GetFilePathsInDirectory(string directory)
@@ -69,6 +91,11 @@ namespace FileUtilities
         {
             var files = GetFileNamesInDirectory(directory);
             return new FileCategorizer().Categorize(files, cStrategy).ToArray();
+        }
+
+        public static long GetFileSizeInBytes(string filePath)
+        {
+            return File.ReadAllBytes(filePath).LongLength;
         }
 
         public static DateTime GetLastUpdateTime(string filePath)

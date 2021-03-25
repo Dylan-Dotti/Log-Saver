@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.timeRangeSelector = new LogSaverClient.TimeRangeSelectionControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -36,18 +37,17 @@
             this.localFolderLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.zipNameInput = new LogSaverClient.FileNameInputControl();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.sendCopyCheck = new System.Windows.Forms.CheckBox();
             this.serverZipCheck = new System.Windows.Forms.CheckBox();
             this.localZipCheck = new System.Windows.Forms.CheckBox();
+            this.categorySelector = new LogSaverClient.GUI.CategorySelectionDisplay();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.existingArchivesButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.sendRequestButton = new System.Windows.Forms.Button();
             this.localFolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
-            this.timeRangeSelector = new LogSaverClient.TimeRangeSelectionControl();
-            this.zipNameInput = new LogSaverClient.FileNameInputControl();
-            this.categorySelector = new LogSaverClient.GUI.CategorySelectionDisplay();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -77,6 +77,17 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(703, 415);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // timeRangeSelector
+            // 
+            this.timeRangeSelector.AutoSize = true;
+            this.timeRangeSelector.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.timeRangeSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.timeRangeSelector.Location = new System.Drawing.Point(291, 10);
+            this.timeRangeSelector.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.timeRangeSelector.Name = "timeRangeSelector";
+            this.timeRangeSelector.Size = new System.Drawing.Size(402, 167);
+            this.timeRangeSelector.TabIndex = 2;
             // 
             // groupBox1
             // 
@@ -187,6 +198,16 @@
             this.label1.Text = "Archive folder name:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // zipNameInput
+            // 
+            this.zipNameInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.zipNameInput.Location = new System.Drawing.Point(196, 3);
+            this.zipNameInput.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.zipNameInput.Name = "zipNameInput";
+            this.zipNameInput.Size = new System.Drawing.Size(155, 33);
+            this.zipNameInput.TabIndex = 8;
+            this.zipNameInput.InputTextChanged += new System.Action<string>(this.OnZipNameChanged);
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.AutoSize = true;
@@ -247,6 +268,17 @@
             this.localZipCheck.Text = "Zip on local";
             this.localZipCheck.UseVisualStyleBackColor = true;
             // 
+            // categorySelector
+            // 
+            this.categorySelector.Categories = null;
+            this.categorySelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categorySelector.Location = new System.Drawing.Point(7, 7);
+            this.categorySelector.Margin = new System.Windows.Forms.Padding(7);
+            this.categorySelector.Name = "categorySelector";
+            this.tableLayoutPanel1.SetRowSpan(this.categorySelector, 2);
+            this.categorySelector.Size = new System.Drawing.Size(267, 343);
+            this.categorySelector.TabIndex = 9;
+            // 
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.ColumnCount = 3;
@@ -254,7 +286,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel6.Controls.Add(this.button1, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.existingArchivesButton, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.closeButton, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.sendRequestButton, 1, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -266,18 +298,18 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(703, 58);
             this.tableLayoutPanel6.TabIndex = 10;
             // 
-            // button1
+            // existingArchivesButton
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button1.Enabled = false;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.button1.Location = new System.Drawing.Point(15, 13);
-            this.button1.Margin = new System.Windows.Forms.Padding(15, 7, 7, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 32);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Undo Requests";
-            this.button1.UseVisualStyleBackColor = true;
+            this.existingArchivesButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.existingArchivesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.existingArchivesButton.Location = new System.Drawing.Point(15, 13);
+            this.existingArchivesButton.Margin = new System.Windows.Forms.Padding(15, 7, 7, 7);
+            this.existingArchivesButton.Name = "existingArchivesButton";
+            this.existingArchivesButton.Size = new System.Drawing.Size(175, 32);
+            this.existingArchivesButton.TabIndex = 11;
+            this.existingArchivesButton.Text = "Existing Archives";
+            this.existingArchivesButton.UseVisualStyleBackColor = true;
+            this.existingArchivesButton.Click += new System.EventHandler(this.existingArchivesButton_Click);
             // 
             // closeButton
             // 
@@ -305,38 +337,6 @@
             this.sendRequestButton.Text = "Send Request";
             this.sendRequestButton.UseVisualStyleBackColor = true;
             this.sendRequestButton.Click += new System.EventHandler(this.sendRequestButton_Click);
-            // 
-            // timeRangeSelector
-            // 
-            this.timeRangeSelector.AutoSize = true;
-            this.timeRangeSelector.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.timeRangeSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.timeRangeSelector.Location = new System.Drawing.Point(291, 10);
-            this.timeRangeSelector.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
-            this.timeRangeSelector.Name = "timeRangeSelector";
-            this.timeRangeSelector.Size = new System.Drawing.Size(402, 167);
-            this.timeRangeSelector.TabIndex = 2;
-            // 
-            // zipNameInput
-            // 
-            this.zipNameInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.zipNameInput.Location = new System.Drawing.Point(196, 3);
-            this.zipNameInput.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.zipNameInput.Name = "zipNameInput";
-            this.zipNameInput.Size = new System.Drawing.Size(155, 33);
-            this.zipNameInput.TabIndex = 8;
-            this.zipNameInput.InputTextChanged += new System.Action<string>(this.OnZipNameChanged);
-            // 
-            // categorySelector
-            // 
-            this.categorySelector.Categories = null;
-            this.categorySelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categorySelector.Location = new System.Drawing.Point(7, 7);
-            this.categorySelector.Margin = new System.Windows.Forms.Padding(7);
-            this.categorySelector.Name = "categorySelector";
-            this.tableLayoutPanel1.SetRowSpan(this.categorySelector, 2);
-            this.categorySelector.Size = new System.Drawing.Size(267, 343);
-            this.categorySelector.TabIndex = 9;
             // 
             // ConnectedClientForm
             // 
@@ -386,6 +386,6 @@
         private System.Windows.Forms.Button sendRequestButton;
         private System.Windows.Forms.CheckBox sendCopyCheck;
         private System.Windows.Forms.CheckBox localZipCheck;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button existingArchivesButton;
     }
 }
