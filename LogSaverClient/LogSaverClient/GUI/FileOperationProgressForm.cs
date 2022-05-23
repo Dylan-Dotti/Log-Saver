@@ -32,11 +32,12 @@ namespace LogSaverClient
         private void UpdateProgressDisplay(int numFilesCompleted, int numTotalFiles)
         {
             int percentComplete = (int)((float)numFilesCompleted / numTotalFiles * 100);
-            // use BeginInvoke to allow modification from other threads
-            operationProgressBar.BeginInvoke(
-                new Action(() => operationProgressBar.Value = percentComplete));
-            progressLabel.BeginInvoke(
-                new Action(() => progressLabel.Text = percentComplete + "% completed"));
+            // use Invoke to allow modification from other threads
+            Invoke(new Action(() =>
+            {
+                operationProgressBar.Value = percentComplete;
+                progressLabel.Text = percentComplete + "% completed";
+            }));
         }
     }
 }
